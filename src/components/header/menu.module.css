@@ -1,6 +1,10 @@
 .menuNav {
   width: 100%;
 
+  .active {
+    color: #0f0;
+  }
+
   ul.container {
     display: flex;
     justify-content: center;

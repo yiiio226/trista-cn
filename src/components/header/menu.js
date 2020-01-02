@@ -14,7 +14,9 @@ export const Menu = ({ menuLinks }) => {
               padding: `1rem`,
             }}
           >
-            <Link to={link.link}>{link.name}</Link>
+            <Link to={link.link} activeClassName={styles.active}>
+              {link.name}
+            </Link>
           </li>
         ))}
       </ul>
