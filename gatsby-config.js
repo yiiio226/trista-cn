@@ -3,6 +3,12 @@ module.exports = {
     title: `Gatsby Default Starter`,
     description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
     author: `@gatsbyjs`,
+    menuLinks: [
+      { name: "首页", link: "/" },
+      { name: "关于我", link: "/about" },
+      { name: "我的工作", link: "/portfolio" },
+      { name: " 联系我", link: "/contact" },
+    ],
   },
   plugins: [
     `gatsby-plugin-postcss`,
