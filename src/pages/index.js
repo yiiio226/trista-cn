@@ -1,22 +1,20 @@
 import React from "react"
-import { Link } from "gatsby"
+import Typist from "react-typist"
 
 import "normalize.css"
 
-import Image from "../components/image"
 import SEO from "../components/seo"
 import Layout from "../components/layout"
 
 const IndexPage = () => (
   <Layout>
     <SEO title="Trista" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
+    <Typist>
+      <span>你好，我是 Trista</span>
+      <Typist.Backspace count={7} delay={1000} />
+      <span>一名设计师</span>
+      <Typist.Delay ms={500} />
+    </Typist>
   </Layout>
 )
 
