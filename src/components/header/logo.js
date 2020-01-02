@@ -1,6 +1,12 @@
 import React from "react"
-import styles from "./logo.module.css"
+import styled from "styled-components"
+
+const LogoWrapper = styled.div`
+  width: 200px;
+  height: 50px;
+  text-align: center;
+`
 
 export const Logo = () => {
-  return <div className={styles.logo}>Trista</div>
+  return <LogoWrapper>Trista</LogoWrapper>
 }

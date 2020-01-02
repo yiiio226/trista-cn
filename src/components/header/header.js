@@ -1,13 +1,23 @@
 import React from "react"
+import styled from "styled-components"
+
 import { Logo } from "./logo"
-import styles from "./header.module.css"
 import { Menu } from "./menu"
+
+const HeaderWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background: #efefef;
+`
 
 export const Header = ({ menuLinks, siteTitle }) => {
   return (
-    <div className={styles.header}>
+    <HeaderWrapper>
       <Logo></Logo>
       <Menu menuLinks={menuLinks} />
-    </div>
+    </HeaderWrapper>
   )
 }
