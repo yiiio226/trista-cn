@@ -2,6 +2,7 @@ import React from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
 import { useWindowWidth } from "@react-hook/window-size"
+import { Animated } from "react-animated-css"
 
 import {
   Container,
@@ -14,6 +15,8 @@ import {
 } from "../components"
 import { useSiteMetadata } from "../hooks"
 import { theme } from "../constants/theme"
+import svgHandPointDown from "../images/icons/hand-point-down.svg"
+import "../styles/animate.min.css"
 
 const FullScreenContainer = styled(Container)`
   display: flex;
@@ -26,14 +29,19 @@ const FullScreenContainer = styled(Container)`
   min-height: 600px;
 `
 
-const ContinueButton = styled(Link)`
-  display: block;
+const ButtonAnimated = styled(Animated)`
   position: absolute;
   bottom: 0;
   left: calc(50% - 30px);
+`
+
+const ContinueButtonLink = styled(Link)`
+  display: block;
   width: 60px;
   height: 90px;
-  background-color: ${props => props.theme.colorBgPlaceholder};
+  background-image: url(${svgHandPointDown});
+  background-repeat: no-repeat;
+  opacity: 0.2;
 `
 
 const IndexPage = () => {
@@ -49,7 +57,13 @@ const IndexPage = () => {
         <SEO title="Trista" />
         <Gap gapSize={150} />
         <Typing />
-        <ContinueButton to="#project-gallery" />
+        <ButtonAnimated
+          animationIn="bounce"
+          animationInDelay={6000}
+          isVisible={true}
+        >
+          <ContinueButtonLink to="#project-gallery" />
+        </ButtonAnimated>
       </FullScreenContainer>
       <Gap gapSize={150} id="project-gallery" />
       <Container sideDistance={sideDistance}>
