@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "gatsby"
 import styled from "styled-components"
 import { useWindowWidth } from "@react-hook/window-size"
 
@@ -25,7 +26,8 @@ const FullScreenContainer = styled(Container)`
   min-height: 600px;
 `
 
-const ContinueButton = styled.div`
+const ContinueButton = styled(Link)`
+  display: block;
   position: absolute;
   bottom: 0;
   left: calc(50% - 30px);
@@ -47,7 +49,7 @@ const IndexPage = () => {
         <SEO title="Trista" />
         <Gap gapSize={150} />
         <Typing />
-        <ContinueButton />
+        <ContinueButton to="#" />
       </FullScreenContainer>
       <Gap gapSize={150} />
       <Container sideDistance={sideDistance}>

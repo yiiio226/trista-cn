@@ -1,7 +1,8 @@
 import React from "react"
+import { Link } from "gatsby"
 import styled from "styled-components"
 
-const LogoWrapper = styled.div`
+const LogoWrapper = styled(Link)`
   display: flex;
   width: 144px;
   height: 72px;
@@ -11,5 +12,5 @@ const LogoWrapper = styled.div`
 `
 
 export const Logo = () => {
-  return <LogoWrapper></LogoWrapper>
+  return <LogoWrapper to="#"></LogoWrapper>
 }

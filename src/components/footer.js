@@ -8,7 +8,7 @@ const FooterWrapper = styled.div`
   align-items: center;
   box-sizing: border-box;
   width: 100%;
-  padding: 70px 80px;
+  padding: 70px 40px;
   box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.06);
 
   ul {
