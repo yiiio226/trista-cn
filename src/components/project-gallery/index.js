@@ -6,7 +6,7 @@ const GalleryWrapper = styled.div`
   display: grid;
   /* grid-template-columns: repeat(2, 1fr); */
   grid-template-columns: repeat(2, minmax(375px, 1fr));
-  grid-auto-rows: 400px;
+  grid-auto-rows: 500px;
   grid-gap: ${props => props.theme.gapSize * 5}px;
 
   @media all and (max-width: ${props => props.theme.mobileWidth}px) {

@@ -37,9 +37,11 @@ const ContinueButton = styled.div`
 const IndexPage = () => {
   const { menuLinks, title } = useSiteMetadata()
   const windowWidth = useWindowWidth()
+  const sideDistance =
+    windowWidth <= theme.mobileWidth ? theme.gapSize * 3 : 100
 
   return (
-    <Layout center={true}>
+    <Layout center={true} sideDistance={sideDistance}>
       <FullScreenContainer>
         <Header menuLinks={menuLinks} siteTitle={title} />
         <SEO title="Trista" />
@@ -48,11 +50,7 @@ const IndexPage = () => {
         <ContinueButton />
       </FullScreenContainer>
       <Gap gapSize={150} />
-      <Container
-        sideDistance={
-          windowWidth <= theme.mobileWidth ? theme.gapSize * 3 : 100
-        }
-      >
+      <Container sideDistance={sideDistance}>
         <ProjectGallery />
       </Container>
     </Layout>

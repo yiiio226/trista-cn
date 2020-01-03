@@ -1,5 +1,6 @@
 export * from "./header"
 export * from "./project-gallery"
+export * from "./footer"
 export * from "./gap"
 export * from "./image"
 export * from "./layout"

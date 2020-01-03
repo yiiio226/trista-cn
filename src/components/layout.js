@@ -12,6 +12,7 @@ import styled, { ThemeProvider } from "styled-components"
 import "normalize.css"
 import { theme } from "../constants/theme"
 import { GlobalStyle } from "./global-style"
+import { Footer, Gap } from "."
 
 export const Container = styled.div`
   margin: 0 auto;
@@ -21,13 +22,17 @@ export const Container = styled.div`
       : props.theme.mobileWidth + "px"};
 `
 
-export const Layout = ({ children }) => {
+export const Layout = ({ sideDistance, children }) => {
   return (
     <>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <main>{children}</main>
-        <footer>© {new Date().getFullYear()}</footer>
+        <Gap gapSize={100} />
+        <Container sideDistance={sideDistance}>
+          <Footer />
+        </Container>
+        <Gap gapSize={100} />
       </ThemeProvider>
     </>
   )

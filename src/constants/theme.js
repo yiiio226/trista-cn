@@ -4,6 +4,7 @@ export const theme = {
   colorTheme: "#266D64",
 
   fontSize: 14,
+  fontSizeFooterLinks: 20,
   fontFamily: "'PingFang SC', 'Helvetica Neue'",
 
   gapSize: 8,
