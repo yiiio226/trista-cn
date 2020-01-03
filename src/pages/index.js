@@ -59,7 +59,7 @@ const IndexPage = () => {
         <Typing />
         <ButtonAnimated
           animationIn="bounce"
-          animationInDelay={6000}
+          animationInDelay={7000}
           isVisible={true}
         >
           <ContinueButtonLink to="#project-gallery" />
