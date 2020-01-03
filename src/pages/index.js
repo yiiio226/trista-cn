@@ -49,9 +49,9 @@ const IndexPage = () => {
         <SEO title="Trista" />
         <Gap gapSize={150} />
         <Typing />
-        <ContinueButton to="#" />
+        <ContinueButton to="#project-gallery" />
       </FullScreenContainer>
-      <Gap gapSize={150} />
+      <Gap gapSize={150} id="project-gallery" />
       <Container sideDistance={sideDistance}>
         <ProjectGallery />
       </Container>
