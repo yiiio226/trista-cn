@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import { useWindowWidth } from "@react-hook/window-size"
 
 import {
   Container,
@@ -11,6 +12,7 @@ import {
   Typing,
 } from "../components"
 import { useSiteMetadata } from "../hooks"
+import { theme } from "../constants/theme"
 
 const FullScreenContainer = styled(Container)`
   position: relative;
@@ -31,6 +33,8 @@ const ContinueButton = styled.div`
 
 const IndexPage = () => {
   const { menuLinks, title } = useSiteMetadata()
+  const windowWidth = useWindowWidth()
+
   return (
     <Layout center={true}>
       <FullScreenContainer>
@@ -41,7 +45,11 @@ const IndexPage = () => {
         <ContinueButton />
       </FullScreenContainer>
       <Gap gapSize={150} />
-      <Container sideDistance={100}>
+      <Container
+        sideDistance={
+          windowWidth <= theme.mobileWidth ? theme.gapSize * 3 : 100
+        }
+      >
         <ProjectGallery />
       </Container>
     </Layout>

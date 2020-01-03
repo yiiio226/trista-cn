@@ -7,4 +7,6 @@ export const theme = {
   fontFamily: "'PingFang SC', 'Helvetica Neue'",
 
   gapSize: 8,
+
+  mobileWidth: 960,
 }

@@ -18,9 +18,7 @@ export const Container = styled.div`
   max-width: ${props =>
     props.sideDistance
       ? "calc(100vw - " + props.sideDistance * 2 + "px)"
-      : "960px"};
-  padding: 0px 1.0875rem 1.45rem;
-  padding-top: 0;
+      : props.theme.mobileWidth + "px"};
 `
 
 export const Layout = ({ children }) => {
