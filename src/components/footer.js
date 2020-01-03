@@ -37,30 +37,36 @@ const FooterWrapper = styled.div`
   }
 `
 
+const ExternalLink = styled.a.attrs({
+  href: props => props.href,
+  children: props => props.label,
+})``
+
 export const Footer = () => {
   return (
     <FooterWrapper>
       <Logo />
       <ul className="links">
         <li>
-          <a href="mailto:hi@trista.design" target="_blank">
-            Email: hi@trista.design
-          </a>
+          <ExternalLink
+            href="mailto:hi@trista.design"
+            label="Email: hi@trista.design"
+          />
         </li>
         <li>
-          <a href="https://dribbble.com/yiiio" target="_blank">
-            Dribbble
-          </a>
+          <ExternalLink href="https://dribbble.com/yiiio" label="Dribbble" />
         </li>
         <li>
-          <a href="https://www.behance.net/tangh1993" target="_blank">
-            Behance
-          </a>
+          <ExternalLink
+            href="https://www.behance.net/tangh1993"
+            label="Behance"
+          />
         </li>
         <li>
-          <a href="https://www.linkedin.com/in/yiiio" target="_blank">
-            LinkedIn
-          </a>
+          <ExternalLink
+            href="https://www.linkedin.com/in/yiiio"
+            label="LinkedIn"
+          />
         </li>
       </ul>
     </FooterWrapper>
