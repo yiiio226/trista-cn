@@ -2,11 +2,14 @@ import React from "react"
 import styled from "styled-components"
 
 const LogoWrapper = styled.div`
-  width: 200px;
-  height: 50px;
-  text-align: center;
+  display: flex;
+  width: 144px;
+  height: 72px;
+  justify-content: center;
+  align-items: center;
+  background-color: ${props => props.theme.colorBgPlaceholder};
 `
 
 export const Logo = () => {
-  return <LogoWrapper>Trista</LogoWrapper>
+  return <LogoWrapper></LogoWrapper>
 }

@@ -3,6 +3,7 @@ import styled from "styled-components"
 
 import { Logo } from "./logo"
 import { Menu } from "./menu"
+import { Gap } from "../gap"
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -10,13 +11,14 @@ const HeaderWrapper = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  background: #efefef;
 `
 
 export const Header = ({ menuLinks, siteTitle }) => {
   return (
     <HeaderWrapper>
-      <Logo></Logo>
+      <Gap gapSize={90} />
+      <Logo />
+      <Gap gapSize={20} />
       <Menu menuLinks={menuLinks} />
     </HeaderWrapper>
   )

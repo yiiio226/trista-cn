@@ -6,20 +6,35 @@ const MenuNavWrapper = styled.nav`
   width: 100%;
 
   .active {
-    color: #0f0;
+    color: ${props => props.theme.colorTheme};
   }
 
   ul {
     display: flex;
+    margin: 0;
+    padding: 0;
     justify-content: center;
     list-style: none;
-    padding: 0 80px;
 
     li {
       margin: 0;
       padding: 0;
-      min-width: 100px;
       text-align: center;
+
+      a {
+        display: inline-block;
+        min-width: 100px;
+        line-height: 48px;
+        font-size: ${props => props.theme.fontSize}px;
+        color: ${props => props.theme.color};
+        text-decoration: none;
+        font-family: ${props => props.theme.fontFamily};
+        font-weight: 600;
+
+        &:hover {
+          color: ${props => props.theme.colorTheme};
+        }
+      }
     }
   }
 `
@@ -29,13 +44,7 @@ export const Menu = ({ menuLinks }) => {
     <MenuNavWrapper>
       <ul>
         {menuLinks.map(link => (
-          <li
-            key={link.name}
-            style={{
-              listStyleType: `none`,
-              padding: `1rem`,
-            }}
-          >
+          <li key={link.name}>
             <Link to={link.link} activeClassName="active">
               {link.name}
             </Link>

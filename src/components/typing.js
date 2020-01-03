@@ -14,6 +14,11 @@ const TypingWrapper = styled.div`
     height: 40px;
     font-size: 48px;
     line-height: 48px;
+    font-family: ${props => props.theme.fontFamily};
+
+    .Cursor {
+      color: ${props => props.theme.colorTheme};
+    }
   }
 `
 
