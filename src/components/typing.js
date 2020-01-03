@@ -4,17 +4,18 @@ import "react-typist/dist/Typist.css"
 import styled from "styled-components"
 
 const TypingWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100px;
+  display: inline-block;
+  font-size: 48px;
+  line-height: 48px;
+  font-family: ${props => props.theme.fontFamily};
+
+  .shadow {
+    padding-right: 10px;
+    opacity: 0;
+  }
 
   .Typist {
-    width: 500px;
     height: 40px;
-    font-size: 48px;
-    line-height: 48px;
-    font-family: ${props => props.theme.fontFamily};
 
     .Cursor {
       color: ${props => props.theme.colorTheme};
@@ -24,12 +25,14 @@ const TypingWrapper = styled.div`
 
 export const Typing = () => {
   const [running, updateRunning] = React.useState(true)
+  const longestSentence = "你好，我是一名设计师"
   React.useEffect(() => {
     if (running === false) updateRunning(true)
   }, [running])
 
   return (
     <TypingWrapper>
+      <div className="shadow">{longestSentence}</div>
       {running ? (
         <Typist
           onTypingDone={() => updateRunning(false)}

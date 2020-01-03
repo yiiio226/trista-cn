@@ -15,6 +15,9 @@ import { useSiteMetadata } from "../hooks"
 import { theme } from "../constants/theme"
 
 const FullScreenContainer = styled(Container)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: relative;
   box-sizing: border-box;
   width: 100%;
