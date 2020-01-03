@@ -2,6 +2,8 @@ import React from "react"
 import styled from "styled-components"
 import { Logo } from "./header/logo"
 
+import { ExternalLink } from "."
+
 const FooterWrapper = styled.div`
   display: flex;
   justify-content: space-between;
@@ -36,11 +38,6 @@ const FooterWrapper = styled.div`
     }
   }
 `
-
-const ExternalLink = styled.a.attrs({
-  href: props => props.href,
-  children: props => props.label,
-})``
 
 export const Footer = () => {
   return (
