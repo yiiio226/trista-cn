@@ -2,6 +2,8 @@ import React from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
 
+import { useHover } from "../../hooks"
+
 const LinkWrapper = styled(Link)`
   display: flex;
   justify-content: center;
@@ -23,16 +25,28 @@ const LinkWrapper = styled(Link)`
 
 export const ProjectCard = ({ ...props }) => {
   const project = props.project
+  const [hoverRef, isHovered] = useHover()
+  const videoRef = React.useRef()
+
+  console.log("hover", hoverRef, isHovered)
+  React.useEffect(() => {
+    if (isHovered) {
+      videoRef.current.play()
+    } else {
+      videoRef.current.pause()
+
+      setTimeout(() => {
+        if (videoRef.current.paused) {
+          videoRef.current.currentTime = 0
+        }
+      }, 500)
+    }
+  }, [isHovered])
 
   return (
-    <LinkWrapper to="" {...props}>
-      <video
-        //  poster={project.cover}
-        autoPlay={true}
-        loop={true}
-        preload="metadata"
-      >
-        <source src={project.coverVideo} type="video/mp4" />
+    <LinkWrapper to="/" {...props} ref={hoverRef}>
+      <video autoPlay={false} loop={true} preload="metadata" ref={videoRef}>
+        <source src={project.coverVideo} type={project.coverVideoType} />
       </video>
     </LinkWrapper>
   )
