@@ -34,7 +34,7 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "npm run clean && gatsby build && rm -rf docs && mv public docs && echo trista.design > docs/CNAME",
+    "build": "npm run clean && gatsby build && rm -rf docs && cp -rf public docs && echo trista.design > docs/CNAME",
     "develop": "npm run clean && gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
