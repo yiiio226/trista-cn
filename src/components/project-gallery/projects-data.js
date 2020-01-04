@@ -1,0 +1,42 @@
+export const data = [
+  {
+    id: 1,
+    name: "ADA",
+    cover: require("../../assets/videos/ada.jpg"),
+    coverVideo: require("../../assets/videos/ada.mp4"),
+    primaryColor: "#25252c",
+    isWide: false,
+  },
+  {
+    id: 2,
+    name: "IID",
+    cover: require("../../assets/videos/iid.jpg"),
+    coverVideo: require("../../assets/videos/iid.mp4"),
+    primaryColor: "#efcc16",
+    isWide: false,
+  },
+  {
+    id: 3,
+    name: "Everest",
+    cover: require("../../assets/videos/everest.jpg"),
+    coverVideo: require("../../assets/videos/everest.mp4"),
+    primaryColor: "#2b5f71",
+    isWide: true,
+  },
+  {
+    id: 4,
+    name: "Microsoft",
+    cover: require("../../assets/videos/ms.jpg"),
+    coverVideo: require("../../assets/videos/ms.mp4"),
+    primaryColor: "#2976d4",
+    isWide: false,
+  },
+  {
+    id: 5,
+    name: "OA",
+    cover: require("../../assets/videos/oa.jpg"),
+    coverVideo: require("../../assets/videos/oa.mp4"),
+    primaryColor: "#337578",
+    isWide: false,
+  },
+]

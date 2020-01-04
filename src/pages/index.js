@@ -65,8 +65,8 @@ const IndexPage = () => {
           <ContinueButtonLink to="#project-gallery" />
         </ButtonAnimated>
       </FullScreenContainer>
-      <Gap gapSize={150} id="project-gallery" />
       <Container sideDistance={sideDistance}>
+        <Gap gapSize={150} id="project-gallery" />
         <ProjectGallery />
       </Container>
     </Layout>

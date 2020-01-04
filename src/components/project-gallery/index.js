@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import { ProjectCard } from "./project-card"
+import { data } from "./projects-data"
 
 const GalleryWrapper = styled.div`
   display: grid;
@@ -19,16 +20,10 @@ const GalleryWrapper = styled.div`
 `
 
 export const ProjectGallery = () => {
-  const data = [1, 2, 3, 4, 5, 6, 7, 8]
   return (
     <GalleryWrapper>
       {data.map(p => (
-        <ProjectCard
-          key={p}
-          primaryColor="rgba(0, 255, 0, 0.1)"
-          isWide={p % 3 === 0}
-          _num={p}
-        />
+        <ProjectCard project={p} key={p.id} />
       ))}
     </GalleryWrapper>
   )

@@ -43,7 +43,9 @@ export const Typing = () => {
           <Typist.Delay ms={1000} />
           <span>，</span>
           <Typist.Delay ms={200} />
-          <span>我是 Trista</span>
+          <span>我是</span>
+          <Typist.Delay ms={100} />
+          <span> Trista</span>
           <Typist.Backspace count={7} delay={1000} />
           <Typist.Delay ms={500} />
           <span>一名设计师</span>
