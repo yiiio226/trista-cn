@@ -28,7 +28,6 @@ export const ProjectCard = ({ ...props }) => {
   const [hoverRef, isHovered] = useHover()
   const videoRef = React.useRef()
 
-  console.log("hover", hoverRef, isHovered)
   React.useEffect(() => {
     if (isHovered) {
       videoRef.current.play()
