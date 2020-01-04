@@ -29,14 +29,17 @@ export const ProjectCard = ({ ...props }) => {
   const videoRef = React.useRef()
 
   React.useEffect(() => {
+    const node = videoRef.current
+    if (!node) return
+
     if (isHovered) {
-      videoRef.current.play()
+      node.play()
     } else {
-      videoRef.current.pause()
+      node.pause()
 
       setTimeout(() => {
-        if (videoRef.current.paused) {
-          videoRef.current.currentTime = 0
+        if (node.paused) {
+          node.currentTime = 0
         }
       }, 500)
     }

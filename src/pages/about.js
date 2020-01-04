@@ -59,21 +59,10 @@ const IndexPage = () => {
 
   return (
     <Layout center={true} sideDistance={sideDistance}>
-      <FullScreenContainer>
+      <Container sideDistance={sideDistance}>
         <Header menuLinks={menuLinks} siteTitle={title} />
         <SEO title="Trista" />
-        <Gap gapSize={150} />
-        <Typing />
-        <ButtonAnimated
-          animationIn="bounce"
-          animationInDelay={7000}
-          isVisible={true}
-        >
-          <ContinueButtonLink to="#project-gallery" />
-        </ButtonAnimated>
-      </FullScreenContainer>
-      <Container sideDistance={sideDistance}>
-        <Gap gapSize={150} id="project-gallery" />
+        <Gap gapSize={60} />
         <ProjectGallery />
       </Container>
     </Layout>

@@ -6,8 +6,8 @@ module.exports = {
     menuLinks: [
       { name: "主页", link: "/" },
       { name: "关于我", link: "/about" },
-      { name: "我的工作", link: "/portfolio" },
-      { name: "联系我", link: "/contact" },
+      // { name: "我的工作", link: "/portfolio" },
+      // { name: "联系我", link: "/contact" },
     ],
   },
   plugins: [
