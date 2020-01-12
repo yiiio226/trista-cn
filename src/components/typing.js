@@ -25,14 +25,14 @@ const TypingWrapper = styled.div`
 
 export const Typing = () => {
   const [running, updateRunning] = React.useState(true)
-  const longestSentence = "你好，我是一名设计师"
+  // const longestSentence = "你好，我是一名设计师"
   React.useEffect(() => {
     if (running === false) updateRunning(true)
   }, [running])
 
   return (
     <TypingWrapper>
-      <div className="shadow">{longestSentence}</div>
+      {/* <div className="shadow">{longestSentence}</div> */}
       {running ? (
         <Typist
           onTypingDone={() => updateRunning(false)}

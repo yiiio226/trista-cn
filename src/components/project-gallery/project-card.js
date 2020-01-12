@@ -46,7 +46,7 @@ export const ProjectCard = ({ ...props }) => {
   }, [isHovered])
 
   return (
-    <LinkWrapper to="/" {...props} ref={hoverRef}>
+    <LinkWrapper to={`/projects/${project.slug}`} {...props} ref={hoverRef}>
       <video autoPlay={false} loop={true} preload="metadata" ref={videoRef}>
         <source src={project.coverVideo} type={project.coverVideoType} />
       </video>

@@ -2,6 +2,7 @@ export const data = [
   {
     id: 1,
     name: "ADA",
+    slug: "ada",
     // cover: require("../../assets/videos/ada.jpg"),
     coverVideo: require("../../assets/videos/ada.mp4"),
     coverVideoType: "video/mp4",
@@ -11,6 +12,7 @@ export const data = [
   {
     id: 2,
     name: "IID",
+    slug: "ada",
     // cover: require("../../assets/videos/iid.jpg"),
     coverVideo: require("../../assets/videos/iid.mp4"),
     coverVideoType: "video/mp4",
@@ -20,6 +22,7 @@ export const data = [
   {
     id: 3,
     name: "Everest",
+    slug: "ada",
     // cover: require("../../assets/videos/everest.jpg"),
     coverVideo: require("../../assets/videos/everest.mp4"),
     coverVideoType: "video/mp4",
@@ -29,6 +32,7 @@ export const data = [
   {
     id: 4,
     name: "Microsoft",
+    slug: "ada",
     // cover: require("../../assets/videos/ms.jpg"),
     coverVideo: require("../../assets/videos/ms.mp4"),
     coverVideoType: "video/mp4",
@@ -38,6 +42,7 @@ export const data = [
   {
     id: 5,
     name: "OA",
+    slug: "ada",
     // cover: require("../../assets/videos/oa.jpg"),
     coverVideo: require("../../assets/videos/oa.mp4"),
     coverVideoType: "video/mp4",
