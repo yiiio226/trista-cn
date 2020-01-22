@@ -4,9 +4,9 @@ export const data = [
     name: "ADA",
     slug: "ada",
     // cover: require("../../assets/videos/ada.jpg"),
-    coverVideo: require("../../assets/videos/ada.mp4"),
+    coverVideo: require("../../assets/videos/ada_new-1.mp4"),
     coverVideoType: "video/mp4",
-    primaryColor: "#25252c",
+    primaryColor: "#242424",
     isWide: false,
   },
   {

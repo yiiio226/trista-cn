@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
 
-import { useHover } from "../../hooks"
+// import { useHover } from "../../hooks"
 
 const LinkWrapper = styled(Link)`
   display: flex;
@@ -25,29 +25,35 @@ const LinkWrapper = styled(Link)`
 
 export const ProjectCard = ({ ...props }) => {
   const project = props.project
-  const [hoverRef, isHovered] = useHover()
+  // const [hoverRef, isHovered] = useHover()
   const videoRef = React.useRef()
 
-  React.useEffect(() => {
-    const node = videoRef.current
-    if (!node) return
+  // React.useEffect(() => {
+  //   const node = videoRef.current
+  //   if (!node) return
 
-    if (isHovered) {
-      node.play()
-    } else {
-      node.pause()
+  //   if (isHovered) {
+  //     node.play()
+  //   } else {
+  //     node.pause()
 
-      setTimeout(() => {
-        if (node.paused) {
-          node.currentTime = 0
-        }
-      }, 500)
-    }
-  }, [isHovered])
+  //     setTimeout(() => {
+  //       if (node.paused) {
+  //         node.currentTime = 0
+  //       }
+  //     }, 500)
+  //   }
+  // }, [isHovered])
 
   return (
-    <LinkWrapper to={`/projects/${project.slug}`} {...props} ref={hoverRef}>
-      <video autoPlay={false} loop={true} preload="metadata" ref={videoRef}>
+    <LinkWrapper to={`/projects/${project.slug}`} {...props}>
+      <video
+        autoPlay={true}
+        loop={true}
+        preload="metadata"
+        ref={videoRef}
+        muted={true}
+      >
         <source src={project.coverVideo} type={project.coverVideoType} />
       </video>
     </LinkWrapper>
