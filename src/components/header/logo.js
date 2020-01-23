@@ -2,6 +2,7 @@ import React from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
 import SvgLogo from "../../images/logo.inline.svg"
+import { useHover } from "../../hooks"
 
 const LogoWrapper = styled(Link)`
   display: flex;
@@ -12,9 +13,20 @@ const LogoWrapper = styled(Link)`
 `
 
 export const Logo = ({ ...props }) => {
+  const [hoverRef, isHovered] = useHover()
+  const [showLogo, updateShowLogo] = React.useState(true)
+
+  React.useEffect(() => {
+    if (isHovered && showLogo) updateShowLogo(false)
+  }, [isHovered])
+
+  React.useEffect(() => {
+    if (!showLogo) updateShowLogo(true)
+  }, [showLogo])
+
   return (
-    <LogoWrapper {...props} to="/">
-      <SvgLogo />
+    <LogoWrapper {...props} to="/" ref={hoverRef}>
+      {showLogo && <SvgLogo />}
     </LogoWrapper>
   )
 }

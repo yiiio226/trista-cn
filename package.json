@@ -26,7 +26,8 @@
     "react-dom": "^16.12.0",
     "react-helmet": "^5.2.1",
     "react-typist": "^2.0.5",
-    "styled-components": "^4.4.1"
+    "styled-components": "^4.4.1",
+    "use-debounce": "^3.3.0"
   },
   "devDependencies": {
     "prettier": "^1.19.1"

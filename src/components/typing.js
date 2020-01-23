@@ -38,6 +38,7 @@ export const Typing = () => {
           onTypingDone={() => updateRunning(false)}
           cursor={{ blink: true }}
         >
+          <Typist.Delay ms={2500} />
           <Typist.Delay ms={1000} />
           <span>你好</span>
           <Typist.Delay ms={1000} />

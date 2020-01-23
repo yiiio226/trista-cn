@@ -3,7 +3,7 @@ import { graphql } from "gatsby"
 import styled from "styled-components"
 
 import { Container, Gap, Header, Layout, SEO } from "../components"
-import { Image } from "../components/images/image-trista-big"
+// import { Image } from "../components/images/image-trista-big"
 import { useSiteMetadata } from "../hooks/use-site-meta-data"
 
 // TODO: Move article related css to separate component
