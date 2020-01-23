@@ -38,24 +38,24 @@ const TristaCutoutCenter = styled.div`
   opacity: 0.14;
   background-image: url(${tristaCutout});
   background-repeat: no-repeat;
-  background-size: 254.5px 300px;
-  background-position: center center;
+  background-size: 420px;
+  background-position: center 205px;
 `
 
-const ButtonAnimated = styled(Animated)`
-  position: absolute;
-  bottom: 0;
-  left: calc(50% - 30px);
-`
+// const ButtonAnimated = styled(Animated)`
+//   position: absolute;
+//   bottom: 0;
+//   left: calc(50% - 30px);
+// `
 
-const ContinueButtonLink = styled(Link)`
-  display: block;
-  width: 60px;
-  height: 90px;
-  background-image: url(${svgHandPointDown});
-  background-repeat: no-repeat;
-  opacity: 0.2;
-`
+// const ContinueButtonLink = styled(Link)`
+//   display: block;
+//   width: 60px;
+//   height: 90px;
+//   background-image: url(${svgHandPointDown});
+//   background-repeat: no-repeat;
+//   opacity: 0.2;
+// `
 
 const IndexPage = () => {
   const { menuLinks, title } = useSiteMetadata()
@@ -78,13 +78,13 @@ const IndexPage = () => {
         <Gap gapSize={150} />
         <TristaCutoutCenter />
         <Typing />
-        <ButtonAnimated
+        {/* <ButtonAnimated
           animationIn="bounce"
           animationInDelay={9500}
           isVisible={true}
         >
           <ContinueButtonLink to="#project-gallery" />
-        </ButtonAnimated>
+        </ButtonAnimated> */}
       </HomeContentContainer>
       <Container sideDistance={sideDistance}>
         <Gap gapSize={150} id="project-gallery" />

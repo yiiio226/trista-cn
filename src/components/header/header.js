@@ -20,7 +20,7 @@ export const Header = ({ menuLinks, siteTitle }) => {
 
   return (
     <HeaderWrapper>
-      <Gap gapSize={90} />
+      <Gap gapSize={60} />
       <Logo onClick={toggleShowLogo} hide={showLogo} />
       <Gap gapSize={20} />
       <Menu menuLinks={menuLinks} />

@@ -5,8 +5,8 @@ import styled from "styled-components"
 
 const TypingWrapper = styled.div`
   display: inline-block;
-  font-size: 48px;
-  line-height: 48px;
+  font-size: 64px;
+  line-height: 64px;
   font-family: ${props => props.theme.fontFamily};
 
   .shadow {

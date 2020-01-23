@@ -1,5 +1,6 @@
 export const theme = {
   color: "#333333",
+  colorInverse: "#ffffff",
   colorBgPlaceholder: "rgba(0,255,0,0.1)",
   colorBgAlt: "#FBFBFB",
   colorTheme: "#266D64",
