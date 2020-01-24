@@ -13,15 +13,11 @@ const HeaderWrapper = styled.div`
   width: 100%;
 `
 
-export const Header = ({ menuLinks, siteTitle }) => {
-  const [showLogo, updateShowLogo] = React.useState(true)
-
-  const toggleShowLogo = () => updateShowLogo(!showLogo)
-
+export const Header = ({ menuLinks }) => {
   return (
     <HeaderWrapper>
       <Gap gapSize={60} />
-      <Logo onClick={toggleShowLogo} hide={showLogo} />
+      <Logo />
       <Gap gapSize={20} />
       <Menu menuLinks={menuLinks} />
     </HeaderWrapper>

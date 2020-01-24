@@ -1,8 +1,8 @@
 import React from "react"
-import { Link } from "gatsby"
+// import { Link } from "gatsby"
 import styled from "styled-components"
 import { useWindowWidth } from "@react-hook/window-size"
-import { Animated } from "react-animated-css"
+// import { Animated } from "react-animated-css"
 
 import {
   Container,
@@ -15,7 +15,7 @@ import {
 } from "../components"
 import { useSiteMetadata } from "../hooks"
 import { theme } from "../constants/theme"
-import svgHandPointDown from "../images/icons/hand-point-down.svg"
+// import svgHandPointDown from "../images/icons/hand-point-down.svg"
 import "../styles/animate.min.css"
 import tristaCutout from "../images/trista-cutout.png"
 

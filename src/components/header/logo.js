@@ -18,7 +18,7 @@ export const Logo = ({ ...props }) => {
 
   React.useEffect(() => {
     if (isHovered && showLogo) updateShowLogo(false)
-  }, [isHovered])
+  }, [isHovered, showLogo])
 
   React.useEffect(() => {
     if (!showLogo) updateShowLogo(true)

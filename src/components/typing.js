@@ -25,7 +25,7 @@ const TypingWrapper = styled.div`
 
 export const Typing = () => {
   const [running, updateRunning] = React.useState(true)
-  // const longestSentence = "你好，我是一名设计师"
+  // const longestSentence = "你好，我是一名 UI 设计师"
   React.useEffect(() => {
     if (running === false) updateRunning(true)
   }, [running])
@@ -49,7 +49,7 @@ export const Typing = () => {
           <span> Trista</span>
           <Typist.Backspace count={7} delay={1000} />
           <Typist.Delay ms={500} />
-          <span>一名设计师</span>
+          <span>一名 UI 设计师</span>
           <Typist.Backspace count={10} delay={5000} />
           <Typist.Delay ms={1000} />
         </Typist>

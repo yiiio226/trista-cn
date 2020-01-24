@@ -1,8 +1,8 @@
 import styled from "styled-components"
 
-export const ExternalLink = styled.a.attrs({
-  href: props => props.href,
-  children: props => props.label,
+export const ExternalLink = styled.a.attrs(props => ({
+  href: props.href,
+  children: props.label,
   target: "_blank",
   rel: "noopener noreferrer",
-})``
+}))``
