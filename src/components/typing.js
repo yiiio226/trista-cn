@@ -50,7 +50,7 @@ export const Typing = () => {
           <Typist.Backspace count={7} delay={1000} />
           <Typist.Delay ms={500} />
           <span>一名 UI 设计师</span>
-          <Typist.Backspace count={10} delay={5000} />
+          <Typist.Backspace count={14} delay={5000} />
           <Typist.Delay ms={1000} />
         </Typist>
       ) : (
