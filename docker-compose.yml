@@ -32,8 +32,8 @@ services:
       DB_DRIVER: pgsql
       DB_SERVER: postgres
       DB_DATABASE: craft3
-      DB_PASSWORD: secret
-      PGPASSWORD: secret
+      DB_PASSWORD: nKR9K2ECuVAEM9tqYsMtDpXa
+      PGPASSWORD: nKR9K2ECuVAEM9tqYsMtDpXa
       DB_SCHEMA: public
       DB_PORT: '5432'
       DB_USER: craft3
@@ -43,7 +43,7 @@ services:
     image: postgres:11.5
     environment:
       POSTGRES_USER: craft3
-      POSTGRES_PASSWORD: secret
+      POSTGRES_PASSWORD: nKR9K2ECuVAEM9tqYsMtDpXa
       POSTGRES_DB: craft3
       POSTGRES_INITDB_ARGS: "-E UTF8"
     volumes:
