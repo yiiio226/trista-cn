@@ -18,7 +18,7 @@ export const Typing = () => {
 
   React.useEffect(() => {
     ;(async () => {
-      await sleep(2000)
+      await sleep(3000)
       updateSlideInContent("你好，我是 Trista")
       await sleep(2000)
       updateSlideInContent("!CLEAR$")
