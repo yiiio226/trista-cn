@@ -1,34 +1,41 @@
 import React from "react"
 import { Viewport } from "./viewport"
 import { ChildrenAnimated } from "./children-animated"
+import { usePrevious } from "../../hooks/use-previous"
 
 export const SlideIn = ({ duration, children }) => {
   const [childrenWidth, updateChildrenWidth] = React.useState(0)
-  const [lastChildren, updateLastChildren] = React.useState()
-  // const [isBlink, updateIsBlink] = React.useState(true)
+  const [lastChildren, updateLastChildren] = React.useState("")
   const viewportRef = React.useRef()
   const childrenRef = React.useRef()
   const isCleaning = children === "!CLEAR$"
-  const showingChildren = isCleaning ? lastChildren : children
+  const isBlinking = children === "!FLASH$"
 
-  React.useEffect(() => {
-    if (isCleaning) {
-      updateChildrenWidth(0)
-      children = ""
-    }
-  }, [isCleaning])
+  let showingChildren = isCleaning ? lastChildren : children
+  showingChildren = isBlinking ? "" : showingChildren
 
-  // TODO: When typing, do not flash cursor
+  console.log(
+    "showingChildren",
+    showingChildren,
+    "isCleaning, isBlinking",
+    isCleaning,
+    isBlinking
+  )
 
   React.useEffect(() => {
     if (childrenRef.current) {
-      const newWidth = childrenRef.current.offsetWidth
+      let newWidth = isCleaning ? 0 : childrenRef.current.offsetWidth
       updateChildrenWidth(newWidth)
-      console.log("newWidth", newWidth)
     }
-  }, [showingChildren, childrenRef])
+  }, [showingChildren, childrenRef, isCleaning])
+
+  /** Remember last children */
+  React.useEffect(() => {
+    if (!isCleaning) updateLastChildren(children)
+  }, [isCleaning, children])
 
   React.useEffect(() => {
+    console.log("childrenWidth", childrenWidth)
     const toggleTransition = isEnable => {
       viewportRef.current.style.transitionDuration = `${
         isEnable ? duration / 1000 : 0
@@ -38,7 +45,7 @@ export const SlideIn = ({ duration, children }) => {
       }s`
     }
     const slideAnimation = () => {
-      viewportRef.current.style.width = `${isCleaning ? 0 : childrenWidth}px`
+      viewportRef.current.style.width = `${childrenWidth}px`
       childrenRef.current.style.transform = `translateX(0px)`
       console.log(
         "width",
@@ -50,16 +57,9 @@ export const SlideIn = ({ duration, children }) => {
 
     toggleTransition(true)
     slideAnimation()
-    setTimeout(() => toggleTransition(false), duration)
+    const timer = setTimeout(() => toggleTransition(false), duration)
+    return () => clearTimeout(timer)
   }, [childrenWidth])
-
-  React.useEffect(() => {
-    if (!isCleaning) {
-      updateLastChildren(children)
-    } else {
-      setTimeout(() => updateLastChildren(children), duration)
-    }
-  }, [isCleaning])
 
   console.log(
     "isCleaning, lastChildren, children",
@@ -72,7 +72,7 @@ export const SlideIn = ({ duration, children }) => {
     <Viewport
       fixedWidth={childrenWidth}
       duration={duration}
-      className="cursorBlink"
+      className={isBlinking ? "cursorBlink" : "cursorNoBlink"}
       ref={viewportRef}
     >
       <ChildrenAnimated

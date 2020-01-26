@@ -7,28 +7,29 @@ export const Viewport = styled.div`
   width: 0;
   overflow: hidden;
   transition-property: width;
+  border-right: 2px solid rgba(32, 104, 106, 0);
 
-  @keyframes cursorBlink {
+  @keyframes cursor-blink {
     0% {
-      box-shadow: 2px 0 0 rgba(32, 104, 106, 0);
+      border-right-color: rgba(32, 104, 106, 0);
     }
     25% {
-      box-shadow: 2px 0 0 rgba(32, 104, 106, 0);
+      border-right-color: rgba(32, 104, 106, 0);
     }
     50% {
-      box-shadow: 2px 0 0 rgba(32, 104, 106, 1);
+      border-right-color: rgba(32, 104, 106, 1);
     }
     90% {
-      box-shadow: 2px 0 0 rgba(32, 104, 106, 1);
+      border-right-color: rgba(32, 104, 106, 1);
     }
     100% {
-      box-shadow: 2px 0 0 rgba(32, 104, 106, 0);
+      border-right-color: rgba(32, 104, 106, 1);
     }
   }
   &.cursorBlink {
-    animation: cursorBlink 1s linear infinite;
+    animation: cursor-blink 1s linear infinite;
   }
   &.cursorNoBlink {
-    box-shadow: 2px 0 0 rgba(32, 104, 106, 1);
+    border-right-color: rgba(32, 104, 106, 1);
   }
 `
