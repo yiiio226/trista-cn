@@ -1,7 +1,9 @@
 import React from "react"
-import Typist from "react-typist"
+// import Typist from "react-typist"
 import "react-typist/dist/Typist.css"
 import styled from "styled-components"
+
+import { SlideIn } from "./slide-in"
 
 const TypingWrapper = styled.div`
   display: inline-block;
@@ -25,37 +27,24 @@ const TypingWrapper = styled.div`
 
 export const Typing = () => {
   const [running, updateRunning] = React.useState(true)
-  // const longestSentence = "你好，我是一名 UI 设计师"
   React.useEffect(() => {
     if (running === false) updateRunning(true)
   }, [running])
 
+  const [slideInContent, updateSlideInContent] = React.useState(
+    "你好，我是 Trista"
+  )
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      updateSlideInContent("!CLEAR$")
+      setTimeout(() => updateSlideInContent("我是一名 UI 设计师"), 2000)
+    }, 2000)
+  }, [])
+
   return (
     <TypingWrapper>
-      {/* <div className="shadow">{longestSentence}</div> */}
-      {running ? (
-        <Typist
-          onTypingDone={() => updateRunning(false)}
-          cursor={{ blink: true }}
-        >
-          <Typist.Delay ms={2500} />
-          <Typist.Delay ms={1000} />
-          <span>你好</span>
-          <Typist.Delay ms={1000} />
-          <span>，</span>
-          <Typist.Delay ms={200} />
-          <span>我是</span>
-          <Typist.Delay ms={100} />
-          <span> Trista</span>
-          <Typist.Backspace count={7} delay={1000} />
-          <Typist.Delay ms={500} />
-          <span>一名 UI 设计师</span>
-          <Typist.Backspace count={14} delay={5000} />
-          <Typist.Delay ms={1000} />
-        </Typist>
-      ) : (
-        ""
-      )}
+      {running ? <SlideIn duration={800}>{slideInContent}</SlideIn> : ""}
     </TypingWrapper>
   )
 }
