@@ -1,7 +1,6 @@
 import React from "react"
 import { Viewport } from "./viewport"
 import { ChildrenAnimated } from "./children-animated"
-import { usePrevious } from "../../hooks/use-previous"
 
 export const SlideIn = ({ duration, children }) => {
   const [childrenWidth, updateChildrenWidth] = React.useState(0)

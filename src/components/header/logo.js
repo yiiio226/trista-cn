@@ -1,7 +1,8 @@
 import React from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
-import SvgLogo from "../../images/logo.inline.svg"
+// import SvgLogo from "../../images/logo.inline.svg"
+import SvgLogo from "../../images/logo-static.inline.svg"
 import { useHover } from "../../hooks"
 
 const LogoWrapper = styled(Link)`
