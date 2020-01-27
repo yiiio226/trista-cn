@@ -2,6 +2,7 @@ export const theme = {
   color: "#333333",
   colorInverse: "#ffffff",
   colorBgPlaceholder: "rgba(0,255,0,0.1)",
+  colorBg: "#ffffff",
   colorBgAlt: "#FBFBFB",
   colorTheme: "#266D64",
 
@@ -10,6 +11,7 @@ export const theme = {
   fontFamily: "'PingFang SC', 'Helvetica Neue'",
 
   gapSize: 8,
+  maxBodyWidth: 680,
 
   mobileWidth: 960,
 }

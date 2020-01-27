@@ -12,7 +12,7 @@ const TypingWrapper = styled.div`
   line-height: 64px;
   font-family: ${props => props.theme.fontFamily};
 
-  @media (max-width: 768px) {
+  @media (max-width: 780px) {
     transform: scale(0.5);
   }
 `

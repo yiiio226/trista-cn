@@ -16,6 +16,7 @@ import { Footer, Gap } from "."
 
 export const Container = styled.div`
   margin: 0 auto;
+  /* When is full width, make max-width 100% */
   max-width: ${props =>
     props.isFullWidth
       ? "100%"

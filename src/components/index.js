@@ -1,3 +1,5 @@
+export * from "./about-body"
+export * from "./body-section"
 export * from "./header"
 export * from "./project-gallery"
 export * from "./external-link"
