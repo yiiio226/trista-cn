@@ -27,7 +27,7 @@ const FooterWrapper = styled.div`
 
     @media (max-width: 780px) {
       flex-direction: column;
-      align-items: center;
+      text-align: center;
     }
 
     a {
