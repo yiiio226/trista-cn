@@ -6,6 +6,7 @@ import { ExternalLink } from "."
 
 const FooterWrapper = styled.div`
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
@@ -13,12 +14,21 @@ const FooterWrapper = styled.div`
   padding: 70px 40px;
   box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.06);
 
+  @media (max-width: 780px) {
+    flex-direction: column;
+  }
+
   ul {
     display: flex;
 
     list-style: none;
     margin: 0;
     padding: 0;
+
+    @media (max-width: 780px) {
+      flex-direction: column;
+      align-items: center;
+    }
 
     a {
       display: inline-block;

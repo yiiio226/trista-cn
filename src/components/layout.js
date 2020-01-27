@@ -13,23 +13,13 @@ import "normalize.css"
 import { theme } from "../constants/theme"
 import { GlobalStyle } from "./global-style"
 import { Footer, Gap } from "."
+import { Container } from "./container"
 
-export const Container = styled.div`
-  margin: 0 auto;
-  /* When is full width, make max-width 100% */
-  max-width: ${props =>
-    props.isFullWidth
-      ? "100%"
-      : props.sideDistance
-      ? "calc(100vw - " + props.sideDistance * 2 + "px)"
-      : props.theme.mobileWidth + "px"};
-  padding: 0
-    ${props =>
-      props.isFullWidth
-        ? props.sideDistance
-          ? props.sideDistance + "px"
-          : "calc((100vw - " + props.theme.mobileWidth + "px)/2)"
-        : 0};
+const FooterContainer = styled(Container)`
+  @media (max-width: 780px) {
+    padding: 0 30px;
+    max-width: unset;
+  }
 `
 
 export const Layout = ({ sideDistance, children }) => {
@@ -39,9 +29,9 @@ export const Layout = ({ sideDistance, children }) => {
         <GlobalStyle />
         <main>{children}</main>
         <Gap gapSize={100} />
-        <Container sideDistance={sideDistance}>
+        <FooterContainer sideDistance={100}>
           <Footer />
-        </Container>
+        </FooterContainer>
         <Gap gapSize={100} />
       </ThemeProvider>
     </>

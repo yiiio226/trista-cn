@@ -1,7 +1,5 @@
 import styled from "styled-components"
 
-import { Container } from "./layout"
-
 // TODO: Move article related css to separate component
 export const AboutBody = styled.div`
   h2 {

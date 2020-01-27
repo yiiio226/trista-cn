@@ -58,7 +58,7 @@ export const SlideIn = ({ duration, children }) => {
     slideAnimation()
     const timer = setTimeout(() => toggleTransition(false), duration)
     return () => clearTimeout(timer)
-  }, [childrenWidth])
+  }, [childrenWidth, duration])
 
   console.log(
     "isCleaning, lastChildren, children",
