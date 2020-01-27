@@ -1,6 +1,7 @@
 export * from "./about-body"
 export * from "./body-section"
 export * from "./header"
+export * from "./photo-gallery"
 export * from "./project-gallery"
 export * from "./external-link"
 export * from "./footer"
