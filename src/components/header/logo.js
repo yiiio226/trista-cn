@@ -21,13 +21,13 @@ export const Logo = ({ ...props }) => {
   React.useEffect(() => {
     if (!isPlaying && isHovering) {
       updateIsPlaying(true)
-      setTimeout(() => updateIsPlaying(false), 3000)
+      setTimeout(() => updateIsPlaying(false), 2000)
     }
   }, [isHovering, isPlaying])
 
   React.useEffect(() => {
     // updateIsInitialPlaying(true) // Disabled initial playing
-    setTimeout(() => updateIsInitialPlaying(false), 3000)
+    setTimeout(() => updateIsInitialPlaying(false), 2000)
   }, [])
 
   return (

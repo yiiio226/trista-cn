@@ -32,7 +32,7 @@ export const Typing = () => {
         updateContent(["!CLEAR$", 800])
         await sleep(1000)
         updateContent(["你好，我是 Trista", 800])
-        // await sleep(1500)
+        await sleep(1500)
         // updateContent(["!FLASH$", 800])
       }
     })()

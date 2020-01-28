@@ -10,7 +10,7 @@
          100% {stroke-dashoffset: 0}
       }
       #mask-word {
-         animation: mask-word-fly 2.5s linear;
+         animation: mask-word-fly 1.5s linear;
       }
    </style>
    <defs id="defs1">
