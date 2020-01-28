@@ -22,17 +22,15 @@ export const Typing = () => {
 
   React.useEffect(() => {
     ;(async () => {
-      await sleep(500)
       while (true) {
-        await sleep(1500)
-        updateContent(["!CLEAR$", 800])
-        await sleep(1000)
-        updateContent(["我是一名 UI 设计师", 1000])
         await sleep(2000)
         updateContent(["!CLEAR$", 800])
         await sleep(1000)
+        updateContent(["我是一名 UI 设计师", 1000])
+        await sleep(3000)
+        updateContent(["!CLEAR$", 800])
+        await sleep(1000)
         updateContent(["你好，我是 Trista", 800])
-        await sleep(1500)
         // updateContent(["!FLASH$", 800])
       }
     })()
