@@ -13,14 +13,6 @@ export const SlideIn = ({ duration, children }) => {
   let showingChildren = isCleaning ? lastChildren : children
   showingChildren = isBlinking ? "" : showingChildren
 
-  console.log(
-    "showingChildren",
-    showingChildren,
-    "isCleaning, isBlinking",
-    isCleaning,
-    isBlinking
-  )
-
   React.useEffect(() => {
     if (childrenRef.current) {
       let newWidth = isCleaning ? 0 : childrenRef.current.offsetWidth
@@ -34,7 +26,6 @@ export const SlideIn = ({ duration, children }) => {
   }, [isCleaning, children])
 
   React.useEffect(() => {
-    console.log("childrenWidth", childrenWidth)
     const toggleTransition = isEnable => {
       viewportRef.current.style.transitionDuration = `${
         isEnable ? duration / 1000 : 0
@@ -46,12 +37,6 @@ export const SlideIn = ({ duration, children }) => {
     const slideAnimation = () => {
       viewportRef.current.style.width = `${childrenWidth}px`
       childrenRef.current.style.transform = `translateX(0px)`
-      console.log(
-        "width",
-        viewportRef.current.style.width,
-        "transform",
-        childrenRef.current.style.transform
-      )
     }
 
     toggleTransition(true)
@@ -59,13 +44,6 @@ export const SlideIn = ({ duration, children }) => {
     const timer = setTimeout(() => toggleTransition(false), duration)
     return () => clearTimeout(timer)
   }, [childrenWidth, duration])
-
-  console.log(
-    "isCleaning, lastChildren, children",
-    isCleaning,
-    lastChildren,
-    children
-  )
 
   return (
     <Viewport
