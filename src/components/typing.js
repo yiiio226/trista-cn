@@ -18,7 +18,7 @@ const TypingWrapper = styled.div`
 `
 
 export const Typing = () => {
-  const [content, updateContent] = React.useState(["!FLASH$", 800])
+  const [content, updateContent] = React.useState(["!CLEAR$", 800])
 
   React.useEffect(() => {
     ;(async () => {
@@ -32,7 +32,7 @@ export const Typing = () => {
         await sleep(1500)
         updateContent(["!CLEAR$", 800])
         await sleep(800)
-        updateContent(["!FLASH$", 800])
+        // updateContent(["!FLASH$", 800])
       }
     })()
   }, [])
