@@ -24,7 +24,7 @@ export const ProjectGallery = () => {
   return (
     <GalleryWrapper>
       {data.map(p => (
-        <LazyLoadComponent>
+        <LazyLoadComponent threshold={600}>
           <ProjectCard project={p} key={p.id} />
         </LazyLoadComponent>
       ))}
