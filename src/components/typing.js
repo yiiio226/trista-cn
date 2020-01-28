@@ -29,8 +29,7 @@ export const Typing = () => {
         updateContent(["!CLEAR$", 800])
         await sleep(1000)
         updateContent(["我是一名 UI 设计师", 1000])
-
-        await sleep(2000)
+        await sleep(1500)
         updateContent(["!CLEAR$", 800])
         await sleep(800)
         updateContent(["!FLASH$", 800])
