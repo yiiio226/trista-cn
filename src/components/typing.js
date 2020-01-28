@@ -18,29 +18,29 @@ const TypingWrapper = styled.div`
 `
 
 export const Typing = () => {
-  const [content, updateContent] = React.useState("!FLASH$")
+  const [content, updateContent] = React.useState(["!FLASH$", 800])
 
   React.useEffect(() => {
     ;(async () => {
       while (true) {
         await sleep(1200)
-        updateContent("你好，我是 Trista")
+        updateContent(["你好，我是 Trista", 800])
         await sleep(1500)
-        updateContent("!CLEAR$")
+        updateContent(["!CLEAR$", 800])
         await sleep(1000)
-        updateContent("我是一名 UI 设计师")
+        updateContent(["我是一名 UI 设计师", 1000])
 
         await sleep(3000)
-        updateContent("!CLEAR$")
+        updateContent(["!CLEAR$", 800])
         await sleep(800)
-        updateContent("!FLASH$")
+        updateContent(["!FLASH$", 800])
       }
     })()
   }, [])
 
   return (
     <TypingWrapper>
-      <SlideIn duration={800}>{content}</SlideIn>
+      <SlideIn duration={content[1]}>{content[0]}</SlideIn>
     </TypingWrapper>
   )
 }
