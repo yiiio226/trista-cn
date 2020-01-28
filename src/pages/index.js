@@ -38,8 +38,8 @@ const TristaCutoutCenter = styled.div`
   opacity: 0.14;
   background-image: url(${tristaCutout});
   background-repeat: no-repeat;
-  background-size: 420px;
-  background-position: center 205px;
+  background-size: 306px;
+  background-position: center 300px;
 `
 
 // const ButtonAnimated = styled(Animated)`
@@ -75,7 +75,7 @@ const IndexPage = () => {
       <HomeContentContainer>
         <Header menuLinks={menuLinks} siteTitle={title} />
         <SEO title="Trista" />
-        <Gap gapSize={150} />
+        <Gap gapSize={235} />
         <TristaCutoutCenter />
         <Typing />
       </HomeContentContainer>
