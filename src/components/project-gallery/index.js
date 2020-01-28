@@ -1,6 +1,9 @@
 import React from "react"
 import styled from "styled-components"
-import { LazyLoadComponent } from "react-lazy-load-image-component"
+import {
+  LazyLoadComponent,
+  trackWindowScroll,
+} from "react-lazy-load-image-component"
 import { ProjectCard } from "./project-card"
 import { data } from "./projects-data"
 
@@ -20,14 +23,14 @@ const GalleryWrapper = styled.div`
   }
 `
 
-export const ProjectGallery = () => {
+export const ProjectGallery = trackWindowScroll(({ scrollPosition }) => {
   return (
     <GalleryWrapper>
       {data.map(p => (
-        <LazyLoadComponent threshold={600}>
+        <LazyLoadComponent threshold={800} scrollPosition={scrollPosition}>
           <ProjectCard project={p} key={p.id} />
         </LazyLoadComponent>
       ))}
     </GalleryWrapper>
   )
-}
+})
