@@ -8,7 +8,7 @@ export const theme = {
 
   fontSize: 14,
   fontSizeFooterLinks: 20,
-  fontFamily: "'PingFang SC', 'Helvetica Neue'",
+  fontFamily: "'PingFang SC', 'Helvetica Neue', sans-serif",
 
   gapSize: 8,
   maxBodyWidth: 680,
