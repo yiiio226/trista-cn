@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import { LazyLoadComponent } from "react-lazy-load-image-component"
 import { ProjectCard } from "./project-card"
 import { data } from "./projects-data"
 
@@ -23,7 +24,9 @@ export const ProjectGallery = () => {
   return (
     <GalleryWrapper>
       {data.map(p => (
-        <ProjectCard project={p} key={p.id} />
+        <LazyLoadComponent>
+          <ProjectCard project={p} key={p.id} />
+        </LazyLoadComponent>
       ))}
     </GalleryWrapper>
   )
