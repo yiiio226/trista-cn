@@ -23,7 +23,7 @@ export const Typing = () => {
   React.useEffect(() => {
     ;(async () => {
       while (true) {
-        await sleep(1000)
+        await sleep(1200)
         updateContent("你好，我是 Trista")
         await sleep(1500)
         updateContent("!CLEAR$")
