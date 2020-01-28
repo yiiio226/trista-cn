@@ -78,13 +78,6 @@ const IndexPage = () => {
         <Gap gapSize={150} />
         <TristaCutoutCenter />
         <Typing />
-        {/* <ButtonAnimated
-          animationIn="bounce"
-          animationInDelay={9500}
-          isVisible={true}
-        >
-          <ContinueButtonLink to="#project-gallery" />
-        </ButtonAnimated> */}
       </HomeContentContainer>
       <Container sideDistance={sideDistance}>
         <Gap gapSize={150} id="project-gallery" />
