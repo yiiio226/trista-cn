@@ -26,7 +26,8 @@ export const Logo = ({ ...props }) => {
 
   return (
     <LogoWrapper {...props} to="/" ref={hoverRef}>
-      {isPlaying ? <SvgLogoAnimated /> : <SvgLogo />}
+      {/* {isPlaying ? <SvgLogoAnimated /> : <SvgLogo />} */}
+      <SvgLogoAnimated />
     </LogoWrapper>
   )
 }
