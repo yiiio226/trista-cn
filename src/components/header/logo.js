@@ -16,18 +16,24 @@ const LogoWrapper = styled(Link)`
 export const Logo = ({ ...props }) => {
   const [isHovering, hoverRef] = useHover(0, 200)
   const [isPlaying, updateIsPlaying] = React.useState(false)
+  const [isInitialPlaying, updateIsInitialPlaying] = React.useState(false)
 
   React.useEffect(() => {
     if (!isPlaying && isHovering) {
       updateIsPlaying(true)
-      setTimeout(() => updateIsPlaying(false), 3000)
+      setTimeout(() => updateIsPlaying(false), 1500)
     }
   }, [isHovering, isPlaying])
 
+  React.useEffect(() => {
+    updateIsInitialPlaying(true)
+    setTimeout(() => updateIsInitialPlaying(false), 1500)
+  }, [])
+
   return (
     <LogoWrapper {...props} to="/" ref={hoverRef}>
-      {/* {isPlaying ? <SvgLogoAnimated /> : <SvgLogo />} */}
-      <SvgLogoAnimated />
+      {isPlaying || isInitialPlaying ? <SvgLogoAnimated /> : <SvgLogo />}
+      {/* <SvgLogoAnimated /> */}
     </LogoWrapper>
   )
 }
