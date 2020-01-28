@@ -38,6 +38,9 @@ services:
       DB_PORT: '5432'
       DB_USER: craft3
 
+      ASSET_BASE_URL: ''
+      ASSET_FS_PATH: ''
+
   postgres:
     image: postgres:11.5
     environment:
