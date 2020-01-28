@@ -41,7 +41,10 @@ export const SlideIn = ({ duration, children }) => {
 
     toggleTransition(true)
     slideAnimation()
-    const timer = setTimeout(() => toggleTransition(false), duration)
+    const timer = setTimeout(() => {
+      toggleTransition(false)
+      clearTimeout(timer)
+    }, duration)
     return () => clearTimeout(timer)
   }, [childrenWidth, duration])
 

@@ -12,7 +12,7 @@ services:
   web:
     image: wyveo/craftcms-docker:latest
     ports:
-      - 8000:80
+      - 8005:80
     volumes:
       - craftcms-logs:/var/log
       - craftcms-data:/usr/share/nginx
