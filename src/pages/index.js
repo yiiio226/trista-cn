@@ -65,7 +65,7 @@ const IndexPage = ({ data }) => {
   const sideDistance =
     windowWidth <= theme.mobileWidth ? theme.gapSize * 3 : 100
 
-  console.log("home page data", data)
+  // console.log("home page data", data)
 
   // Disable static content generation, only render lively, mainly due to useWindowWidth()
   // TODO: Replace useWindowWidth()

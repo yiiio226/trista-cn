@@ -50,7 +50,6 @@ const FooterWrapper = styled.div`
 `
 
 export const Footer = ({ links }) => {
-  console.log(links)
   return (
     <FooterWrapper>
       <Logo />
