@@ -9,8 +9,10 @@ volumes:
 services:
   www:
     build: .
+    restart: unless-stopped
   web:
     image: wyveo/craftcms-docker:latest
+    restart: unless-stopped
     ports:
       - 8005:80
     volumes:
@@ -43,6 +45,7 @@ services:
 
   postgres:
     image: postgres:11.5
+    restart: unless-stopped
     environment:
       POSTGRES_USER: craft3
       POSTGRES_PASSWORD: nKR9K2ECuVAEM9tqYsMtDpXa
@@ -54,5 +57,6 @@ services:
 
   redis:
     image: redis:5.0.6-alpine
+    restart: unless-stopped
     volumes:
       - redis-data:/data
