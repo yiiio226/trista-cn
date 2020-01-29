@@ -19,6 +19,7 @@
     "gatsby-transformer-remark": "^2.6.48",
     "gatsby-transformer-sharp": "^2.3.7",
     "i": "^0.3.6",
+    "lodash": "^4.17.15",
     "normalize.css": "^8.0.1",
     "npm": "^6.13.4",
     "prop-types": "^15.7.2",

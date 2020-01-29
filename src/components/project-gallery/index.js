@@ -27,8 +27,12 @@ export const ProjectGallery = trackWindowScroll(({ scrollPosition }) => {
   return (
     <GalleryWrapper>
       {data.map(p => (
-        <LazyLoadComponent threshold={800} scrollPosition={scrollPosition}>
-          <ProjectCard project={p} key={p.id} />
+        <LazyLoadComponent
+          threshold={800}
+          scrollPosition={scrollPosition}
+          key={p.id}
+        >
+          <ProjectCard project={p} />
         </LazyLoadComponent>
       ))}
     </GalleryWrapper>

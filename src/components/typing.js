@@ -17,24 +17,63 @@ const TypingWrapper = styled.div`
   }
 `
 
-export const Typing = () => {
+const DEFAULT_ACTIONS = [
+  {
+    sentence: "你好，我是 Trista",
+    duration: 1,
+    typeHandle: "text",
+  },
+  {
+    duration: 2000,
+    typeHandle: "sleep",
+  },
+  {
+    duration: 800,
+    typeHandle: "clear",
+  },
+  {
+    duration: 200,
+    typeHandle: "sleep",
+  },
+  {
+    sentence: "你好，我是 Trista",
+    duration: 800,
+    typeHandle: "text",
+  },
+]
+
+export const Typing = ({ actions = DEFAULT_ACTIONS }) => {
   const [content, updateContent] = React.useState(["你好，我是 Trista", 1])
 
   React.useEffect(() => {
     ;(async () => {
       while (true) {
-        await sleep(2000)
-        updateContent(["!CLEAR$", 800])
-        await sleep(1000)
-        updateContent(["我是一名 UI 设计师", 1000])
-        await sleep(3000)
-        updateContent(["!CLEAR$", 800])
-        await sleep(1000)
-        updateContent(["你好，我是 Trista", 800])
-        // updateContent(["!FLASH$", 800])
+        for (const i in actions) {
+          const a = actions[i]
+
+          switch (a.typeHandle) {
+            case "text":
+              updateContent([a.sentence, a.duration])
+              await sleep(a.duration)
+              break
+            case "sleep":
+              await sleep(a.duration)
+              break
+            case "clear":
+              updateContent(["!CLEAR$", a.duration])
+              await sleep(a.duration)
+              break
+            case "flash":
+              updateContent(["!FLASH$", a.duration])
+              await sleep(a.duration)
+              break
+            default:
+              await sleep(a.duration)
+          }
+        }
       }
     })()
-  }, [])
+  }, [actions])
 
   return (
     <TypingWrapper>

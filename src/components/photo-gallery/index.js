@@ -42,7 +42,7 @@ export const PhotoGallery = () => {
   return (
     <>
       {photos.map((p, i) => (
-        <PhotoItemWrapper index={i}>
+        <PhotoItemWrapper index={i} key={i}>
           <PhotoImgWrapper src={p.src} alt={p.desc} />
           <PhotoLabel index={i}>{p.desc}</PhotoLabel>
         </PhotoItemWrapper>

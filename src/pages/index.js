@@ -1,5 +1,6 @@
 import React from "react"
-// import { Link } from "gatsby"
+import _get from "lodash/get"
+import { graphql } from "gatsby"
 import styled from "styled-components"
 import { useWindowWidth } from "@react-hook/window-size"
 // import { Animated } from "react-animated-css"
@@ -57,12 +58,14 @@ const TristaCutoutCenter = styled.div`
 //   opacity: 0.2;
 // `
 
-const IndexPage = () => {
+const IndexPage = ({ data }) => {
   const { menuLinks, title } = useSiteMetadata()
   const windowWidth = useWindowWidth()
   console.log("windowWidth", windowWidth)
   const sideDistance =
     windowWidth <= theme.mobileWidth ? theme.gapSize * 3 : 100
+
+  console.log("home page data", data)
 
   // Disable static content generation, only render lively, mainly due to useWindowWidth()
   // TODO: Replace useWindowWidth()
@@ -77,7 +80,7 @@ const IndexPage = () => {
         <SEO title="Trista" />
         <Gap gapSize={235} />
         <TristaCutoutCenter />
-        <Typing />
+        <Typing actions={_get(data, "cms.entry.typingSentences")} />
       </HomeContentContainer>
       <Container sideDistance={sideDistance}>
         <Gap gapSize={150} id="project-gallery" />
@@ -86,5 +89,58 @@ const IndexPage = () => {
     </Layout>
   )
 }
+
+export const query = graphql`
+  {
+    cms {
+      entry(section: "homePage") {
+        title
+        sectionHandle
+        ... on CMS_homePage_homePage_Entry {
+          backgroundImage {
+            url
+            mimeType
+            width
+            height
+          }
+          typingSentences {
+            ... on CMS_typingSentences_text_BlockType {
+              sentence
+              duration
+              typeHandle
+            }
+            ... on CMS_typingSentences_clear_BlockType {
+              duration
+              typeHandle
+            }
+            ... on CMS_typingSentences_sleep_BlockType {
+              duration
+              typeHandle
+            }
+            ... on CMS_typingSentences_flashCursor_BlockType {
+              duration
+              typeHandle
+            }
+          }
+          projects {
+            ... on CMS_project_project_Entry {
+              heroPicture {
+                url
+                mimeType
+                width
+                height
+              }
+              projectVideo {
+                size
+                url
+              }
+              title
+            }
+          }
+        }
+      }
+    }
+  }
+`
 
 export default IndexPage

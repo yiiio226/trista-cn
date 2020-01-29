@@ -27,6 +27,22 @@ module.exports = {
       },
     },
     {
+      resolve: "gatsby-source-graphql",
+      options: {
+        typeName: "CMS",
+        fieldName: "cms",
+        url: "https://dev.cms.trista.design/api",
+        // HTTP headers
+        headers: {
+          // Learn about environment variables: https://gatsby.dev/env-vars
+          Authorization: `Bearer GnIyCjNWZKR1MeN_6dadFIMmbypU1q-e`,
+        },
+        // Additional options to pass to node-fetch
+        fetchOptions: {},
+        refetchInterval: 10,
+      },
+    },
+    {
       resolve: "gatsby-plugin-react-svg",
       options: {
         rule: {
