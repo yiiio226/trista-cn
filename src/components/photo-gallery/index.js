@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 
-import { photos } from "./photos-data"
+// import { photos } from "./photos-data"
 
 const PhotoItemWrapper = styled.div`
   display: flex;
@@ -38,13 +38,13 @@ const PhotoLabel = styled.label`
   }
 `
 
-export const PhotoGallery = () => {
+export const PhotoGallery = ({ photos = [] }) => {
   return (
     <>
       {photos.map((p, i) => (
         <PhotoItemWrapper index={i} key={i}>
-          <PhotoImgWrapper src={p.src} alt={p.desc} />
-          <PhotoLabel index={i}>{p.desc}</PhotoLabel>
+          <PhotoImgWrapper src={p.photo[0].url} alt={p.title} />
+          <PhotoLabel index={i}>{p.title}</PhotoLabel>
         </PhotoItemWrapper>
       ))}
     </>
