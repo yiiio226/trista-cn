@@ -49,32 +49,32 @@ const FooterWrapper = styled.div`
   }
 `
 
-export const Footer = () => {
+export const Footer = ({ links }) => {
+  console.log(links)
   return (
     <FooterWrapper>
       <Logo />
       <ul className="links">
-        <li>
-          <ExternalLink
-            href="mailto:hi@trista.design"
-            label="Email: hi@trista.design"
-          />
-        </li>
-        <li>
-          <ExternalLink href="https://dribbble.com/yiiio" label="Dribbble" />
-        </li>
-        <li>
-          <ExternalLink
-            href="https://www.behance.net/tangh1993"
-            label="Behance"
-          />
-        </li>
-        <li>
-          <ExternalLink
-            href="https://www.linkedin.com/in/yiiio"
-            label="LinkedIn"
-          />
-        </li>
+        {links &&
+          links.map(l => {
+            switch (l.typeHandle) {
+              case "email":
+                return (
+                  <li key={l.email}>
+                    <ExternalLink
+                      label={`Email: ${l.email}`}
+                      href={`mailto:${l.email}`}
+                    />
+                  </li>
+                )
+              case "links":
+                return (
+                  <li key={l.linkText}>
+                    <ExternalLink label={l.linkText} href={l.linkHref} />
+                  </li>
+                )
+            }
+          })}
       </ul>
     </FooterWrapper>
   )

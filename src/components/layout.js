@@ -22,7 +22,7 @@ const FooterContainer = styled(Container)`
   }
 `
 
-export const Layout = ({ sideDistance, children }) => {
+export const Layout = ({ sideDistance, footerLinks, children }) => {
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -30,7 +30,7 @@ export const Layout = ({ sideDistance, children }) => {
         <main>{children}</main>
         <Gap gapSize={100} />
         <FooterContainer sideDistance={100}>
-          <Footer />
+          <Footer links={footerLinks} />
         </FooterContainer>
         <Gap gapSize={100} />
       </ThemeProvider>

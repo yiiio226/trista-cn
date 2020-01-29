@@ -74,13 +74,17 @@ const IndexPage = ({ data }) => {
   }
 
   return (
-    <Layout center={true} sideDistance={sideDistance}>
+    <Layout
+      center={true}
+      sideDistance={sideDistance}
+      footerLinks={_get(data, "cms.footer.usefulLinks")}
+    >
       <HomeContentContainer>
         <Header menuLinks={menuLinks} siteTitle={title} />
         <SEO title="Trista" />
         <Gap gapSize={235} />
         <TristaCutoutCenter />
-        <Typing actions={_get(data, "cms.entry.typingSentences")} />
+        <Typing actions={_get(data, "cms.home.typingSentences")} />
       </HomeContentContainer>
       <Container sideDistance={sideDistance}>
         <Gap gapSize={150} id="project-gallery" />
@@ -93,7 +97,7 @@ const IndexPage = ({ data }) => {
 export const query = graphql`
   {
     cms {
-      entry(section: "homePage") {
+      home: entry(section: "homePage") {
         title
         sectionHandle
         ... on CMS_homePage_homePage_Entry {
@@ -135,6 +139,23 @@ export const query = graphql`
                 url
               }
               title
+            }
+          }
+        }
+      }
+
+      footer: entry(section: "footer") {
+        title
+        ... on CMS_footer_footer_Entry {
+          usefulLinks {
+            ... on CMS_usefulLinks_email_BlockType {
+              email
+              typeHandle
+            }
+            ... on CMS_usefulLinks_links_BlockType {
+              linkText
+              linkHref
+              typeHandle
             }
           }
         }
