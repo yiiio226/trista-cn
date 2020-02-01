@@ -7,11 +7,11 @@ WORKDIR /app
 ENV NODE_ENV=production
 
 # Only copy package.json, as it won't change that often
-COPY package.json ./
+COPY ../../package.json ./
 RUN yarn --frozen-lockfile --non-interactive
 
 # If project files change
-COPY . .
+COPY ../../ .
 
 EXPOSE 8000
 
