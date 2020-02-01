@@ -11,7 +11,7 @@ services:
     build: .
     restart: unless-stopped
   dev-live:
-    build: ./dockerfiles/live
+    build: ./Dockerfile-dev-live
     restart: unless-stopped
   web:
     image: wyveo/craftcms-docker:latest
