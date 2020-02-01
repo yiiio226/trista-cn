@@ -10,9 +10,6 @@ services:
   www:
     build: .
     restart: unless-stopped
-  dev-live:
-    build: ./Dockerfile-dev-live
-    restart: unless-stopped
   web:
     image: wyveo/craftcms-docker:latest
     restart: unless-stopped
