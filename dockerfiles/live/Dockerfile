@@ -14,3 +14,5 @@ RUN yarn --frozen-lockfile --non-interactive
 COPY . .
 
 EXPOSE 8000
+
+CMD ['yarn', 'start']
