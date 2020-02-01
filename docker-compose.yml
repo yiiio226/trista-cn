@@ -10,6 +10,10 @@ services:
   www:
     build: .
     restart: unless-stopped
+  dev:
+    build: .
+    command: yarn start
+    restart: unless-stopped
   web:
     image: wyveo/craftcms-docker:latest
     restart: unless-stopped
