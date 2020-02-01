@@ -10,7 +10,7 @@ services:
   www:
     build: .
     restart: unless-stopped
-  dev:
+  dev-live:
     build: ./dockerfiles/live
     restart: unless-stopped
   web:
