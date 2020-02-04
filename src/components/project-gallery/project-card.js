@@ -9,8 +9,10 @@ const LinkWrapper = styled(Link)`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: ${props => props.project.projectTileColor || props.theme.color};
-  grid-column: ${props => (props.project.projectTileIsWide ? "1/3" : "initial")};
+  background-color: ${props =>
+    props.project.projectTileColor || props.theme.color};
+  grid-column: ${props =>
+    props.project.projectTileIsWide ? "1/3" : "initial"};
   box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.06);
   text-decoration: none;
   overflow-y: hidden;
@@ -44,9 +46,7 @@ const LinkWrapper = styled(Link)`
 const LinkCopy = styled.div`
   margin-top: 70px;
   color: ${props =>
-    props.projectTileIsInversedColor
-      ? props.theme.colorInverse
-      : props.theme.color};
+    props.isInverseColor ? props.theme.colorInverse : props.theme.color};
   font-size: 24px;
   font-weight: 500;
   text-align: center;
@@ -75,13 +75,15 @@ export const ProjectCard = ({ ...props }) => {
   //   }
   // }, [isHovered])
 
+  console.log("project", project)
+
   return (
     <LinkWrapper to={`/projects/${project.slug}`} {...props}>
       <LinkCopy
         className="link-copy"
         isInverseColor={project.projectTileIsInversedColor}
       >
-        {project.title}
+        {project.projectTitleShort}
       </LinkCopy>
       <video
         autoPlay={true}
