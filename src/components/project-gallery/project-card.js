@@ -1,4 +1,5 @@
 import React from "react"
+import _get from "lodash/get"
 import styled from "styled-components"
 import { Link } from "gatsby"
 
@@ -8,8 +9,8 @@ const LinkWrapper = styled(Link)`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: ${props => props.project.primaryColor || props.theme.color};
-  grid-column: ${props => (props.project.isWide ? "1/3" : "initial")};
+  background-color: ${props => props.project.projectTileColor || props.theme.color};
+  grid-column: ${props => (props.project.projectTileIsWide ? "1/3" : "initial")};
   box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.06);
   text-decoration: none;
   overflow-y: hidden;
@@ -43,7 +44,9 @@ const LinkWrapper = styled(Link)`
 const LinkCopy = styled.div`
   margin-top: 70px;
   color: ${props =>
-    props.isInverseColor ? props.theme.colorInverse : props.theme.color};
+    props.projectTileIsInversedColor
+      ? props.theme.colorInverse
+      : props.theme.color};
   font-size: 24px;
   font-weight: 500;
   text-align: center;
@@ -51,6 +54,7 @@ const LinkCopy = styled.div`
 
 export const ProjectCard = ({ ...props }) => {
   const project = props.project
+  const projectVideo = _get(project, "projectVideo[0]", {})
   // const [hoverRef, isHovered] = useHover()
   const videoRef = React.useRef()
 
@@ -71,10 +75,15 @@ export const ProjectCard = ({ ...props }) => {
   //   }
   // }, [isHovered])
 
+  console.log("project", project)
+
   return (
     <LinkWrapper to={`/projects/${project.slug}`} {...props}>
-      <LinkCopy className="link-copy" isInverseColor={project.isInverseColor}>
-        {project.name}
+      <LinkCopy
+        className="link-copy"
+        isInverseColor={project.projectTileIsInversedColor}
+      >
+        {project.title}
       </LinkCopy>
       <video
         autoPlay={true}
@@ -83,7 +92,7 @@ export const ProjectCard = ({ ...props }) => {
         ref={videoRef}
         muted={true}
       >
-        <source src={project.coverVideo} type={project.coverVideoType} />
+        <source src={projectVideo.url} type={projectVideo.mimeType} />
       </video>
     </LinkWrapper>
   )

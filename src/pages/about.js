@@ -24,7 +24,7 @@ const AboutPage = ({ data }) => {
   const photos = _get(data, "cms.about.photos")
 
   return (
-    <Layout center={true}>
+    <Layout center={true} footerLinks={_get(data, "cms.footer.usefulLinks")}>
       <Container>
         <Header menuLinks={menuLinks} siteTitle={title} />
         <SEO title="Trista" />
@@ -72,6 +72,23 @@ export const query = graphql`
                 width
                 height
               }
+            }
+          }
+        }
+      }
+
+      footer: entry(section: "footer") {
+        title
+        ... on CMS_footer_footer_Entry {
+          usefulLinks {
+            ... on CMS_usefulLinks_email_BlockType {
+              email
+              typeHandle
+            }
+            ... on CMS_usefulLinks_links_BlockType {
+              linkText
+              linkHref
+              typeHandle
             }
           }
         }

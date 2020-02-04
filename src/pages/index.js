@@ -88,7 +88,7 @@ const IndexPage = ({ data }) => {
       </HomeContentContainer>
       <Container sideDistance={sideDistance}>
         <Gap gapSize={150} id="project-gallery" />
-        <ProjectGallery />
+        <ProjectGallery projects={_get(data, "cms.home.projects")} />
       </Container>
     </Layout>
   )
@@ -127,23 +127,30 @@ export const query = graphql`
             }
           }
           projects {
+            id
+            title
+            slug
             ... on CMS_project_project_Entry {
+              projectTitleShort
+              projectTileColor
+              projectTileIsInversedColor
+              projectTileIsWide
               heroPicture {
                 url
                 mimeType
                 width
                 height
+                size
               }
               projectVideo {
-                size
                 url
+                mimeType
+                size
               }
-              title
             }
           }
         }
       }
-
       footer: entry(section: "footer") {
         title
         ... on CMS_footer_footer_Entry {
