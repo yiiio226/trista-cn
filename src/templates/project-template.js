@@ -179,6 +179,7 @@ export default ({ pageContext }) => {
         <RelatedProjects
           projects={relatedProjects}
           className="project-gallery"
+          loadByDefault={true}
         />
       </RelatedProjectsWrapper>
     </Layout>

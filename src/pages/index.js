@@ -88,7 +88,10 @@ const IndexPage = ({ data }) => {
       </HomeContentContainer>
       <Container sideDistance={sideDistance}>
         <Gap gapSize={150} id="project-gallery" />
-        <ProjectGallery projects={_get(data, "cms.home.projects")} />
+        <ProjectGallery
+          projects={_get(data, "cms.home.projects")}
+          loadByDefault={true}
+        />
       </Container>
     </Layout>
   )

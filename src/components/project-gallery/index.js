@@ -24,7 +24,7 @@ const GalleryWrapper = styled.div`
 `
 
 export const ProjectGallery = trackWindowScroll(
-  ({ scrollPosition, projects = [], className }) => {
+  ({ scrollPosition, projects = [], loadByDefault = false, className }) => {
     return (
       <GalleryWrapper className={className}>
         {projects.map(p => (
@@ -32,6 +32,7 @@ export const ProjectGallery = trackWindowScroll(
             threshold={800}
             scrollPosition={scrollPosition}
             key={p.id}
+            visibleByDefault={loadByDefault}
           >
             <ProjectCard project={p} />
           </LazyLoadComponent>
