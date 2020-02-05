@@ -12,8 +12,8 @@ export const Container = styled.div`
   padding: 0
     ${props =>
       props.isFullWidth
-        ? props.sideDistance
-          ? props.sideDistance + "px"
-          : "calc((100vw - " + props.theme.mobileWidth + "px)/2)"
-        : 0};
+        ? 0
+        : props.sideDistance
+        ? props.sideDistance + "px"
+        : "calc((100vw - " + props.theme.mobileWidth + "px)/2)"};
 `

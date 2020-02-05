@@ -75,7 +75,7 @@ export const ProjectCard = ({ ...props }) => {
   //   }
   // }, [isHovered])
 
-  console.log("project", project)
+  // console.log("project", project)
 
   return (
     <LinkWrapper to={`/projects/${project.slug}`} {...props}>

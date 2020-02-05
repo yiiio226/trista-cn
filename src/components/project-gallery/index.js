@@ -24,9 +24,9 @@ const GalleryWrapper = styled.div`
 `
 
 export const ProjectGallery = trackWindowScroll(
-  ({ scrollPosition, projects = [] }) => {
+  ({ scrollPosition, projects = [], className }) => {
     return (
-      <GalleryWrapper>
+      <GalleryWrapper className={className}>
         {projects.map(p => (
           <LazyLoadComponent
             threshold={800}
