@@ -102,6 +102,7 @@ const createProjectPages = (createPage, template, data) => {
         iCur = 0
       }
       const relatedP = data.projects[iCur]
+      console.log(p.id, "current p id", relatedP.id)
       relatedP.projectTileIsWide = false // Please, do not go full width...
       relatedProjects.push(relatedP)
     }

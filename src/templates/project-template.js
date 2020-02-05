@@ -113,8 +113,14 @@ const PostHR = styled.div`
 
 const RelatedProjects = styled(ProjectGallery)``
 
-const RelatedProjectsWrapper = styled.div`
+const RelatedProjectsWrapper = styled(Container)`
   margin-top: 80px;
+  background-color: #fff;
+
+  @media (max-width: 780px) {
+    padding: 0 30px;
+    max-width: unset;
+  }
 
   h2 {
     font-size: 30px;
@@ -167,14 +173,14 @@ export default ({ pageContext }) => {
             }
           })}
         </PostBody>
-        <RelatedProjectsWrapper>
-          <h2>其他项目</h2>
-          <RelatedProjects
-            projects={relatedProjects}
-            className="project-gallery"
-          />
-        </RelatedProjectsWrapper>
       </Body>
+      <RelatedProjectsWrapper sideDistance={100}>
+        <h2>其他项目</h2>
+        <RelatedProjects
+          projects={relatedProjects}
+          className="project-gallery"
+        />
+      </RelatedProjectsWrapper>
     </Layout>
   )
 }
