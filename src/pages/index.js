@@ -18,7 +18,7 @@ import { useSiteMetadata } from "../hooks"
 import { theme } from "../constants/theme"
 // import svgHandPointDown from "../images/icons/hand-point-down.svg"
 import "../styles/animate.min.css"
-import tristaCutout from "../images/trista-cutout.png"
+import tristaCutoutPng from "../images/trista-cutout.png"
 
 const HomeContentContainer = styled(Container)`
   display: flex;
@@ -37,7 +37,7 @@ const TristaCutoutCenter = styled.div`
   height: 100%;
   width: 100%;
   opacity: 0.14;
-  background-image: url(${tristaCutout});
+  background-image: url(${props.src});
   background-repeat: no-repeat;
   background-size: 306px;
   background-position: center 300px;
@@ -61,6 +61,11 @@ const TristaCutoutCenter = styled.div`
 const IndexPage = ({ data }) => {
   const { menuLinks, title } = useSiteMetadata()
   const windowWidth = useWindowWidth()
+  const tristaCutout = _get(
+    data,
+    "cms.home.backgroundImage[0].url",
+    tristaCutoutPng
+  )
   console.log("windowWidth", windowWidth)
   const sideDistance =
     windowWidth <= theme.mobileWidth ? theme.gapSize * 3 : 100
@@ -83,7 +88,7 @@ const IndexPage = ({ data }) => {
         <Header menuLinks={menuLinks} siteTitle={title} />
         <SEO title="Trista" />
         <Gap gapSize={235} />
-        <TristaCutoutCenter />
+        <TristaCutoutCenter src={tristaCutout} />
         <Typing actions={_get(data, "cms.home.typingSentences")} />
       </HomeContentContainer>
       <Container sideDistance={sideDistance}>
