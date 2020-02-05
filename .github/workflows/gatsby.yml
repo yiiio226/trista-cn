@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - dummy
 
 jobs:
   build:
