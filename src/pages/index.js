@@ -37,7 +37,7 @@ const TristaCutoutCenter = styled.div`
   height: 100%;
   width: 100%;
   opacity: 0.14;
-  background-image: url(${props.src});
+  background-image: url(${props => props.src});
   background-repeat: no-repeat;
   background-size: 306px;
   background-position: center 300px;
