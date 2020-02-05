@@ -84,7 +84,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     return
   }
 
-  // console.log("result:\n", JSON.stringify(result, {}, 2))
   createProjectPages(createPage, projectTemplate, {
     projects: _get(result, "data.cms.projects", []),
     footer: _get(result, "data.cms.footer", {}),
