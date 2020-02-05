@@ -5,6 +5,7 @@ on:
     branches:
       - master
       - dummy
+  repository_dispatch:
 
 jobs:
   build:
