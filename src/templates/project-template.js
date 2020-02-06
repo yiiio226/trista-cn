@@ -82,11 +82,24 @@ const PostBody = styled.div`
   }
 
   h3 {
-    margin: 80px 0 0px;
+    margin: 80px 0 0;
     font-size: 24px;
     line-height: 31px;
     font-weight: bold;
     color: rgba(51, 51, 51, 1);
+  }
+
+  h4 {
+    margin: 20px 0 0;
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  h5,
+  h6 {
+    margin: 10px 0 0;
+    font-size: 14px;
+    line-height: 24px;
   }
 
   ol,
