@@ -82,7 +82,7 @@ const PostBody = styled.div`
   }
 
   h3 {
-    margin: 40px 0 0px;
+    margin: 80px 0 0px;
     font-size: 24px;
     line-height: 31px;
     font-weight: bold;
