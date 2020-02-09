@@ -12,7 +12,7 @@ import {
   ProjectGallery,
   SEO,
 } from "../components"
-import { useSiteMetadata } from "../hooks/use-site-meta-data"
+import { useSiteMetadata } from "../hooks/graphql"
 
 const Body = styled(Container)`
   display: flex;
@@ -154,7 +154,7 @@ const RelatedProjectsWrapper = styled(Container)`
 `
 
 export default ({ pageContext }) => {
-  const { menuLinks, title } = useSiteMetadata()
+  const { siteMainMenu, siteTitle } = useSiteMetadata()
   console.log("pageContext", pageContext)
 
   const { project, relatedProjects, footer } = pageContext
@@ -163,7 +163,7 @@ export default ({ pageContext }) => {
   return (
     <Layout center={true} footerLinks={footer.usefulLinks}>
       <Container>
-        <Header menuLinks={menuLinks} siteTitle={title} />
+        <Header menuLinks={siteMainMenu} siteTitle={siteTitle} />
         <SEO title="Trista" />
         <Gap gapSize={40} />
       </Container>

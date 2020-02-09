@@ -1,4 +1,6 @@
 import { useStaticQuery, graphql } from "gatsby"
+
+/** @deprecated Use hooks/graphql/use-site-meta-data instead */
 export const useSiteMetadata = () => {
   const { site } = useStaticQuery(
     graphql`

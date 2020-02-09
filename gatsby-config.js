@@ -6,7 +6,7 @@ module.exports = {
     menuLinks: [
       { name: "主页", link: "/" },
       { name: "关于我", link: "/about" },
-      { name: "联系我", link: "copy:hi@trista.design" }
+      { name: "联系我", link: "copy:hi@trista.design" },
       // { name: "我的工作", link: "/portfolio" },
       // { name: "联系我", link: "/contact" },
     ],
@@ -66,8 +66,20 @@ module.exports = {
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Trista`,
+        short_name: `Trista`,
+        start_url: `/`,
+        background_color: `#267776`,
+        theme_color: `#ffffff`,
+        display: `standalone`,
+        icon: `src/images/favicon.png`,
+      },
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
+    `gatsby-plugin-offline`,
   ],
 }

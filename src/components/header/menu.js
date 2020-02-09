@@ -47,18 +47,18 @@ export const Menu = ({ menuLinks }) => {
       <ul>
         {menuLinks.map(link => {
           let linkEle = (
-            <Link to={link.link} activeClassName="active">
-              {link.name}
+            <Link to={link.linkLink} activeClassName="active">
+              {link.linkTitle}
             </Link>
           )
 
-          if (link.link.startsWith("copy:")) {
+          if (link.typeHandle === "clickToCopyLink") {
             linkEle = (
               <ClickToCopyLink link={link} successText="Email 复制成功" />
             )
           }
 
-          return <li key={link.name}>{linkEle}</li>
+          return <li key={link.id}>{linkEle}</li>
         })}
       </ul>
     </MenuNavWrapper>

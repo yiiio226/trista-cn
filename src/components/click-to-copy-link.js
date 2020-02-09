@@ -13,12 +13,11 @@ const Tooltip = styled.span`
 `
 
 export const ClickToCopyLink = ({
-  link = { name: "LINK", link: "copy:LINK" },
+  link = { linkTitle: "LINK", linkLink: "copy:LINK" },
   successText = "",
 }) => {
   const [showTooltip, updateShowTooltip] = React.useState(false)
   const tooltipRef = React.useRef()
-  const linkHref = link.link.replace("copy:", "")
 
   const animateTooltip = (ref, updateShow) => {
     updateShow(true)
@@ -39,9 +38,9 @@ export const ClickToCopyLink = ({
       <Tooltip ref={tooltipRef} style={{ opacity: showTooltip ? 1 : 0 }}>
         {successText}
       </Tooltip>
-      <CopyToClipboard text={linkHref}>
+      <CopyToClipboard text={link.linkLink}>
         <a onClick={e => onClickLink(e)} href="">
-          {link.name}
+          {link.linkTitle}
         </a>
       </CopyToClipboard>
     </>

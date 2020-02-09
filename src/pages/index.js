@@ -14,7 +14,7 @@ import {
   SEO,
   Typing,
 } from "../components"
-import { useSiteMetadata } from "../hooks"
+import { useSiteMetadata } from "../hooks/graphql"
 import { theme } from "../constants/theme"
 // import svgHandPointDown from "../images/icons/hand-point-down.svg"
 import "../styles/animate.min.css"
@@ -59,7 +59,7 @@ const TristaCutoutCenter = styled.div`
 // `
 
 const IndexPage = ({ data }) => {
-  const { menuLinks, title } = useSiteMetadata()
+  const { siteMainMenu, siteTitle } = useSiteMetadata()
   const windowWidth = useWindowWidth()
   const tristaCutout = _get(
     data,
@@ -85,8 +85,8 @@ const IndexPage = ({ data }) => {
       footerLinks={_get(data, "cms.footer.usefulLinks")}
     >
       <HomeContentContainer>
-        <Header menuLinks={menuLinks} siteTitle={title} />
-        <SEO title="Trista" />
+        <Header menuLinks={siteMainMenu} siteTitle={siteTitle} />
+        <SEO title={siteTitle} />
         <Gap gapSize={235} />
         <TristaCutoutCenter src={tristaCutout} />
         <Typing actions={_get(data, "cms.home.typingSentences")} />

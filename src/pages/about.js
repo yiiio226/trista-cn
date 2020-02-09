@@ -15,20 +15,20 @@ import {
   SEO,
 } from "../components"
 import { Image } from "../components/images/image-trista-big"
-import { useSiteMetadata } from "../hooks"
+import { useSiteMetadata } from "../hooks/graphql"
 import "../styles/animate.min.css"
 
 const AboutPage = ({ data }) => {
-  const { menuLinks, title } = useSiteMetadata()
+  const { siteMainMenu, siteTitle } = useSiteMetadata()
   const descriptionInfo = _get(data, "cms.about.descriptionInfo")
   const photos = _get(data, "cms.about.photos")
 
   return (
     <Layout center={true} footerLinks={_get(data, "cms.footer.usefulLinks")}>
       <Container>
-        <Header menuLinks={menuLinks} siteTitle={title} />
+        <Header menuLinks={siteMainMenu} siteTitle={siteTitle} />
         <SEO title="Trista" />
-        <Gap gapSize={40} />
+        <Gap gapSize={180} />
         <Image />
       </Container>
       <Gap gapSize={100} />
