@@ -16,7 +16,5 @@ export const AboutBody = styled.div`
     font-weight: 400;
     color: rgba(51, 51, 51, 1);
     margin: 20px 0 0;
-
-    
   }
 `
