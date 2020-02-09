@@ -193,6 +193,7 @@ export default ({ pageContext }) => {
                   />
                 )
               case "image":
+                // TODO: 项目图片应该显示所有图片
                 return <img key={uuid()} src={block.image[0].url} />
             }
           })}

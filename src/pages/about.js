@@ -1,5 +1,6 @@
 import React from "react"
 import ReactMarkdown from "react-markdown/with-html"
+import styled from "styled-components"
 import _get from "lodash/get"
 import { graphql } from "gatsby"
 
@@ -14,22 +15,30 @@ import {
   PhotoGallery,
   SEO,
 } from "../components"
-import { Image } from "../components/images/image-trista-big"
 import { useSiteMetadata } from "../hooks/graphql"
 import "../styles/animate.min.css"
+
+const HeroPic = styled.img`
+  display: block;
+  margin: 0 auto;
+  max-width: 1200px;
+  width: 90vw;
+  height: auto;
+`
 
 const AboutPage = ({ data }) => {
   const { siteMainMenu, siteTitle } = useSiteMetadata()
   const descriptionInfo = _get(data, "cms.about.descriptionInfo")
+  const heroPic = _get(data, "cms.about.heroPicture[0]")
   const photos = _get(data, "cms.about.photos")
 
   return (
     <Layout center={true} footerLinks={_get(data, "cms.footer.usefulLinks")}>
-      <Container>
+      <Container isFullWidth>
         <Header menuLinks={siteMainMenu} siteTitle={siteTitle} />
         <SEO title="关于我" />
         <Gap gapSize={180} />
-        <Image />
+        <HeroPic src={heroPic.url} />
       </Container>
       <Gap gapSize={100} />
       <AboutBody>
@@ -57,6 +66,12 @@ export const query = graphql`
         ... on CMS_aboutMe_aboutMe_Entry {
           sectionHandle
           typeHandle
+          heroPicture {
+            url
+            mimeType
+            width
+            height
+          }
           descriptionInfo {
             ... on CMS_descriptionInfo_blurb_BlockType {
               blurbTitle
@@ -76,19 +91,30 @@ export const query = graphql`
           }
         }
       }
-
       footer: entry(section: "footer") {
         title
-        ... on CMS_footer_footer_Entry {
-          usefulLinks {
-            ... on CMS_usefulLinks_email_BlockType {
-              email
-              typeHandle
+        sectionHandle
+        ... on CMS_aboutMe_aboutMe_Entry {
+          heroPicture(width: "") {
+            id
+          }
+          sectionHandle
+          typeHandle
+          descriptionInfo {
+            ... on CMS_descriptionInfo_blurb_BlockType {
+              blurbTitle
+              blurbContent
             }
-            ... on CMS_usefulLinks_links_BlockType {
-              linkText
-              linkHref
-              typeHandle
+          }
+          photos {
+            title
+            ... on CMS_photo_photos_Entry {
+              photo {
+                url
+                mimeType
+                width
+                height
+              }
             }
           }
         }
