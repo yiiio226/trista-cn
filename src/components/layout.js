@@ -22,7 +22,7 @@ const FooterContainer = styled(Container)`
   }
 `
 
-export const Layout = ({ sideDistance, footerLinks, children }) => {
+export const Layout = ({ footerLinks, children }) => {
   return (
     <>
       <ThemeProvider theme={theme}>

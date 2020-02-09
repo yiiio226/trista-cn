@@ -2,7 +2,6 @@ import React from "react"
 import _get from "lodash/get"
 import { graphql } from "gatsby"
 import styled from "styled-components"
-import { useWindowWidth } from "@react-hook/window-size"
 
 import {
   Container,
@@ -14,7 +13,6 @@ import {
   Typing,
 } from "../components"
 import { useSiteMetadata } from "../hooks/graphql"
-import { theme } from "../constants/theme"
 import "../styles/animate.min.css"
 import tristaCutoutPng from "../images/trista-cutout.png"
 
@@ -27,6 +25,7 @@ const HomeContentContainer = styled(Container)`
   width: 100%;
   height: 100vh;
   min-height: 600px;
+  max-height: 900px;
 `
 
 const TristaCutoutCenter = styled.div`
@@ -44,30 +43,24 @@ const TristaCutoutCenter = styled.div`
   }
 `
 
+const ProjectsContainer = styled(Container)`
+  max-width: 1200px;
+  padding: 100px;
+  @media (max-width: 780px) {
+    padding: 30px;
+  }
+`
+
 const IndexPage = ({ data }) => {
   const { siteMainMenu, siteTitle } = useSiteMetadata()
-  const windowWidth = useWindowWidth()
   const tristaCutout = _get(
     data,
     "cms.home.backgroundImage[0].url",
     tristaCutoutPng
   )
-  console.log("windowWidth", windowWidth)
-  const sideDistance =
-    windowWidth <= theme.mobileWidth ? theme.gapSize * 3 : 100
-
-  // Disable static content generation, only render lively, mainly due to useWindowWidth()
-  // TODO: Replace useWindowWidth()
-  if (typeof window === `undefined`) {
-    return <></>
-  }
 
   return (
-    <Layout
-      center={true}
-      sideDistance={sideDistance}
-      footerLinks={_get(data, "cms.footer.usefulLinks")}
-    >
+    <Layout center={true} footerLinks={_get(data, "cms.footer.usefulLinks")}>
       <HomeContentContainer>
         <Header menuLinks={siteMainMenu} siteTitle={siteTitle} />
         <SEO title={"主页"} />
@@ -75,13 +68,13 @@ const IndexPage = ({ data }) => {
         <TristaCutoutCenter src={tristaCutout} />
         <Typing actions={_get(data, "cms.home.typingSentences")} />
       </HomeContentContainer>
-      <Container sideDistance={sideDistance}>
-        <Gap gapSize={150} id="project-gallery" />
+      <Gap gapSize={150} id="project-gallery" />
+      <ProjectsContainer isFullWidth>
         <ProjectGallery
           projects={_get(data, "cms.home.projects")}
           loadByDefault={true}
         />
-      </Container>
+      </ProjectsContainer>
     </Layout>
   )
 }
