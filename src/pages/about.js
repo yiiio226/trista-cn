@@ -27,7 +27,7 @@ const AboutPage = ({ data }) => {
     <Layout center={true} footerLinks={_get(data, "cms.footer.usefulLinks")}>
       <Container>
         <Header menuLinks={siteMainMenu} siteTitle={siteTitle} />
-        <SEO title="Trista" />
+        <SEO title="关于我" />
         <Gap gapSize={180} />
         <Image />
       </Container>

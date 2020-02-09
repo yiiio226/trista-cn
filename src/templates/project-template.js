@@ -164,7 +164,7 @@ export default ({ pageContext }) => {
     <Layout center={true} footerLinks={footer.usefulLinks}>
       <Container>
         <Header menuLinks={siteMainMenu} siteTitle={siteTitle} />
-        <SEO title="Trista" />
+        <SEO title={project.title} />
         <Gap gapSize={40} />
       </Container>
       <PostHead isFullWidth>
