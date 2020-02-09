@@ -22,7 +22,7 @@ const HeroPic = styled.img`
   display: block;
   margin: 0 auto;
   max-width: 1200px;
-  width: 90vw;
+  width: calc(100vw - 60px);
   height: auto;
 `
 
@@ -40,7 +40,7 @@ const AboutPage = ({ data }) => {
         <Gap gapSize={180} />
         <HeroPic src={heroPic.url} />
       </Container>
-      <Gap gapSize={100} />
+      <Gap gapSize={200} />
       <AboutBody>
         {descriptionInfo &&
           descriptionInfo.map((s, i) => (
