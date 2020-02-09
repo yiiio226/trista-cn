@@ -11,7 +11,7 @@ const Tooltip = styled.div`
   height: 40px;
   line-height: 40px;
   background-color: rgba(228, 238, 238, 1);
-  color: rgba(33, 119, 119, 1);
+  color: ${props => props.theme.colorTheme};
   transform: translateY(0);
 
   display: flex;
