@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
+import { CopyToClipboard } from "react-copy-to-clipboard"
 
 const MenuNavWrapper = styled.nav`
   width: 100%;
@@ -43,13 +44,23 @@ export const Menu = ({ menuLinks }) => {
   return (
     <MenuNavWrapper>
       <ul>
-        {menuLinks.map(link => (
-          <li key={link.name}>
+        {menuLinks.map(link => {
+          let linkEle = (
             <Link to={link.link} activeClassName="active">
               {link.name}
             </Link>
-          </li>
-        ))}
+          )
+          // TODO:
+          if (link.link.startsWith("copy:")) {
+            linkEle = (
+              <CopyToClipboard text={link.link.replace("copy:", "")}>
+                <Link onClick={e => e.preventDefault()}>{link.name}</Link>
+              </CopyToClipboard>
+            )
+          }
+
+          return <li key={link.name}>{linkEle}</li>
+        })}
       </ul>
     </MenuNavWrapper>
   )

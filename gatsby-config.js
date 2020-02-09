@@ -6,6 +6,7 @@ module.exports = {
     menuLinks: [
       { name: "主页", link: "/" },
       { name: "关于我", link: "/about" },
+      { name: "联系我", link: "copy:hi@trista.design" }
       // { name: "我的工作", link: "/portfolio" },
       // { name: "联系我", link: "/contact" },
     ],
