@@ -19,9 +19,9 @@ const Body = styled(Container)`
   flex-direction: column;
   align-items: center;
   background-color: ${props => props.theme.colorBgAlt};
-  padding: 100px 120px;
+  padding: 80px 120px;
   @media (max-width: 780px) {
-    padding: 50px 30px;
+    padding: 40px 30px;
   }
 `
 
@@ -124,6 +124,14 @@ const PostHR = styled.div`
   width: 100%;
 `
 
+const PostHead = styled(Body)`
+  background-color: #ffffff;
+  padding: 100px 120px 60px;
+  @media (max-width: 780px) {
+    padding: 50px 30px 30px;
+  }
+`
+
 const RelatedProjects = styled(ProjectGallery)``
 
 const RelatedProjectsWrapper = styled(Container)`
@@ -159,7 +167,7 @@ export default ({ pageContext }) => {
         <SEO title="Trista" />
         <Gap gapSize={40} />
       </Container>
-      <Body isFullWidth>
+      <PostHead isFullWidth>
         <PostCoverWrapper src={heroPic.url} />
         <PostBody>
           <div className="meta">
@@ -170,7 +178,10 @@ export default ({ pageContext }) => {
             <p className="post-attr">角色：{project.projectMyRole}</p>
             <p className="post-attr">时间：{project.projectDuration}</p>
           </div>
-          <Gap gapSize={60} />
+        </PostBody>
+      </PostHead>
+      <Body isFullWidth>
+        <PostBody>
           {project.projectContentBody.map(block => {
             switch (block.typeHandle) {
               case "textSection":
