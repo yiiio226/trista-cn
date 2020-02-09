@@ -1,7 +1,8 @@
 import React from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
-import { CopyToClipboard } from "react-copy-to-clipboard"
+
+import { ClickToCopyLink } from "../click-to-copy-link"
 
 const MenuNavWrapper = styled.nav`
   width: 100%;
@@ -50,12 +51,10 @@ export const Menu = ({ menuLinks }) => {
               {link.name}
             </Link>
           )
-          // TODO:
+
           if (link.link.startsWith("copy:")) {
             linkEle = (
-              <CopyToClipboard text={link.link.replace("copy:", "")}>
-                <Link onClick={e => e.preventDefault()}>{link.name}</Link>
-              </CopyToClipboard>
+              <ClickToCopyLink link={link} successText="Email 复制成功" />
             )
           }
 
