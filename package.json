@@ -7,6 +7,7 @@
   "dependencies": {
     "@react-hook/hover": "^2.0.1",
     "@react-hook/window-size": "^1.0.12",
+    "dotenv": "^8.2.0",
     "gatsby": "^2.18.12",
     "gatsby-image": "^2.2.34",
     "gatsby-plugin-manifest": "^2.2.41",
