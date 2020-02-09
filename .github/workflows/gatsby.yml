@@ -16,3 +16,5 @@ jobs:
         with:
           access-token: ${{ secrets.ACCESS_TOKEN }}
           deploy-branch: gh-pages
+        env: # Or as an environment variable
+          API_AUTH: ${{ secrets.API_AUTH }}
