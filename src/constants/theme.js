@@ -8,7 +8,8 @@ export const theme = {
 
   fontSize: 14,
   fontSizeFooterLinks: 20,
-  fontFamily: "'PingFang SC', 'Microsoft Yahei', sans-serif",
+  fontFamily:
+    "'PingFang SC', 'Microsoft Yahei', 'Droid Sans Fallback', 'WenQuanYi Micro Hei', Helvetica, 'San Francisco',Tahoma, Arial, sans-serif",
 
   gapSize: 8,
   maxBodyWidth: 680,
