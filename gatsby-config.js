@@ -1,16 +1,5 @@
 module.exports = {
-  siteMetadata: {
-    title: `Trista`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@trista`,
-    menuLinks: [
-      { name: "主页", link: "/" },
-      { name: "关于我", link: "/about" },
-      { name: "联系我", link: "copy:hi@trista.design" },
-      // { name: "我的工作", link: "/portfolio" },
-      // { name: "联系我", link: "/contact" },
-    ],
-  },
+  siteMetadata: {},
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
@@ -36,7 +25,7 @@ module.exports = {
         // HTTP headers
         headers: {
           // Learn about environment variables: https://gatsby.dev/env-vars
-          Authorization: `Bearer GnIyCjNWZKR1MeN_6dadFIMmbypU1q-e`,
+          Authorization: `Bearer ${process.env.API_AUTH}`,
         },
         // Additional options to pass to node-fetch
         fetchOptions: {},

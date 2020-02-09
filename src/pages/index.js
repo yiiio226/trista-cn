@@ -3,7 +3,6 @@ import _get from "lodash/get"
 import { graphql } from "gatsby"
 import styled from "styled-components"
 import { useWindowWidth } from "@react-hook/window-size"
-// import { Animated } from "react-animated-css"
 
 import {
   Container,
@@ -16,7 +15,6 @@ import {
 } from "../components"
 import { useSiteMetadata } from "../hooks/graphql"
 import { theme } from "../constants/theme"
-// import svgHandPointDown from "../images/icons/hand-point-down.svg"
 import "../styles/animate.min.css"
 import tristaCutoutPng from "../images/trista-cutout.png"
 
@@ -43,21 +41,6 @@ const TristaCutoutCenter = styled.div`
   background-position: center 300px;
 `
 
-// const ButtonAnimated = styled(Animated)`
-//   position: absolute;
-//   bottom: 0;
-//   left: calc(50% - 30px);
-// `
-
-// const ContinueButtonLink = styled(Link)`
-//   display: block;
-//   width: 60px;
-//   height: 90px;
-//   background-image: url(${svgHandPointDown});
-//   background-repeat: no-repeat;
-//   opacity: 0.2;
-// `
-
 const IndexPage = ({ data }) => {
   const { siteMainMenu, siteTitle } = useSiteMetadata()
   const windowWidth = useWindowWidth()
@@ -69,8 +52,6 @@ const IndexPage = ({ data }) => {
   console.log("windowWidth", windowWidth)
   const sideDistance =
     windowWidth <= theme.mobileWidth ? theme.gapSize * 3 : 100
-
-  // console.log("home page data", data)
 
   // Disable static content generation, only render lively, mainly due to useWindowWidth()
   // TODO: Replace useWindowWidth()
