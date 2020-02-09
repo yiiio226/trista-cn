@@ -93,28 +93,16 @@ export const query = graphql`
       }
       footer: entry(section: "footer") {
         title
-        sectionHandle
-        ... on CMS_aboutMe_aboutMe_Entry {
-          heroPicture(width: "") {
-            id
-          }
-          sectionHandle
-          typeHandle
-          descriptionInfo {
-            ... on CMS_descriptionInfo_blurb_BlockType {
-              blurbTitle
-              blurbContent
+        ... on CMS_footer_footer_Entry {
+          usefulLinks {
+            ... on CMS_usefulLinks_email_BlockType {
+              email
+              typeHandle
             }
-          }
-          photos {
-            title
-            ... on CMS_photo_photos_Entry {
-              photo {
-                url
-                mimeType
-                width
-                height
-              }
+            ... on CMS_usefulLinks_links_BlockType {
+              linkText
+              linkHref
+              typeHandle
             }
           }
         }
