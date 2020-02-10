@@ -99,7 +99,13 @@ export const ProjectCard = ({ ...props }) => {
         {project.projectTitleShort}
       </LinkCopy>
       {projectVideo ? (
-        <video autoPlay loop preload="metadata" muted playsinline>
+        <video
+          preload="metadata"
+          autoPlay={true}
+          loop={true}
+          muted={true}
+          playsinline={true}
+        >
           <source src={projectVideo.url} type={projectVideo.mimeType} />
         </video>
       ) : (
