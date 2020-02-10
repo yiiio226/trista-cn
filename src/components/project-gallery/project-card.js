@@ -64,6 +64,9 @@ const LinkCopy = styled.div`
 `
 
 export const ProjectCard = ({ ...props }) => {
+  // Have to disable ssr for this component for now
+  if (typeof window === `undefined`) return null
+
   const project = props.project
   const videoRef = React.useRef()
   const [projectVideo, updateProjectVideo] = React.useState(
