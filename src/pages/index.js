@@ -61,7 +61,7 @@ const IndexPage = ({ data }) => {
   )
 
   return (
-    <Layout center={true} footerLinks={_get(footer.usefulLinks)}>
+    <Layout center={true} footerLinks={footer.usefulLinks}>
       <HomeContentContainer>
         <Header menuLinks={siteMainMenu} siteTitle={siteTitle} />
         <SEO title={"主页"} />
