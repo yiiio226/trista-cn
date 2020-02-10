@@ -75,9 +75,12 @@ export const ProjectCard = ({ ...props }) => {
     if (projectVideo && typeof window !== `undefined`) {
       if (window.innerWidth < 780) {
         // Mobile view
-        updateProjectVideo(_get(project, "projectVideoSmall[0]"))
-        if (project.projectTileColorSmall) {
-          updateProjectTileColor(project.projectTileColorSmall)
+        const smallVideo = _get(project, "projectVideoSmall[0]")
+        if (smallVideo) {
+          updateProjectVideo(smallVideo)
+          if (project.projectTileColorSmall) {
+            updateProjectTileColor(project.projectTileColorSmall)
+          }
         }
       }
     }
