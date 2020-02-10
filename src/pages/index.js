@@ -44,10 +44,10 @@ const TristaCutoutCenter = styled.div`
 `
 
 const ProjectsContainer = styled(Container)`
-  max-width: 1200px;
-  padding: 100px;
+  max-width: 1240px;
+  padding: 0 100px;
   @media (max-width: 780px) {
-    padding: 30px;
+    padding: 0 30px;
   }
 `
 

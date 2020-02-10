@@ -16,7 +16,11 @@ export const AboutBodyPhotos = styled(Container)`
   background-color: ${props =>
     props.isAlt ? props.theme.colorBgAlt : props.theme.colorBg};
 
-  padding: 60px 120px;
+  padding: 60px calc((100vw - 1240px) / 2);
+  /* 1680: 1440 + 120 x 2 */
+  @media (max-width: 1680px) {
+    padding: 60px 120px;
+  }
   @media (max-width: 780px) {
     padding: 60px 15px;
   }

@@ -49,7 +49,7 @@ const AboutPage = ({ data }) => {
               <ReactMarkdown source={s.blurbContent} escapeHtml={false} />
             </AboutBodySection>
           ))}
-        <AboutBodyPhotos isAlt isFullWidth sideDistance={120}>
+        <AboutBodyPhotos isAlt isFullWidth>
           <PhotoGallery photos={photos} />
         </AboutBodyPhotos>
       </AboutBody>

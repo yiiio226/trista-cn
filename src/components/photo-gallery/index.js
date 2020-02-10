@@ -16,8 +16,10 @@ const PhotoItemWrapper = styled.div`
 `
 
 const PhotoImgWrapper = styled.img`
-  max-width: 45vw;
-
+  max-width: 640px;
+  @media (max-width: 1440px) {
+    max-width: 45vw;
+  }
   @media (max-width: 780px) {
     max-width: calc(100vw - 30px * 2);
   }
