@@ -5,7 +5,7 @@ import IconSuccess from "../images/icon_success.inline.svg"
 
 const Tooltip = styled.div`
   position: fixed;
-  top: 0;
+  top: 15px;
   left: calc(50% - 100px);
   width: 200px;
   height: 40px;
