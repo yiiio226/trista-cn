@@ -45,7 +45,7 @@ const AboutPage = ({ data }) => {
       <AboutBody>
         {descriptionInfo &&
           descriptionInfo.map((s, i) => (
-            <AboutBodySection isAlt={i % 2 === 0} key={i}>
+            <AboutBodySection isAlt={i % 2 === 0} key={i} isFullWidth>
               <h2>{s.blurbTitle}</h2>
               <ReactMarkdown source={s.blurbContent} escapeHtml={false} />
             </AboutBodySection>
