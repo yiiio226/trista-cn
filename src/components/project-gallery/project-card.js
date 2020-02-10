@@ -104,7 +104,7 @@ export const ProjectCard = ({ ...props }) => {
           autoPlay={true}
           loop={true}
           muted={true}
-          playsinline={true}
+          playsInline={true}
         >
           <source src={projectVideo.url} type={projectVideo.mimeType} />
         </video>
