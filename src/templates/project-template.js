@@ -137,6 +137,8 @@ const RelatedProjects = styled(ProjectGallery)``
 const RelatedProjectsWrapper = styled(Container)`
   margin-top: 80px;
   background-color: #fff;
+  padding: 0 100px;
+  max-width: 1240px;
 
   @media (max-width: 780px) {
     padding: 0 30px;
@@ -204,7 +206,7 @@ export default ({ pageContext }) => {
           })}
         </PostBody>
       </Body>
-      <RelatedProjectsWrapper sideDistance={100}>
+      <RelatedProjectsWrapper isFullWidth>
         <h2>其他项目</h2>
         <RelatedProjects
           projects={relatedProjects}
