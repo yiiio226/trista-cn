@@ -62,9 +62,21 @@ const LinkCopy = styled.div`
 
 export const ProjectCard = ({ ...props }) => {
   const project = props.project
-  const projectVideo = _get(project, "projectVideo[0]")
+  const [projectVideo, updateProjectVideo] = React.useState(
+    _get(project, "projectVideo[0]")
+  )
   const projectCover =
     _get(project, "projectCover[0]") || _get(project, "heroPicture[0]")
+
+  React.useEffect(() => {
+    if (projectVideo && typeof window !== `undefined`) {
+      var userAgent = window.navigator.userAgent
+      if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i)) {
+        // iPad or iPhone, manually disable video
+        updateProjectVideo(_get(project, "projectVideoSmall[0]"))
+      }
+    }
+  }, [projectVideo, typeof window === `undefined`])
 
   return (
     <LinkWrapper to={`/projects/${project.slug}`} {...props}>
