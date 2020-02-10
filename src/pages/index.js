@@ -13,7 +13,6 @@ import {
   Typing,
 } from "../components"
 import { useFooterData, useSiteMetadata } from "../hooks/graphql"
-import "../styles/animate.min.css"
 import tristaCutoutPng from "../images/trista-cutout.png"
 
 const HomeContentContainer = styled(Container)`

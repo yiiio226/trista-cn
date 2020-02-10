@@ -16,7 +16,6 @@ import {
   SEO,
 } from "../components"
 import { useFooterData, useSiteMetadata } from "../hooks/graphql"
-import "../styles/animate.min.css"
 
 const HeroPic = styled.img`
   display: block;
