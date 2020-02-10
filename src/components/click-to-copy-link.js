@@ -42,8 +42,12 @@ export const ClickToCopyLink = ({
     ref.current.classList.add("animate")
     setTimeout(() => {
       updateShow(false)
+      if (!ref.current) return
       ref.current.classList.remove("showing")
-      setTimeout(() => ref.current.classList.remove("animate"), 500)
+      setTimeout(() => {
+        if (!ref.current) return
+        ref.current.classList.remove("animate")
+      }, 500)
     }, 1000)
   }
 

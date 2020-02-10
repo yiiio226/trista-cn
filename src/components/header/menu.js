@@ -26,13 +26,19 @@ const MenuNavWrapper = styled.nav`
 
       a {
         display: inline-block;
-        min-width: 100px;
+        /* min-width: 100px; */
+        word-break: keep-all;
         line-height: 48px;
+        padding: 0 20px;
         font-size: ${props => props.theme.fontSize}px;
         color: ${props => props.theme.color};
         text-decoration: none;
         font-family: ${props => props.theme.fontFamily};
         font-weight: 600;
+
+        @media (max-width: 780px) {
+          padding: 0 10px;
+        }
 
         &:hover {
           color: ${props => props.theme.colorTheme};
