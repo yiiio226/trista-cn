@@ -19,9 +19,13 @@ const Tooltip = styled.div`
   align-items: center;
   justify-content: center;
 
+  transform: translateY(-10px);
+  &.showing {
+    transform: translateY(0);
+  }
+
   &.animate {
     transition: all 0.5s;
-    /* transform: translateY(-10px); */
   }
 `
 
@@ -34,10 +38,12 @@ export const ClickToCopyLink = ({
 
   const animateTooltip = (ref, updateShow) => {
     updateShow(true)
+    ref.current.classList.add("showing")
     ref.current.classList.add("animate")
     setTimeout(() => {
       updateShow(false)
-      ref.current.classList.remove("animate")
+      ref.current.classList.remove("showing")
+      setTimeout(() => ref.current.classList.remove("animate"), 500)
     }, 1000)
   }
 
