@@ -73,9 +73,8 @@ export const ProjectCard = ({ ...props }) => {
 
   React.useEffect(() => {
     if (projectVideo && typeof window !== `undefined`) {
-      var userAgent = window.navigator.userAgent
-      if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i)) {
-        // iPad or iPhone, manually disable video and fix tile color
+      if (window.innerWidth < 780) {
+        // Mobile view
         updateProjectVideo(_get(project, "projectVideoSmall[0]"))
         if (project.projectTileColorSmall) {
           updateProjectTileColor(project.projectTileColorSmall)
