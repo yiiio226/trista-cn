@@ -21,6 +21,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           ... on CMS_project_project_Entry {
             projectTitleShort
             projectTileColor
+            projectTileColorSmall
             projectTileIsInversedColor
             projectTileIsWide
             projectDescription
@@ -58,6 +59,11 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
               size
             }
             projectVideo {
+              url
+              mimeType
+              size
+            }
+            projectVideoSmall {
               url
               mimeType
               size

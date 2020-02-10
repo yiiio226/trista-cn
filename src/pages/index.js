@@ -119,6 +119,7 @@ export const query = graphql`
             ... on CMS_project_project_Entry {
               projectTitleShort
               projectTileColor
+              projectTileColorSmall
               projectTileIsInversedColor
               projectTileIsWide
               heroPicture {
@@ -136,6 +137,11 @@ export const query = graphql`
                 size
               }
               projectVideo {
+                url
+                mimeType
+                size
+              }
+              projectVideoSmall {
                 url
                 mimeType
                 size

@@ -7,8 +7,7 @@ const LinkWrapper = styled(Link)`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: ${props =>
-    props.project.projectTileColor || props.theme.color};
+  background-color: ${props => props.projectTileColor || props.theme.color};
   grid-column: ${props =>
     props.project.projectTileIsWide ? "1/3" : "initial"};
   box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.06);
@@ -65,6 +64,10 @@ export const ProjectCard = ({ ...props }) => {
   const [projectVideo, updateProjectVideo] = React.useState(
     _get(project, "projectVideo[0]")
   )
+  const [projectTileColor, updateProjectTileColor] = React.useState(
+    project.projectTileColor
+  )
+
   const projectCover =
     _get(project, "projectCover[0]") || _get(project, "heroPicture[0]")
 
@@ -72,14 +75,21 @@ export const ProjectCard = ({ ...props }) => {
     if (projectVideo && typeof window !== `undefined`) {
       var userAgent = window.navigator.userAgent
       if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i)) {
-        // iPad or iPhone, manually disable video
+        // iPad or iPhone, manually disable video and fix tile color
         updateProjectVideo(_get(project, "projectVideoSmall[0]"))
+        if (project.projectTileColorSmall) {
+          updateProjectTileColor(project.projectTileColorSmall)
+        }
       }
     }
   }, [projectVideo, typeof window === `undefined`])
 
   return (
-    <LinkWrapper to={`/projects/${project.slug}`} {...props}>
+    <LinkWrapper
+      to={`/projects/${project.slug}`}
+      projectTileColor={projectTileColor}
+      {...props}
+    >
       <LinkCopy
         className="link-copy"
         isInverseColor={project.projectTileIsInversedColor}
