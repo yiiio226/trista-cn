@@ -61,6 +61,7 @@ const LinkCopy = styled.div`
 
 export const ProjectCard = ({ ...props }) => {
   const project = props.project
+  const videoRef = React.useRef()
   const [projectVideo, updateProjectVideo] = React.useState(
     _get(project, "projectVideo[0]")
   )
@@ -86,6 +87,11 @@ export const ProjectCard = ({ ...props }) => {
     }
   }, [projectVideo, typeof window === `undefined`])
 
+  /** Trying to fix muted not being set on ios video tag */
+  React.useEffect(() => {
+    videoRef.current.defaultMuted = true
+  }, [videoRef.current])
+
   return (
     <LinkWrapper
       to={`/projects/${project.slug}`}
@@ -105,6 +111,7 @@ export const ProjectCard = ({ ...props }) => {
           loop={true}
           muted={true}
           playsInline={true}
+          ref={videoRef}
         >
           <source src={projectVideo.url} type={projectVideo.mimeType} />
         </video>
