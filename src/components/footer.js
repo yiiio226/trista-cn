@@ -17,6 +17,7 @@ const FooterWrapper = styled.div`
 
   @media (max-width: 780px) {
     flex-direction: column;
+    padding: 60px 15px;
   }
 
   ul {
@@ -29,6 +30,11 @@ const FooterWrapper = styled.div`
     @media (max-width: 780px) {
       flex-direction: column;
       text-align: center;
+      margin-top: 60px;
+
+      li {
+        margin: 10px 0;
+      }
     }
 
     a {
