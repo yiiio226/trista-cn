@@ -51,9 +51,11 @@ const ProjectCoverImg = styled.div`
 
 const LinkCopy = styled.div`
   margin-top: 70px;
+  padding: 0 30px;
   color: ${props =>
     props.isInverseColor ? props.theme.colorInverse : props.theme.color};
   font-size: 24px;
+  line-height: 180%;
   font-weight: 500;
   text-align: center;
 `
