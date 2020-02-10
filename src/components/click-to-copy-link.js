@@ -63,7 +63,7 @@ export const ClickToCopyLink = ({
         {successText}
       </Tooltip>
       <CopyToClipboard text={link.linkLink}>
-        <a onClick={e => onClickLink(e)} href="">
+        <a onClick={e => onClickLink(e)} href="./">
           {link.linkTitle}
         </a>
       </CopyToClipboard>

@@ -79,6 +79,8 @@ export const Footer = ({ links }) => {
                     <ExternalLink label={l.linkText} href={l.linkHref} />
                   </li>
                 )
+              default:
+                return null
             }
           })}
       </ul>

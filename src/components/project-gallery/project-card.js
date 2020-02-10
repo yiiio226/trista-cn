@@ -61,7 +61,8 @@ const LinkCopy = styled.div`
 export const ProjectCard = ({ ...props }) => {
   const project = props.project
   const projectVideo = _get(project, "projectVideo[0]")
-  const projectCover = _get(project, "projectCover[0]")
+  const projectCover =
+    _get(project, "projectCover[0]") || _get(project, "heroPicture[0]")
 
   return (
     <LinkWrapper to={`/projects/${project.slug}`} {...props}>

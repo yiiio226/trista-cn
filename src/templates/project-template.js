@@ -50,6 +50,9 @@ const PostBody = styled.div`
     width: 680px;
     font-size: 14px;
     line-height: 200%;
+    @media (max-width: 780px) {
+      width: calc(100vw - 60px);
+    }
   }
 
   * {
@@ -197,10 +200,16 @@ export default ({ pageContext }) => {
                 return (
                   <React.Fragment key={uuid()}>
                     {block.image.map(node => (
-                      <img key={uuid()} src={node.url} />
+                      <img
+                        key={uuid()}
+                        src={node.url}
+                        alt="Project screenshot"
+                      />
                     ))}
                   </React.Fragment>
                 )
+              default:
+                return null
             }
           })}
         </PostBody>
