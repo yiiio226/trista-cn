@@ -89,7 +89,10 @@ export const ProjectCard = ({ ...props }) => {
 
   /** Trying to fix muted not being set on ios video tag */
   React.useEffect(() => {
-    if (videoRef.current) videoRef.current.defaultMuted = true
+    if (videoRef.current) {
+      videoRef.current.defaultMuted = true
+      videoRef.current.muted = true
+    }
   }, [videoRef.current])
 
   return (
