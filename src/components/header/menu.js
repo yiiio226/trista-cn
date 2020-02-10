@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
+import uuid from "uuid/v4"
 
 import { ClickToCopyLink } from "../click-to-copy-link"
 
@@ -58,7 +59,7 @@ export const Menu = ({ menuLinks }) => {
             )
           }
 
-          return <li key={link.id}>{linkEle}</li>
+          return <li key={uuid()}>{linkEle}</li>
         })}
       </ul>
     </MenuNavWrapper>

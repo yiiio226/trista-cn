@@ -3,8 +3,6 @@ import _get from "lodash/get"
 import styled from "styled-components"
 import { Link } from "gatsby"
 
-// import { useHover } from "../../hooks"
-
 const LinkWrapper = styled(Link)`
   display: flex;
   flex-direction: column;
@@ -55,27 +53,7 @@ const LinkCopy = styled.div`
 export const ProjectCard = ({ ...props }) => {
   const project = props.project
   const projectVideo = _get(project, "projectVideo[0]", {})
-  // const [hoverRef, isHovered] = useHover()
-  const videoRef = React.useRef()
-
-  // React.useEffect(() => {
-  //   const node = videoRef.current
-  //   if (!node) return
-
-  //   if (isHovered) {
-  //     node.play()
-  //   } else {
-  //     node.pause()
-
-  //     setTimeout(() => {
-  //       if (node.paused) {
-  //         node.currentTime = 0
-  //       }
-  //     }, 500)
-  //   }
-  // }, [isHovered])
-
-  // console.log("project", project)
+  const projectCover = _get(project, "projectCover[0]", {})
 
   return (
     <LinkWrapper to={`/projects/${project.slug}`} {...props}>
@@ -85,15 +63,13 @@ export const ProjectCard = ({ ...props }) => {
       >
         {project.projectTitleShort}
       </LinkCopy>
-      <video
-        autoPlay={true}
-        loop={true}
-        preload="metadata"
-        ref={videoRef}
-        muted={true}
-      >
-        <source src={projectVideo.url} type={projectVideo.mimeType} />
-      </video>
+      {projectVideo ? (
+        <video autoPlay={true} loop={true} preload="metadata" muted={true}>
+          <source src={projectVideo.url} type={projectVideo.mimeType} />
+        </video>
+      ) : (
+        <img src={projectCover.url} alt={project.projectTitleShort} />
+      )}
     </LinkWrapper>
   )
 }

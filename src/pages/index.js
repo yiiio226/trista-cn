@@ -12,7 +12,7 @@ import {
   SEO,
   Typing,
 } from "../components"
-import { useSiteMetadata } from "../hooks/graphql"
+import { useFooterData, useSiteMetadata } from "../hooks/graphql"
 import "../styles/animate.min.css"
 import tristaCutoutPng from "../images/trista-cutout.png"
 
@@ -53,6 +53,7 @@ const ProjectsContainer = styled(Container)`
 
 const IndexPage = ({ data }) => {
   const { siteMainMenu, siteTitle } = useSiteMetadata()
+  const footer = useFooterData()
   const tristaCutout = _get(
     data,
     "cms.home.backgroundImage[0].url",
@@ -60,7 +61,7 @@ const IndexPage = ({ data }) => {
   )
 
   return (
-    <Layout center={true} footerLinks={_get(data, "cms.footer.usefulLinks")}>
+    <Layout center={true} footerLinks={_get(footer.usefulLinks)}>
       <HomeContentContainer>
         <Header menuLinks={siteMainMenu} siteTitle={siteTitle} />
         <SEO title={"主页"} />
@@ -127,27 +128,18 @@ export const query = graphql`
                 height
                 size
               }
+              projectCover {
+                url
+                mimeType
+                width
+                height
+                size
+              }
               projectVideo {
                 url
                 mimeType
                 size
               }
-            }
-          }
-        }
-      }
-      footer: entry(section: "footer") {
-        title
-        ... on CMS_footer_footer_Entry {
-          usefulLinks {
-            ... on CMS_usefulLinks_email_BlockType {
-              email
-              typeHandle
-            }
-            ... on CMS_usefulLinks_links_BlockType {
-              linkText
-              linkHref
-              typeHandle
             }
           }
         }

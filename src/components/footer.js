@@ -1,7 +1,8 @@
 import React from "react"
 import styled from "styled-components"
-import { Logo } from "./header/logo"
+import uuid from "uuid/v4"
 
+import { Logo } from "./header/logo"
 import { ExternalLink } from "."
 
 const FooterWrapper = styled.div`
@@ -59,7 +60,7 @@ export const Footer = ({ links }) => {
             switch (l.typeHandle) {
               case "email":
                 return (
-                  <li key={l.email}>
+                  <li key={uuid()}>
                     <ExternalLink
                       label={`Email: ${l.email}`}
                       href={`mailto:${l.email}`}
@@ -68,7 +69,7 @@ export const Footer = ({ links }) => {
                 )
               case "links":
                 return (
-                  <li key={l.linkText}>
+                  <li key={uuid()}>
                     <ExternalLink label={l.linkText} href={l.linkHref} />
                   </li>
                 )

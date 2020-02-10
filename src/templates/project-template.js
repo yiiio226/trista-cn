@@ -12,7 +12,7 @@ import {
   ProjectGallery,
   SEO,
 } from "../components"
-import { useSiteMetadata } from "../hooks/graphql"
+import { useFooterData, useSiteMetadata } from "../hooks/graphql"
 
 const Body = styled(Container)`
   display: flex;
@@ -156,10 +156,9 @@ const RelatedProjectsWrapper = styled(Container)`
 `
 
 export default ({ pageContext }) => {
+  const { project, relatedProjects } = pageContext
   const { siteMainMenu, siteTitle } = useSiteMetadata()
-  console.log("pageContext", pageContext)
-
-  const { project, relatedProjects, footer } = pageContext
+  const footer = useFooterData()
   const heroPic = _get(project, "heroPicture[0]")
 
   return (
@@ -196,11 +195,11 @@ export default ({ pageContext }) => {
                 )
               case "image":
                 return (
-                  <>
+                  <React.Fragment key={uuid()}>
                     {block.image.map(node => (
                       <img key={uuid()} src={node.url} />
                     ))}
-                  </>
+                  </React.Fragment>
                 )
             }
           })}

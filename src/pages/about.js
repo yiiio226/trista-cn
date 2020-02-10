@@ -15,7 +15,7 @@ import {
   PhotoGallery,
   SEO,
 } from "../components"
-import { useSiteMetadata } from "../hooks/graphql"
+import { useFooterData, useSiteMetadata } from "../hooks/graphql"
 import "../styles/animate.min.css"
 
 const HeroPic = styled.img`
@@ -28,12 +28,13 @@ const HeroPic = styled.img`
 
 const AboutPage = ({ data }) => {
   const { siteMainMenu, siteTitle } = useSiteMetadata()
+  const footer = useFooterData()
   const descriptionInfo = _get(data, "cms.about.descriptionInfo")
   const heroPic = _get(data, "cms.about.heroPicture[0]")
   const photos = _get(data, "cms.about.photos")
 
   return (
-    <Layout center={true} footerLinks={_get(data, "cms.footer.usefulLinks")}>
+    <Layout center={true} footerLinks={_get(footer.usefulLinks)}>
       <Container isFullWidth>
         <Header menuLinks={siteMainMenu} siteTitle={siteTitle} />
         <SEO title="关于我" />
@@ -87,22 +88,6 @@ export const query = graphql`
                 width
                 height
               }
-            }
-          }
-        }
-      }
-      footer: entry(section: "footer") {
-        title
-        ... on CMS_footer_footer_Entry {
-          usefulLinks {
-            ... on CMS_usefulLinks_email_BlockType {
-              email
-              typeHandle
-            }
-            ... on CMS_usefulLinks_links_BlockType {
-              linkText
-              linkHref
-              typeHandle
             }
           }
         }

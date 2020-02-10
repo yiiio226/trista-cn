@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import uuid from "uuid/v4"
 import {
   LazyLoadComponent,
   trackWindowScroll,
@@ -31,7 +32,7 @@ export const ProjectGallery = trackWindowScroll(
           <LazyLoadComponent
             threshold={800}
             scrollPosition={scrollPosition}
-            key={p.id}
+            key={uuid()}
             visibleByDefault={loadByDefault}
           >
             <ProjectCard project={p} />

@@ -50,27 +50,17 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
               height
               size
             }
+            projectCover {
+              url
+              mimeType
+              width
+              height
+              size
+            }
             projectVideo {
               url
               mimeType
               size
-            }
-          }
-        }
-
-        footer: entry(section: "footer") {
-          title
-          ... on CMS_footer_footer_Entry {
-            usefulLinks {
-              ... on CMS_usefulLinks_email_BlockType {
-                email
-                typeHandle
-              }
-              ... on CMS_usefulLinks_links_BlockType {
-                linkText
-                linkHref
-                typeHandle
-              }
             }
           }
         }
@@ -86,7 +76,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   createProjectPages(createPage, projectTemplate, {
     projects: _get(result, "data.cms.projects", []),
-    footer: _get(result, "data.cms.footer", {}),
   })
 }
 
@@ -111,7 +100,6 @@ const createProjectPages = (createPage, template, data) => {
       context: {
         project: p,
         relatedProjects,
-        footer: data.footer,
       },
     })
   })
