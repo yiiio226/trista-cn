@@ -41,6 +41,14 @@ const LinkWrapper = styled(Link)`
   }
 `
 
+const ProjectCoverImg = styled.div`
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
+  background-image: url(${props => props.src});
+`
+
 const LinkCopy = styled.div`
   margin-top: 70px;
   color: ${props =>
@@ -52,8 +60,8 @@ const LinkCopy = styled.div`
 
 export const ProjectCard = ({ ...props }) => {
   const project = props.project
-  const projectVideo = _get(project, "projectVideo[0]", {})
-  const projectCover = _get(project, "projectCover[0]", {})
+  const projectVideo = _get(project, "projectVideo[0]")
+  const projectCover = _get(project, "projectCover[0]")
 
   return (
     <LinkWrapper to={`/projects/${project.slug}`} {...props}>
@@ -68,7 +76,7 @@ export const ProjectCard = ({ ...props }) => {
           <source src={projectVideo.url} type={projectVideo.mimeType} />
         </video>
       ) : (
-        <img src={projectCover.url} alt={project.projectTitleShort} />
+        <ProjectCoverImg src={projectCover.url} />
       )}
     </LinkWrapper>
   )
