@@ -62,7 +62,7 @@ const IndexPage = ({ data }) => {
 
   return (
     <Layout center={true} footerLinks={footer.usefulLinks}>
-      <HomeContentContainer>
+      <HomeContentContainer isFullWidth>
         <Header menuLinks={siteMainMenu} siteTitle={siteTitle} />
         <SEO title={"主页"} />
         <Gap gapSize={235} shrinkOnMobile={false} />
