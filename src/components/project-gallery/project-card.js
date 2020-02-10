@@ -30,6 +30,10 @@ const LinkWrapper = styled(Link)`
   .link-copy {
     opacity: 0;
     transition: opacity 0.2s;
+
+    @media (max-width: 780px) {
+      opacity: 1;
+    }
   }
 
   video {
