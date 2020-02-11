@@ -97,7 +97,7 @@ export const query = graphql`
                 ... on CMS_images_Asset {
                   localImage {
                     childImageSharp {
-                      fluid(maxWidth: 640) {
+                      fluid(maxWidth: 640, quality: 90) {
                         ...GatsbyImageSharpFluid_withWebp
                       }
                     }
