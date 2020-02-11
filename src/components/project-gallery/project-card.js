@@ -77,6 +77,7 @@ export const ProjectCard = ({ ...props }) => {
   const projectCover =
     _get(project, "projectCover[0].localImage.publicURL") ||
     _get(project, "heroPicture[0].localImage.publicURL")
+  console.log("project", project)
 
   React.useEffect(() => {
     if (projectVideo && typeof window !== `undefined`) {
@@ -129,7 +130,7 @@ export const ProjectCard = ({ ...props }) => {
           />
         </video>
       ) : (
-        (projectCover && <ProjectCoverImg src={projectCover.url} />) || null
+        (projectCover && <ProjectCoverImg src={projectCover} />) || null
       )}
     </LinkWrapper>
   )
