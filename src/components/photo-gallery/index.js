@@ -1,7 +1,7 @@
 import React from "react"
+import _get from "lodash/get"
 import styled from "styled-components"
-
-// import { photos } from "./photos-data"
+import Img from "gatsby-image"
 
 const PhotoItemWrapper = styled.div`
   display: flex;
@@ -15,7 +15,8 @@ const PhotoItemWrapper = styled.div`
   }
 `
 
-const PhotoImgWrapper = styled.img`
+const PhotoImgWrapper = styled(Img)`
+  width: 100%;
   max-width: 640px;
   @media (max-width: 1440px) {
     max-width: 45vw;
@@ -41,14 +42,21 @@ const PhotoLabel = styled.label`
 `
 
 export const PhotoGallery = ({ photos = [] }) => {
+  console.log("photos", photos)
   return (
     <>
-      {photos.map((p, i) => (
-        <PhotoItemWrapper index={i} key={i}>
-          <PhotoImgWrapper src={p.photo[0].url} alt={p.title} />
-          <PhotoLabel index={i}>{p.title}</PhotoLabel>
-        </PhotoItemWrapper>
-      ))}
+      {photos.map((p, i) => {
+        const imgData = _get(p, "photo[0].localImage.childImageSharp.fluid")
+        if (imgData) {
+          console.log("imgData", imgData)
+        }
+        return (
+          <PhotoItemWrapper index={i} key={i}>
+            {imgData && <PhotoImgWrapper fluid={imgData} alt="p.title" />}
+            <PhotoLabel index={i}>{p.title}</PhotoLabel>
+          </PhotoItemWrapper>
+        )
+      })}
     </>
   )
 }

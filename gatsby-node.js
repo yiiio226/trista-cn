@@ -7,6 +7,7 @@
 // You can delete this file if you're not using it
 const path = require(`path`)
 const _get = require("lodash/get")
+const { createRemoteFileNode } = require(`gatsby-source-filesystem`)
 
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions
@@ -82,6 +83,39 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   createProjectPages(createPage, projectTemplate, {
     projects: _get(result, "data.cms.projects", []),
+  })
+}
+
+exports.createResolvers = async ({
+  actions,
+  cache,
+  createNodeId,
+  createResolvers,
+  store,
+  reporter,
+}) => {
+  const { createNode } = actions
+
+  await createResolvers({
+    CMS_images_Asset: {
+      localImage: {
+        type: "File",
+        async resolve(parent, args, context) {
+          // console.log("params:", parent, args, context)
+          let url = parent.url
+          if (url.startsWith("//")) url = `https:${url}`
+
+          return createRemoteFileNode({
+            url: encodeURI(url),
+            store,
+            cache,
+            createNode,
+            createNodeId,
+            reporter,
+          })
+        },
+      },
+    },
   })
 }
 

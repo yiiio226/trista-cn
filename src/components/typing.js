@@ -1,6 +1,4 @@
 import React from "react"
-// import Typist from "react-typist"
-import "react-typist/dist/Typist.css"
 import styled from "styled-components"
 
 import { SlideIn } from "./slide-in"

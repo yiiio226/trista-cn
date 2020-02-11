@@ -3,6 +3,7 @@ import ReactMarkdown from "react-markdown/with-html"
 import styled from "styled-components"
 import _get from "lodash/get"
 import { graphql } from "gatsby"
+import Img from "gatsby-image"
 
 import {
   AboutBody,
@@ -17,12 +18,10 @@ import {
 } from "../components"
 import { useFooterData, useSiteMetadata } from "../hooks/graphql"
 
-const HeroPic = styled.img`
-  display: block;
+const HeroPic = styled(Img)`
   margin: 0 auto;
   max-width: 1200px;
   width: calc(100vw - 60px);
-  height: auto;
 `
 
 const AboutPage = ({ data }) => {
@@ -32,13 +31,18 @@ const AboutPage = ({ data }) => {
   const heroPic = _get(data, "cms.about.heroPicture[0]")
   const photos = _get(data, "cms.about.photos")
 
+  console.log("heroPic", heroPic)
+
   return (
     <Layout center={true} footerLinks={footer.usefulLinks}>
       <Container isFullWidth>
         <Header menuLinks={siteMainMenu} siteTitle={siteTitle} />
         <SEO title="关于我" />
         <Gap gapSize={180} />
-        <HeroPic src={heroPic.url} />
+        <HeroPic
+          fluid={heroPic.localImage.childImageSharp.fluid}
+          alt="Trista hero picture"
+        />
       </Container>
       <Gap gapSize={200} />
       <AboutBody>
@@ -68,6 +72,15 @@ export const query = graphql`
           typeHandle
           heroPicture {
             url
+            ... on CMS_images_Asset {
+              localImage {
+                childImageSharp {
+                  fluid(maxWidth: 2400) {
+                    ...GatsbyImageSharpFluid
+                  }
+                }
+              }
+            }
             mimeType
             width
             height
@@ -83,6 +96,15 @@ export const query = graphql`
             ... on CMS_photo_photos_Entry {
               photo {
                 url
+                ... on CMS_images_Asset {
+                  localImage {
+                    childImageSharp {
+                      fluid(maxWidth: 1280) {
+                        ...GatsbyImageSharpFluid
+                      }
+                    }
+                  }
+                }
                 mimeType
                 width
                 height

@@ -64,10 +64,8 @@ const LinkCopy = styled.div`
 `
 
 export const ProjectCard = ({ ...props }) => {
-  // Have to disable ssr for this component for now
-  if (typeof window === `undefined`) return null
-
   const project = props.project
+  const noWindow = typeof window === `undefined`
   const videoRef = React.useRef()
   const [projectVideo, updateProjectVideo] = React.useState(
     _get(project, "projectVideo[0]")
@@ -92,15 +90,16 @@ export const ProjectCard = ({ ...props }) => {
         }
       }
     }
-  }, [projectVideo, typeof window === `undefined`])
+  }, [project, projectVideo, noWindow])
 
   /** Trying to fix muted not being set on ios video tag */
-  React.useEffect(() => {
-    if (videoRef.current && !videoRef.current.defaultMuted) {
-      videoRef.current.defaultMuted = true
-      videoRef.current.muted = true
-    }
-  }, [videoRef.current])
+  if (videoRef.current && !videoRef.current.defaultMuted) {
+    videoRef.current.defaultMuted = true
+    videoRef.current.muted = true
+  }
+
+  // Have to disable ssr for this component for now
+  if (noWindow) return null
 
   return (
     <LinkWrapper

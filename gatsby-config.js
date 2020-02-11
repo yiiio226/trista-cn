@@ -14,8 +14,15 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `projects`,
-        path: `${__dirname}/src/projects`,
+        name: `assets-images`,
+        path: `${__dirname}/src/assets/images`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `assets-videos`,
+        path: `${__dirname}/src/assets/videos`,
       },
     },
     {
@@ -34,6 +41,14 @@ module.exports = {
         refetchInterval: 10,
       },
     },
+    // {
+    //   resolve: `gatsby-plugin-remote-images`,
+    //   options: {
+    //     nodeType: "CMS_images_Asset",
+    //     imagePath: "url",
+    //     name: "localImage",
+    //   },
+    // },
     {
       resolve: "gatsby-plugin-react-svg",
       options: {
@@ -49,18 +64,6 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
-        start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
-        display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
-      },
-    },
-    {
-      resolve: `gatsby-plugin-manifest`,
-      options: {
         name: `Trista`,
         short_name: `Trista`,
         start_url: `/`,
@@ -70,6 +73,5 @@ module.exports = {
         icon: `src/images/favicon.png`,
       },
     },
-    `gatsby-plugin-remove-serviceworker`,
   ],
 }
