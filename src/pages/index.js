@@ -55,7 +55,7 @@ const IndexPage = ({ data }) => {
   const footer = useFooterData()
   const tristaCutout = _get(
     data,
-    "cms.home.backgroundImage[0].url",
+    "cms.home.backgroundImage[0].localImage.publicURL",
     tristaCutoutPng
   )
 
@@ -88,6 +88,11 @@ export const query = graphql`
         ... on CMS_homePage_homePage_Entry {
           backgroundImage {
             url
+            ... on CMS_images_Asset {
+              localImage {
+                publicURL
+              }
+            }
             mimeType
             width
             height
@@ -123,6 +128,11 @@ export const query = graphql`
               projectTileIsWide
               heroPicture {
                 url
+                ... on CMS_images_Asset {
+                  localImage {
+                    publicURL
+                  }
+                }
                 mimeType
                 width
                 height
@@ -130,6 +140,11 @@ export const query = graphql`
               }
               projectCover {
                 url
+                ... on CMS_images_Asset {
+                  localImage {
+                    publicURL
+                  }
+                }
                 mimeType
                 width
                 height
@@ -137,11 +152,21 @@ export const query = graphql`
               }
               projectVideo {
                 url
+                ... on CMS_videos_Asset {
+                  localVideo {
+                    publicURL
+                  }
+                }
                 mimeType
                 size
               }
               projectVideoSmall {
                 url
+                ... on CMS_videos_Asset {
+                  localVideo {
+                    publicURL
+                  }
+                }
                 mimeType
                 size
               }

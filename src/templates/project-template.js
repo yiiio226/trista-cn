@@ -2,6 +2,7 @@ import React from "react"
 import _get from "lodash/get"
 import styled from "styled-components"
 import uuid from "uuid/v4"
+import Img from "gatsby-image"
 import ReactMarkdown from "react-markdown/with-html"
 
 import {
@@ -12,7 +13,11 @@ import {
   ProjectGallery,
   SEO,
 } from "../components"
-import { useFooterData, useSiteMetadata } from "../hooks/graphql"
+import {
+  useFooterData,
+  useSiteMetadata,
+  useProjectsData,
+} from "../hooks/graphql"
 
 const Body = styled(Container)`
   display: flex;
@@ -25,10 +30,10 @@ const Body = styled(Container)`
   }
 `
 
-const PostCoverWrapper = styled.div`
-  background-image: url(${props => props.src});
+const PostCoverWrapper = styled(Img)`
+  /* background-image: url(${props => props.src});
   background-size: cover;
-  background-position: center top;
+  background-position: center top; */
   max-width: 1200px;
   width: 100%;
   height: 547px;
@@ -110,17 +115,21 @@ const PostBody = styled.div`
     margin: 20px 0 0;
   }
 
-  img {
-    max-width: 100%;
+  .project-image {
+    max-width: calc(100vw - 120px);
     margin: 60px 0;
-    width: auto;
-    height: auto;
+    width: 100vw;
     object-fit: scale-down;
     background-color: #ffffff;
     box-shadow: 0px 10px 30px -2px rgba(0, 0, 0, 0.06);
 
     @media (max-width: 780px) {
+      max-width: calc(100vw - 60px);
       margin: 30px 0;
+    }
+
+    & * {
+      max-width: unset;
     }
   }
 `
@@ -163,10 +172,28 @@ const RelatedProjectsWrapper = styled(Container)`
 `
 
 export default ({ pageContext }) => {
-  const { project, relatedProjects } = pageContext
+  const { project: curP, relatedProjects: curRelatedProjects } = pageContext
   const { siteMainMenu, siteTitle } = useSiteMetadata()
+  const projects = useProjectsData()
+  const project = projects.filter(p => p.id === curP.id)[0]
   const footer = useFooterData()
   const heroPic = _get(project, "heroPicture[0]")
+  const [relatedProjects, updateRelatedProjects] = React.useState(
+    curRelatedProjects
+  )
+
+  /** Transform related project ids into related projects */
+  React.useEffect(() => {
+    if (relatedProjects.length <= 0) return
+    if (!relatedProjects[0].title) {
+      const updatedRelatedProjects = relatedProjects.map(p => {
+        const q = projects.filter(q => q.id === p.id)[0]
+        q.projectTileIsWide = false
+        return q
+      })
+      updateRelatedProjects(updatedRelatedProjects)
+    }
+  }, [projects, relatedProjects])
 
   return (
     <Layout center={true} footerLinks={footer.usefulLinks}>
@@ -176,7 +203,7 @@ export default ({ pageContext }) => {
         <Gap gapSize={40} />
       </Container>
       <PostHead isFullWidth>
-        <PostCoverWrapper src={heroPic.url} />
+        <PostCoverWrapper fluid={heroPic.localImage.childImageSharp.fluid} />
         <PostBody>
           <div className="meta">
             <h1>{project.title}</h1>
@@ -203,13 +230,16 @@ export default ({ pageContext }) => {
               case "image":
                 return (
                   <React.Fragment key={uuid()}>
-                    {block.image.map(node => (
-                      <img
-                        key={uuid()}
-                        src={node.url}
-                        alt="Project screenshot"
-                      />
-                    ))}
+                    {block.image.map(node => {
+                      return (
+                        <Img
+                          className="project-image"
+                          key={uuid()}
+                          fluid={_get(node, "localImage.childImageSharp.fluid")}
+                          alt="Project screenshot"
+                        />
+                      )
+                    })}
                   </React.Fragment>
                 )
               default:

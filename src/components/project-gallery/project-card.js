@@ -75,7 +75,8 @@ export const ProjectCard = ({ ...props }) => {
   )
 
   const projectCover =
-    _get(project, "projectCover[0]") || _get(project, "heroPicture[0]")
+    _get(project, "projectCover[0].localImage.publicURL") ||
+    _get(project, "heroPicture[0].localImage.publicURL")
 
   React.useEffect(() => {
     if (projectVideo && typeof window !== `undefined`) {
@@ -122,10 +123,13 @@ export const ProjectCard = ({ ...props }) => {
           playsInline={true}
           ref={videoRef}
         >
-          <source src={projectVideo.url} type={projectVideo.mimeType} />
+          <source
+            src={projectVideo.localVideo.publicURL}
+            type={projectVideo.mimeType}
+          />
         </video>
       ) : (
-        <ProjectCoverImg src={projectCover.url} />
+        (projectCover && <ProjectCoverImg src={projectCover.url} />) || null
       )}
     </LinkWrapper>
   )

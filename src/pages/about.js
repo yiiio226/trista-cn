@@ -31,8 +31,6 @@ const AboutPage = ({ data }) => {
   const heroPic = _get(data, "cms.about.heroPicture[0]")
   const photos = _get(data, "cms.about.photos")
 
-  console.log("heroPic", heroPic)
-
   return (
     <Layout center={true} footerLinks={footer.usefulLinks}>
       <Container isFullWidth>
@@ -75,8 +73,8 @@ export const query = graphql`
             ... on CMS_images_Asset {
               localImage {
                 childImageSharp {
-                  fluid(maxWidth: 2400) {
-                    ...GatsbyImageSharpFluid
+                  fluid(maxWidth: 1200, quality: 90) {
+                    ...GatsbyImageSharpFluid_withWebp
                   }
                 }
               }
@@ -100,7 +98,7 @@ export const query = graphql`
                   localImage {
                     childImageSharp {
                       fluid(maxWidth: 640) {
-                        ...GatsbyImageSharpFluid
+                        ...GatsbyImageSharpFluid_withWebp
                       }
                     }
                   }

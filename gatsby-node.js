@@ -9,6 +9,17 @@ const path = require(`path`)
 const _get = require("lodash/get")
 const { createRemoteFileNode } = require(`gatsby-source-filesystem`)
 
+/**
+ * Using:
+ *   base64
+ *   aspectRatio
+ *   src
+ *   srcSet
+ *   srcWebp
+ *   srcSetWebp
+ *   sizes
+ * as GatsbyImageSharpFluid_withWebp
+ */
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions
   const projectTemplate = path.resolve(`src/templates/project-template.js`)
@@ -17,59 +28,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       cms {
         projects: entries(section: "project") {
           id
-          title
           slug
-          ... on CMS_project_project_Entry {
-            projectTitleShort
-            projectTileColor
-            projectTileColorSmall
-            projectTileIsInversedColor
-            projectTileIsWide
-            projectDescription
-            projectClient
-            projectMyRole
-            projectDuration
-            projectContentBody {
-              ... on CMS_projectContentBody_textSection_BlockType {
-                typeHandle
-                body
-              }
-              ... on CMS_projectContentBody_image_BlockType {
-                typeHandle
-                image {
-                  url
-                  mimeType
-                  width
-                  height
-                  size
-                }
-              }
-            }
-            heroPicture {
-              url
-              mimeType
-              width
-              height
-              size
-            }
-            projectCover {
-              url
-              mimeType
-              width
-              height
-              size
-            }
-            projectVideo {
-              url
-              mimeType
-              size
-            }
-            projectVideoSmall {
-              url
-              mimeType
-              size
-            }
-          }
         }
       }
     }
@@ -100,8 +59,25 @@ exports.createResolvers = async ({
     CMS_images_Asset: {
       localImage: {
         type: "File",
-        async resolve(parent, args, context) {
-          // console.log("params:", parent, args, context)
+        async resolve(parent) {
+          let url = parent.url
+          if (url.startsWith("//")) url = `https:${url}`
+
+          return createRemoteFileNode({
+            url: encodeURI(url),
+            store,
+            cache,
+            createNode,
+            createNodeId,
+            reporter,
+          })
+        },
+      },
+    },
+    CMS_videos_Asset: {
+      localVideo: {
+        type: "File",
+        async resolve(parent) {
           let url = parent.url
           if (url.startsWith("//")) url = `https:${url}`
 
@@ -130,7 +106,7 @@ const createProjectPages = (createPage, template, data) => {
         iCur = 0
       }
       const relatedP = data.projects[iCur]
-      relatedP.projectTileIsWide = false // Please, do not go full width...
+      relatedP.projectTileIsWide = false // For related projects, please, do not go full width...
       relatedProjects.push(relatedP)
     }
 

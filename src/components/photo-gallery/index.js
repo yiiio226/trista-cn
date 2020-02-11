@@ -42,14 +42,10 @@ const PhotoLabel = styled.label`
 `
 
 export const PhotoGallery = ({ photos = [] }) => {
-  console.log("photos", photos)
   return (
     <>
       {photos.map((p, i) => {
         const imgData = _get(p, "photo[0].localImage.childImageSharp.fluid")
-        if (imgData) {
-          console.log("imgData", imgData)
-        }
         return (
           <PhotoItemWrapper index={i} key={i}>
             {imgData && <PhotoImgWrapper fluid={imgData} alt="p.title" />}
