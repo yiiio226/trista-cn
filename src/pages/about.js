@@ -99,7 +99,7 @@ export const query = graphql`
                 ... on CMS_images_Asset {
                   localImage {
                     childImageSharp {
-                      fluid(maxWidth: 1280) {
+                      fluid(maxWidth: 640) {
                         ...GatsbyImageSharpFluid
                       }
                     }
