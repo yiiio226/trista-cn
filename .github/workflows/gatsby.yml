@@ -18,8 +18,7 @@ jobs:
           mkdir -p ~/.ssh && chmod 700 ~/.ssh
           echo "${{ secrets.PRIVATE_SSH_KEY }}" | base64 -d > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          touch ~/.ssh/known_hosts && chmod 600 ~/.ssh/known_hosts
-          ssh-keygen -R 47.56.199.173
+          ssh-keyscan 47.56.199.173 >> ~/.ssh/known_hosts && chmod 600 ~/.ssh/known_hosts
   build:
     runs-on: ubuntu-latest
     steps:
