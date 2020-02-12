@@ -31,12 +31,8 @@ const Body = styled(Container)`
 `
 
 const PostCoverWrapper = styled(Img)`
-  /* background-image: url(${props => props.src});
-  background-size: cover;
-  background-position: center top; */
   max-width: 1200px;
   width: 100%;
-  /* height: 547px; */
   box-shadow: 0px 10px 30px -2px rgba(0, 0, 0, 0.06);
 `
 
@@ -81,12 +77,14 @@ const PostBody = styled.div`
 
   h1,
   h2 {
-    margin-top: 80px;
-    margin-bottom: 40px;
+    margin: 80px 0 40px;
     font-size: 30px;
     line-height: 40px;
     font-weight: bold;
     color: rgba(51, 51, 51, 1);
+    @media (max-width: 780px) {
+      margin: 40px 0 20px;
+    }
   }
 
   h3 {
@@ -123,12 +121,9 @@ const PostBody = styled.div`
     background-color: #ffffff;
     box-shadow: 0px 10px 30px -2px rgba(0, 0, 0, 0.06);
 
-    @media (max-width: 1440px) {
-      max-width: calc(100vw - 320px);
-    }
-
-    @media (max-width: 1000px) {
-      max-width: calc(100vw - 60px);
+    /* 1200px = 1120px + 80px */
+    @media (max-width: 1200px) {
+      max-width: calc(100vw - 80px);
     }
 
     @media (max-width: 780px) {
