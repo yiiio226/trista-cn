@@ -1,4 +1,4 @@
-version: '2'
+version: "2"
 
 volumes:
   craftcms-data:
@@ -8,7 +8,8 @@ volumes:
 
 services:
   www:
-    build: .
+    build:
+      context: ./
     restart: unless-stopped
   web:
     image: wyveo/craftcms-docker:latest
@@ -37,11 +38,11 @@ services:
       DB_PASSWORD: nKR9K2ECuVAEM9tqYsMtDpXa
       PGPASSWORD: nKR9K2ECuVAEM9tqYsMtDpXa
       DB_SCHEMA: public
-      DB_PORT: '5432'
+      DB_PORT: "5432"
       DB_USER: craft3
 
-      ASSET_BASE_URL: ''
-      ASSET_FS_PATH: ''
+      ASSET_BASE_URL: ""
+      ASSET_FS_PATH: ""
 
   postgres:
     image: postgres:11.5
