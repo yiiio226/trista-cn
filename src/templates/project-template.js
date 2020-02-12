@@ -36,7 +36,7 @@ const PostCoverWrapper = styled(Img)`
   background-position: center top; */
   max-width: 1200px;
   width: 100%;
-  height: 547px;
+  /* height: 547px; */
   box-shadow: 0px 10px 30px -2px rgba(0, 0, 0, 0.06);
 `
 
