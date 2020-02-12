@@ -8,16 +8,6 @@ on:
   repository_dispatch:
 
 jobs:
-  # This job only used when rsync to other server is needed
-  prepare:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Inject private key
-        shell: bash
-        run: |
-          mkdir -p ~/.ssh && chmod 700 ~/.ssh
-          echo "${{ secrets.PRIVATE_SSH_KEY }}" | base64 -d > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
   build:
     runs-on: ubuntu-latest
     steps:
@@ -32,6 +22,7 @@ jobs:
       - name: Upload website
         shell: bash
         run: |
-          pwd
-          ls -lha
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
+          echo "${{ secrets.PRIVATE_SSH_KEY }}" | base64 -d > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
           rsync -e "ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa" -havr --progress --delete ./public root@47.56.199.173:/root/works/docker_static_nginx/sample_web_app
