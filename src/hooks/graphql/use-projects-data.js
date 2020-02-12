@@ -30,7 +30,7 @@ export const useProjectsData = () => {
                     ... on CMS_images_Asset {
                       localImage {
                         childImageSharp {
-                          fluid(maxWidth: 1120, quality: 90) {
+                          fluid(maxWidth: 1120, quality: 100) {
                             ...GatsbyImageSharpFluid_withWebp
                           }
                         }

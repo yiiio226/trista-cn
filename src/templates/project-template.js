@@ -116,15 +116,22 @@ const PostBody = styled.div`
   }
 
   .project-image {
-    max-width: calc(100vw - 120px);
+    max-width: 1120px;
     margin: 60px 0;
     width: 100vw;
     object-fit: scale-down;
     background-color: #ffffff;
     box-shadow: 0px 10px 30px -2px rgba(0, 0, 0, 0.06);
 
-    @media (max-width: 780px) {
+    @media (max-width: 1440px) {
+      max-width: calc(100vw - 320px);
+    }
+
+    @media (max-width: 1000px) {
       max-width: calc(100vw - 60px);
+    }
+
+    @media (max-width: 780px) {
       margin: 30px 0;
     }
 
