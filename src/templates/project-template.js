@@ -144,8 +144,8 @@ const PostHR = styled.div`
 
 const PostHead = styled(Body)`
   background-color: #ffffff;
-  padding: 100px 120px 60px;
-  @media (max-width: 780px) {
+  padding: 100px 30px 60px;
+  @media (max-width: 1260px) {
     padding: 50px 30px 30px;
   }
 `
