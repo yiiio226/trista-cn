@@ -49,7 +49,7 @@ const ProjectCoverImg = styled.div`
   height: 100%;
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: center center;
+  background-position: center bottom;
   background-image: url(${props => props.src});
 `
 
