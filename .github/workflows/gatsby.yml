@@ -15,6 +15,7 @@ jobs:
       - name: Inject private key
         shell: bash
         run: |
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
           echo "${{ secrets.PRIVATE_SSH_KEY }}" | base64 -d > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
   build:
