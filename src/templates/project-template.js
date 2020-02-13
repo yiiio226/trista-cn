@@ -19,6 +19,7 @@ import {
   useProjectsData,
 } from "../hooks/graphql"
 import { Protected } from "../components/encrypted"
+import { mergeProjects } from "../utils"
 
 const Body = styled(Container)`
   display: flex;
@@ -184,7 +185,7 @@ export default ({ pageContext }) => {
 
   const { siteMainMenu, siteTitle } = useSiteMetadata()
   const projects = useProjectsData()
-  const project = projects.filter(p => p.id === curP.id)[0] || {}
+  // const project = projects.filter(p => p.id === curP.id)[0] || {}
   const footer = useFooterData()
   const [relatedProjects, updateRelatedProjects] = React.useState(
     curRelatedProjects
@@ -207,16 +208,20 @@ export default ({ pageContext }) => {
     <Layout center={true} footerLinks={footer.usefulLinks}>
       <Container>
         <Header menuLinks={siteMainMenu} siteTitle={siteTitle} />
-        <SEO title={project.title} />
+        <SEO title={curP.title} />
         <Gap gapSize={40} />
       </Container>
       <Protected
         isProtected={isProtected}
-        unprotectedData={project}
+        unprotectedData={curP}
         protectedData={encryptedProjectStr}
       >
         {({ data }) => {
-          const p = projects.filter(q => q.id === data.id)[0]
+          console.log("data", data)
+          const foundP = projects.filter(q => q.id === data.id)[0]
+          console.log("foundP", foundP)
+          const p = mergeProjects(foundP, data)
+          console.log("merged p\n", p)
           const heroPic = _get(p, "heroPicture[0]")
           return (
             <>

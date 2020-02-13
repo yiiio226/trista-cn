@@ -10,35 +10,6 @@ const _get = require("lodash/get")
 const { createRemoteFileNode } = require(`gatsby-source-filesystem`)
 const { encrypt } = require("./src/components/encrypted/utils/encrypt")
 
-exports.createPages = async ({ actions, graphql, reporter }) => {
-  const { createPage } = actions
-  const projectTemplate = path.resolve(`src/templates/project-template.js`)
-  const result = await graphql(`
-    {
-      cms {
-        projects: entries(section: "project") {
-          id
-          slug
-          ... on CMS_project_project_Entry {
-            isProtected
-            password
-          }
-        }
-      }
-    }
-  `)
-
-  // Handle errors
-  if (result.errors) {
-    reporter.panicOnBuild(`Error while running GraphQL query.`)
-    return
-  }
-
-  createProjectPages(createPage, projectTemplate, {
-    projects: _get(result, "data.cms.projects", []),
-  })
-}
-
 exports.createResolvers = async ({
   actions,
   cache,
@@ -121,5 +92,79 @@ const createProjectPages = (createPage, template, data) => {
         relatedProjects,
       },
     })
+  })
+}
+
+exports.createPages = async ({ actions, graphql, reporter }) => {
+  const { createPage } = actions
+  const projectTemplate = path.resolve(`src/templates/project-template.js`)
+  const result = await graphql(`
+    {
+      cms {
+        projects: entries(section: "project") {
+          id
+          title
+          slug
+          ... on CMS_project_project_Entry {
+            isProtected
+            password
+            projectTitleShort
+            projectTileColor
+            projectTileColorSmall
+            projectTileIsInversedColor
+            projectTileIsWide
+            projectDescription
+            projectClient
+            projectMyRole
+            projectDuration
+            projectContentBody {
+              ... on CMS_projectContentBody_textSection_BlockType {
+                id
+                typeHandle
+                body
+              }
+              ... on CMS_projectContentBody_image_BlockType {
+                id
+                typeHandle
+                image {
+                  id
+                  url
+                  mimeType
+                  width
+                  height
+                  size
+                }
+              }
+            }
+            heroPicture {
+              id
+              url
+              mimeType
+              width
+              height
+              size
+            }
+            projectCover {
+              id
+              url
+              mimeType
+              width
+              height
+              size
+            }
+          }
+        }
+      }
+    }
+  `)
+
+  // Handle errors
+  if (result.errors) {
+    reporter.panicOnBuild(`Error while running GraphQL query.`)
+    return
+  }
+
+  createProjectPages(createPage, projectTemplate, {
+    projects: _get(result, "data.cms.projects", []),
   })
 }

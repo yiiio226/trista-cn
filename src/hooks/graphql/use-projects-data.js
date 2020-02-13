@@ -9,23 +9,12 @@ export const useProjectsData = () => {
             title
             slug
             ... on CMS_project_project_Entry {
-              projectTitleShort
-              projectTileColor
-              projectTileColorSmall
-              projectTileIsInversedColor
-              projectTileIsWide
-              projectDescription
-              projectClient
-              projectMyRole
-              projectDuration
               projectContentBody {
-                ... on CMS_projectContentBody_textSection_BlockType {
-                  typeHandle
-                  body
-                }
                 ... on CMS_projectContentBody_image_BlockType {
+                  id
                   typeHandle
                   image {
+                    id
                     url
                     ... on CMS_images_Asset {
                       localImage {
@@ -37,14 +26,11 @@ export const useProjectsData = () => {
                         }
                       }
                     }
-                    mimeType
-                    width
-                    height
-                    size
                   }
                 }
               }
               heroPicture {
+                id
                 url
                 ... on CMS_images_Asset {
                   localImage {
@@ -56,12 +42,9 @@ export const useProjectsData = () => {
                     }
                   }
                 }
-                mimeType
-                width
-                height
-                size
               }
               projectCover {
+                id
                 url
                 ... on CMS_images_Asset {
                   localImage {
@@ -73,12 +56,9 @@ export const useProjectsData = () => {
                     }
                   }
                 }
-                mimeType
-                width
-                height
-                size
               }
               projectVideo {
+                id
                 url
                 ... on CMS_videos_Asset {
                   localVideo {
@@ -89,6 +69,7 @@ export const useProjectsData = () => {
                 size
               }
               projectVideoSmall {
+                id
                 url
                 ... on CMS_videos_Asset {
                   localVideo {
