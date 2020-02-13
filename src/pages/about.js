@@ -22,6 +22,14 @@ const HeroPic = styled(Img)`
   margin: 0 auto;
   max-width: 1200px;
   width: calc(100vw - 60px);
+
+  @media (max-width: 1440px) {
+    width: 83.33vw;
+  }
+
+  @media (max-width: 780px) {
+    width: calc(100vw - 40px);
+  }
 `
 
 const AboutPage = ({ data }) => {
