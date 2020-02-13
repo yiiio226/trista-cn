@@ -18,6 +18,7 @@ import {
   useSiteMetadata,
   useProjectsData,
 } from "../hooks/graphql"
+import { Protected } from "../components/encrypted"
 
 const Body = styled(Container)`
   display: flex;
@@ -174,12 +175,17 @@ const RelatedProjectsWrapper = styled(Container)`
 `
 
 export default ({ pageContext }) => {
-  const { project: curP, relatedProjects: curRelatedProjects } = pageContext
+  const {
+    isProtected, // When isProtected, project will be null
+    encryptedProjectStr,
+    project: curP,
+    relatedProjects: curRelatedProjects,
+  } = pageContext
+
   const { siteMainMenu, siteTitle } = useSiteMetadata()
   const projects = useProjectsData()
-  const project = projects.filter(p => p.id === curP.id)[0]
+  const project = projects.filter(p => p.id === curP.id)[0] || {}
   const footer = useFooterData()
-  const heroPic = _get(project, "heroPicture[0]")
   const [relatedProjects, updateRelatedProjects] = React.useState(
     curRelatedProjects
   )
@@ -204,52 +210,71 @@ export default ({ pageContext }) => {
         <SEO title={project.title} />
         <Gap gapSize={40} />
       </Container>
-      <PostHead isFullWidth>
-        <PostCoverWrapper fluid={heroPic.localImage.childImageSharp.fluid} />
-        <PostBody>
-          <div className="meta">
-            <h1>{project.title}</h1>
-            <p>{project.projectDescription}</p>
-            <PostHR />
-            <p className="post-attr">客户：{project.projectClient}</p>
-            <p className="post-attr">角色：{project.projectMyRole}</p>
-            <p className="post-attr">时间：{project.projectDuration}</p>
-          </div>
-        </PostBody>
-      </PostHead>
-      <Body isFullWidth>
-        <PostBody>
-          {project.projectContentBody.map(block => {
-            switch (block.typeHandle) {
-              case "textSection":
-                return (
-                  <ReactMarkdown
-                    key={uuid()}
-                    source={block.body}
-                    escapeHtml={false}
-                  />
-                )
-              case "image":
-                return (
-                  <React.Fragment key={uuid()}>
-                    {block.image.map(node => {
-                      return (
-                        <Img
-                          className="project-image"
-                          key={uuid()}
-                          fluid={_get(node, "localImage.childImageSharp.fluid")}
-                          alt="Project screenshot"
-                        />
-                      )
-                    })}
-                  </React.Fragment>
-                )
-              default:
-                return null
-            }
-          })}
-        </PostBody>
-      </Body>
+      <Protected
+        isProtected={isProtected}
+        unprotectedData={project}
+        protectedData={encryptedProjectStr}
+      >
+        {({ data }) => {
+          const p = projects.filter(q => q.id === data.id)[0]
+          const heroPic = _get(p, "heroPicture[0]")
+          return (
+            <>
+              <PostHead isFullWidth>
+                <PostCoverWrapper
+                  fluid={heroPic.localImage.childImageSharp.fluid}
+                />
+                <PostBody>
+                  <div className="meta">
+                    <h1>{p.title}</h1>
+                    <p>{p.projectDescription}</p>
+                    <PostHR />
+                    <p className="post-attr">客户：{p.projectClient}</p>
+                    <p className="post-attr">角色：{p.projectMyRole}</p>
+                    <p className="post-attr">时间：{p.projectDuration}</p>
+                  </div>
+                </PostBody>
+              </PostHead>
+              <Body isFullWidth>
+                <PostBody>
+                  {p.projectContentBody.map(block => {
+                    switch (block.typeHandle) {
+                      case "textSection":
+                        return (
+                          <ReactMarkdown
+                            key={uuid()}
+                            source={block.body}
+                            escapeHtml={false}
+                          />
+                        )
+                      case "image":
+                        return (
+                          <React.Fragment key={uuid()}>
+                            {block.image.map(node => {
+                              return (
+                                <Img
+                                  className="project-image"
+                                  key={uuid()}
+                                  fluid={_get(
+                                    node,
+                                    "localImage.childImageSharp.fluid"
+                                  )}
+                                  alt="Project screenshot"
+                                />
+                              )
+                            })}
+                          </React.Fragment>
+                        )
+                      default:
+                        return null
+                    }
+                  })}
+                </PostBody>
+              </Body>
+            </>
+          )
+        }}
+      </Protected>
       <RelatedProjectsWrapper isFullWidth>
         <h2>其他项目</h2>
         <RelatedProjects

@@ -8,6 +8,7 @@
 const path = require(`path`)
 const _get = require("lodash/get")
 const { createRemoteFileNode } = require(`gatsby-source-filesystem`)
+const { encrypt } = require("./src/components/encrypted/utils/encrypt")
 
 /**
  * Using:
@@ -110,10 +111,21 @@ const createProjectPages = (createPage, template, data) => {
       relatedProjects.push(relatedP)
     }
 
+    p.isProtected = true
+    p.password = "hello"
+
+    let encryptedProjectStr
+    if (p.isProtected) {
+      console.log("Encrypting project", `/projects/${p.slug}`)
+      encryptedProjectStr = encrypt(p, p.password)
+    }
+
     createPage({
       path: `projects/${p.slug}`,
       component: template,
       context: {
+        isProtected: p.isProtected,
+        encryptedProjectStr,
         project: p,
         relatedProjects,
       },
