@@ -1,10 +1,7 @@
 import React from "react"
-import styled from "styled-components"
 
 import { decrypt } from "./utils/encrypt"
 import { EncryptedDialog } from "./encrypted-dialog"
-
-const ProtectedWrapper = styled.div``
 
 export const Protected = ({
   isProtected,

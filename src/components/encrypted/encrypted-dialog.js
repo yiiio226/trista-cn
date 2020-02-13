@@ -1,32 +1,33 @@
 import React from "react"
+import styled from "styled-components"
 
-export const EncryptedDialog = ({ onSubmit, onValid, errorMsg }) => {
+const EncryptedDialogWrapper = styled.div`
+  width: calc(100vw - 60px);
+  max-width: 1240px;
+  margin: 0 auto;
+  text-align: center;
+`
+
+export const EncryptedDialog = ({ onSubmit, errorMsg }) => {
   const [password, updatePassword] = React.useState()
-  const [isValid, updateIsValid] = React.useState()
   const handleSubmit = e => {
     e.preventDefault()
-    console.log("submit password:", password)
-    const isValid = onSubmit(password)
-    updateIsValid(isValid)
-
-    if (isValid) {
-      onValid()
-    }
+    onSubmit(password)
   }
   return (
-    <div>
-      <h2>Encrypted</h2>
+    <EncryptedDialogWrapper>
+      <h2>Page is encrypted</h2>
       <form onSubmit={handleSubmit}>
-        <h3>Input password</h3>
+        <h3>Please provide a password</h3>
         <input
           type="password"
           name="password"
           value={password}
           onChange={e => updatePassword(e.target.value)}
         />
-        {errorMsg && <div style={{ color: "red" }}>{errorMsg}</div>}
         <input type="submit" />
+        {errorMsg && <div style={{ color: "red" }}>{errorMsg}</div>}
       </form>
-    </div>
+    </EncryptedDialogWrapper>
   )
 }
