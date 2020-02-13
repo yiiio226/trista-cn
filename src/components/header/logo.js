@@ -16,11 +16,20 @@ const LogoWrapper = styled(Link)`
 export const Logo = ({ ...props }) => {
   const [isHovering, hoverRef] = useHover(0, 200)
   const [isPlaying, updateIsPlaying] = React.useState(false)
+  const timerRef = React.useRef()
 
   React.useEffect(() => {
     if (isHovering) {
+      if (timerRef.current) {
+        return
+      }
+
       updateIsPlaying(true)
-      setTimeout(() => updateIsPlaying(false), 1500)
+      timerRef.current = setTimeout(() => {
+        updateIsPlaying(false)
+        clearTimeout(timerRef.current)
+        timerRef.current = null
+      }, 1500)
     }
   }, [isHovering])
 
