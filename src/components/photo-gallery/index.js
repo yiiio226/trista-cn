@@ -19,7 +19,7 @@ const PhotoImgWrapper = styled(Img)`
   width: 100%;
   max-width: 640px;
   @media (max-width: 1440px) {
-    max-width: 45vw;
+    max-width: 44.44vw;
   }
   @media (max-width: 780px) {
     max-width: calc(100vw - 30px * 2);
@@ -31,6 +31,10 @@ const PhotoLabel = styled.label`
   line-height: 24px;
   padding-left: ${props => (props.index % 2 === 0 ? 80 : 0)}px;
   padding-right: ${props => (props.index % 2 === 0 ? 0 : 80)}px;
+
+  @media (max-width: 1440px) {
+    padding-left: 5.56vw;
+  }
 
   @media (max-width: 780px) {
     font-size: 14px;
