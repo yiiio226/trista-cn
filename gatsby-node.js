@@ -10,17 +10,6 @@ const _get = require("lodash/get")
 const { createRemoteFileNode } = require(`gatsby-source-filesystem`)
 const { encrypt } = require("./src/components/encrypted/utils/encrypt")
 
-/**
- * Using:
- *   base64
- *   aspectRatio
- *   src
- *   srcSet
- *   srcWebp
- *   srcSetWebp
- *   sizes
- * as GatsbyImageSharpFluid_withWebp
- */
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions
   const projectTemplate = path.resolve(`src/templates/project-template.js`)
@@ -30,6 +19,10 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         projects: entries(section: "project") {
           id
           slug
+          ... on CMS_project_project_Entry {
+            isProtected
+            password
+          }
         }
       }
     }
@@ -111,14 +104,12 @@ const createProjectPages = (createPage, template, data) => {
       relatedProjects.push(relatedP)
     }
 
-    p.isProtected = true
-    p.password = "hello"
-
     let encryptedProjectStr
     if (p.isProtected) {
       console.log("Encrypting project", `/projects/${p.slug}`)
       encryptedProjectStr = encrypt(p, p.password)
     }
+    p.password = undefined // Clear the password!
 
     createPage({
       path: `projects/${p.slug}`,
