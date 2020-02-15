@@ -41,7 +41,7 @@ const DialogForm = styled.form`
   align-items: center;
   h1 {
     margin: 140px auto 40px;
-    @media (max-width: 1260px) {
+    @media (max-width: 780px) {
       margin: 60px auto 20px;
     }
   }
