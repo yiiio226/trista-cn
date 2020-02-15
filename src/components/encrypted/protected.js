@@ -1,7 +1,7 @@
 import React from "react"
 
 import { decrypt } from "./utils/encrypt"
-import { EncryptedDialog } from "./encrypted-dialog"
+import { ProtectedDialog } from "./protected-dialog"
 
 export const Protected = ({
   isProtected,
@@ -23,7 +23,7 @@ export const Protected = ({
         return false
       }
     },
-    [protectedData]
+    [isProtected, protectedData]
   )
 
   if (!isProtected) {
@@ -32,7 +32,7 @@ export const Protected = ({
     return children({ data: decryptedData })
   } else {
     return (
-      <EncryptedDialog onSubmit={p => decryptData(p)} hintData={hintData} />
+      <ProtectedDialog onSubmit={p => decryptData(p)} hintData={hintData} />
     )
   }
 }

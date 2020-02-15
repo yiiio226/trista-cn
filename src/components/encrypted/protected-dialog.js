@@ -3,7 +3,7 @@ import styled, { css, keyframes } from "styled-components"
 import Img from "gatsby-image"
 import IcArrowRight from "../../images/icon_arrow-right.inline.svg"
 
-const EncryptedDialogWrapper = styled.div`
+const ProtectedDialogWrapper = styled.div`
   position: relative;
   display: flex;
   margin: 100px auto 0;
@@ -42,7 +42,8 @@ const DialogForm = styled.form`
   h1 {
     margin: 140px auto 40px;
     @media (max-width: 780px) {
-      margin: 60px auto 20px;
+      font-size: 20px;
+      margin: 40px auto 20px;
     }
   }
 `
@@ -103,7 +104,7 @@ const InputField = styled.div`
   }
 `
 
-export const EncryptedDialog = ({ onSubmit, hintData }) => {
+export const ProtectedDialog = ({ onSubmit, hintData }) => {
   const [password, updatePassword] = React.useState("")
   const [isPasswordCorrect, updateIsPasswordCorrect] = React.useState(null)
 
@@ -128,7 +129,7 @@ export const EncryptedDialog = ({ onSubmit, hintData }) => {
   }, [isPasswordCorrect])
 
   return (
-    <EncryptedDialogWrapper>
+    <ProtectedDialogWrapper>
       <PostCoverWrapper fluid={heroPic.localImage.childImageSharp.fluid} />
       <DialogFormWrapper>
         <DialogForm onSubmit={handleSubmit}>
@@ -147,6 +148,6 @@ export const EncryptedDialog = ({ onSubmit, hintData }) => {
           </InputField>
         </DialogForm>
       </DialogFormWrapper>
-    </EncryptedDialogWrapper>
+    </ProtectedDialogWrapper>
   )
 }
