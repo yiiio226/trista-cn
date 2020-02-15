@@ -40,6 +40,7 @@ const DialogForm = styled.form`
   flex-direction: column;
   align-items: center;
   h1 {
+    font-size: 30px;
     margin: 140px auto 40px;
     @media (max-width: 780px) {
       font-size: 20px;
