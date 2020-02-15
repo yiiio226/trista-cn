@@ -51,7 +51,7 @@ export const PhotoGallery = ({ photos = [] }) => {
   const [showLightbox, updateShowLightbox] = React.useState(false)
   const [lightboxIndex, updateLightboxIndex] = React.useState(1)
   const urls = React.useMemo(
-    () => photos.map(p => _get(p, "photo[0].localImage.publicURL")),
+    () => photos.map(p => _get(p, "photo[0].localImage.big.fluid.src")),
     [photos]
   )
 

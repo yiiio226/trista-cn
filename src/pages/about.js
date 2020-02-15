@@ -112,6 +112,11 @@ export const query = graphql`
                         ...GatsbyImageSharpFluid_withWebp
                       }
                     }
+                    big: childImageSharp {
+                      fluid(maxWidth: 4096, quality: 80) {
+                        src
+                      }
+                    }
                   }
                 }
                 mimeType
