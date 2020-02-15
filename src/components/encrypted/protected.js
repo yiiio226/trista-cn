@@ -7,17 +7,18 @@ export const Protected = ({
   isProtected,
   unprotectedData,
   protectedData,
+  hintData,
   children,
 }) => {
   const [decryptedData, updateDecryptedData] = React.useState(null)
-  const [errorMsg, updateErrorMsg] = React.useState(null)
   const decryptData = React.useCallback(
     pass => {
       try {
         const decrypted = decrypt(protectedData, pass)
         updateDecryptedData(decrypted)
+        return true
       } catch (e) {
-        updateErrorMsg("Wrong password, please try again :)")
+        return false
       }
     },
     [isProtected, protectedData]
@@ -29,7 +30,7 @@ export const Protected = ({
     return children({ data: decryptedData })
   } else {
     return (
-      <EncryptedDialog onSubmit={p => decryptData(p)} errorMsg={errorMsg} />
+      <EncryptedDialog onSubmit={p => decryptData(p)} hintData={hintData} />
     )
   }
 }

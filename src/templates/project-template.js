@@ -191,12 +191,12 @@ export default ({ pageContext }) => {
       <Container>
         <Header menuLinks={siteMainMenu} siteTitle={siteTitle} />
         <SEO title={pMeta.title} />
-        <Gap gapSize={40} />
       </Container>
       <Protected
         isProtected={isProtected}
         unprotectedData={project}
         protectedData={encryptedProjectStr}
+        hintData={pMeta}
       >
         {({ data: p }) => {
           const heroPic = _get(p, "heroPicture[0]")
