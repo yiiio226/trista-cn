@@ -79,6 +79,7 @@ export const query = graphql`
           heroPicture {
             url
             ... on CMS_images_Asset {
+              id
               localImage {
                 childImageSharp {
                   fluid(maxWidth: 1200, quality: 90) {
@@ -103,7 +104,9 @@ export const query = graphql`
               photo {
                 url
                 ... on CMS_images_Asset {
+                  id
                   localImage {
+                    publicURL
                     childImageSharp {
                       fluid(maxWidth: 640, quality: 90) {
                         ...GatsbyImageSharpFluid_withWebp

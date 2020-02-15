@@ -14,14 +14,16 @@ export const Protected = ({
   const decryptData = React.useCallback(
     pass => {
       try {
-        const decrypted = decrypt(protectedData, pass)
-        updateDecryptedData(decrypted)
+        if (isProtected) {
+          const decrypted = decrypt(protectedData, pass)
+          updateDecryptedData(decrypted)
+        }
         return true
       } catch (e) {
         return false
       }
     },
-    [isProtected, protectedData]
+    [protectedData]
   )
 
   if (!isProtected) {

@@ -5,19 +5,8 @@ import uuid from "uuid/v4"
 import Img from "gatsby-image"
 import ReactMarkdown from "react-markdown/with-html"
 
-import {
-  Container,
-  Gap,
-  Header,
-  Layout,
-  ProjectGallery,
-  SEO,
-} from "../components"
-import {
-  useFooterData,
-  useSiteMetadata,
-  useProjectsData,
-} from "../hooks/graphql"
+import { Container, Header, Layout, ProjectGallery, SEO } from "../components"
+import { useFooterData, useSiteMetadata } from "../hooks/graphql"
 import { Protected } from "../components/encrypted"
 
 const Body = styled(Container)`

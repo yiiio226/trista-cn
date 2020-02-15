@@ -2,6 +2,7 @@ import React from "react"
 import _get from "lodash/get"
 import styled from "styled-components"
 import Img from "gatsby-image"
+import Lightbox from "fslightbox-react"
 
 const PhotoItemWrapper = styled.div`
   display: flex;
@@ -15,9 +16,10 @@ const PhotoItemWrapper = styled.div`
   }
 `
 
-const PhotoImgWrapper = styled(Img)`
+const PhotoImgWrapper = styled.div`
   width: 100%;
   max-width: 640px;
+  cursor: pointer;
   @media (max-width: 1440px) {
     max-width: 44.44vw;
   }
@@ -46,13 +48,40 @@ const PhotoLabel = styled.label`
 `
 
 export const PhotoGallery = ({ photos = [] }) => {
+  const [showLightbox, updateShowLightbox] = React.useState(false)
+  const [lightboxIndex, updateLightboxIndex] = React.useState(1)
+  const urls = React.useMemo(
+    () => photos.map(p => _get(p, "photo[0].localImage.publicURL")),
+    [photos]
+  )
+
   return (
     <>
+      {showLightbox && (
+        <Lightbox
+          toggler={true}
+          openOnMount={true}
+          loadOnlyCurrentSource={true}
+          sources={urls}
+          sourceIndex={lightboxIndex}
+          onClose={() => updateShowLightbox(false)}
+        />
+      )}
       {photos.map((p, i) => {
         const imgData = _get(p, "photo[0].localImage.childImageSharp.fluid")
         return (
           <PhotoItemWrapper index={i} key={i}>
-            {imgData && <PhotoImgWrapper fluid={imgData} alt="p.title" />}
+            {imgData && (
+              <PhotoImgWrapper
+                onClick={() => {
+                  updateLightboxIndex(i)
+                  updateShowLightbox(true)
+                }}
+              >
+                <Img fluid={imgData} alt="p.title" />
+              </PhotoImgWrapper>
+            )}
+
             <PhotoLabel index={i}>{p.title}</PhotoLabel>
           </PhotoItemWrapper>
         )
