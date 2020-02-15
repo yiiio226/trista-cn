@@ -9,6 +9,9 @@ const EncryptedDialogWrapper = styled.div`
   margin: 100px auto 0;
   max-width: 1240px;
   justify-content: center;
+  @media (max-width: 1260px) {
+    margin: 50px 30px 0;
+  }
 `
 
 const PostCoverWrapper = styled(Img)`
@@ -38,6 +41,9 @@ const DialogForm = styled.form`
   align-items: center;
   h1 {
     margin: 140px auto 40px;
+    @media (max-width: 1260px) {
+      margin: 60px auto 20px;
+    }
   }
 `
 
