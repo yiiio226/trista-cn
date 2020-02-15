@@ -176,38 +176,21 @@ const RelatedProjectsWrapper = styled(Container)`
 
 export default ({ pageContext }) => {
   const {
-    isProtected, // When isProtected, project will be null
+    isProtected,
     encryptedProjectStr,
-    project: curP,
-    relatedProjects: curRelatedProjects,
+    project, // When isProtected, project will be null
+    pMeta, // pMeta is always plain text
+    relatedProjects,
   } = pageContext
 
   const { siteMainMenu, siteTitle } = useSiteMetadata()
-  const projects = useProjectsData()
-  const project = projects.filter(p => p.id === curP.id)[0] || {}
   const footer = useFooterData()
-  const [relatedProjects, updateRelatedProjects] = React.useState(
-    curRelatedProjects
-  )
-
-  /** Transform related project ids into related projects */
-  React.useEffect(() => {
-    if (relatedProjects.length <= 0) return
-    if (!relatedProjects[0].title) {
-      const updatedRelatedProjects = relatedProjects.map(p => {
-        const q = projects.filter(q => q.id === p.id)[0]
-        q.projectTileIsWide = false
-        return q
-      })
-      updateRelatedProjects(updatedRelatedProjects)
-    }
-  }, [projects, relatedProjects])
 
   return (
     <Layout center={true} footerLinks={footer.usefulLinks}>
       <Container>
         <Header menuLinks={siteMainMenu} siteTitle={siteTitle} />
-        <SEO title={project.title} />
+        <SEO title={pMeta.title} />
         <Gap gapSize={40} />
       </Container>
       <Protected
@@ -215,8 +198,7 @@ export default ({ pageContext }) => {
         unprotectedData={project}
         protectedData={encryptedProjectStr}
       >
-        {({ data }) => {
-          const p = projects.filter(q => q.id === data.id)[0]
+        {({ data: p }) => {
           const heroPic = _get(p, "heroPicture[0]")
           return (
             <>

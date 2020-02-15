@@ -10,6 +10,18 @@ const _get = require("lodash/get")
 const { createRemoteFileNode } = require(`gatsby-source-filesystem`)
 const { encrypt } = require("./src/components/encrypted/utils/encrypt")
 
+/**
+ * Replace `GatsbyImageSharpFluid_withWebp` with:
+ * ```js
+ * base64
+ * aspectRatio
+ * src
+ * srcSet
+ * srcWebp
+ * srcSetWebp
+ * sizes
+ * ```
+ */
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions
   const projectTemplate = path.resolve(`src/templates/project-template.js`)
@@ -18,10 +30,126 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       cms {
         projects: entries(section: "project") {
           id
+          title
           slug
           ... on CMS_project_project_Entry {
+            id
             isProtected
             password
+            projectTitleShort
+            projectTileColor
+            projectTileColorSmall
+            projectTileIsInversedColor
+            projectTileIsWide
+            projectDescription
+            projectClient
+            projectMyRole
+            projectDuration
+            projectContentBody {
+              ... on CMS_projectContentBody_textSection_BlockType {
+                typeHandle
+                body
+              }
+              ... on CMS_projectContentBody_image_BlockType {
+                typeHandle
+                image {
+                  id
+                  url
+                  ... on CMS_images_Asset {
+                    id
+                    localImage {
+                      id
+                      publicURL
+                      childImageSharp {
+                        fluid(maxWidth: 1120, quality: 95) {
+                          base64
+                          aspectRatio
+                          src
+                          srcSet
+                          srcWebp
+                          srcSetWebp
+                          sizes
+                        }
+                      }
+                    }
+                  }
+                  mimeType
+                  width
+                  height
+                  size
+                }
+              }
+            }
+            heroPicture {
+              url
+              ... on CMS_images_Asset {
+                id
+                localImage {
+                  publicURL
+                  childImageSharp {
+                    fluid(maxWidth: 1200, quality: 90) {
+                      base64
+                      aspectRatio
+                      src
+                      srcSet
+                      srcWebp
+                      srcSetWebp
+                      sizes
+                    }
+                  }
+                }
+              }
+              mimeType
+              width
+              height
+              size
+            }
+            projectCover {
+              url
+              ... on CMS_images_Asset {
+                id
+                localImage {
+                  publicURL
+                  childImageSharp {
+                    fluid(maxWidth: 1200, quality: 90) {
+                      base64
+                      aspectRatio
+                      src
+                      srcSet
+                      srcWebp
+                      srcSetWebp
+                      sizes
+                    }
+                  }
+                }
+              }
+              mimeType
+              width
+              height
+              size
+            }
+            projectVideo {
+              url
+              ... on CMS_videos_Asset {
+                id
+                localVideo {
+                  publicURL
+                }
+              }
+              mimeType
+              size
+            }
+            projectVideoSmall {
+              url
+              ... on CMS_videos_Asset {
+                id
+                localVideo {
+                  publicURL
+                }
+              }
+              mimeType
+              size
+            }
           }
         }
       }
@@ -94,6 +222,22 @@ const createProjectPages = (createPage, template, data) => {
 
   data.projects.forEach((p, i) => {
     const relatedProjects = []
+    const {
+      slug,
+      isProtected,
+      password,
+      heroPicture,
+      projectCover,
+      projectVideo,
+      projectVideoSmall,
+
+      title,
+      projectTitleShort,
+      projectTileColor,
+      projectTileColorSmall,
+      projectTileIsInversedColor,
+      projectTileIsWide,
+    } = p
 
     for (let j = 0, iCur = i + 1; j < NEXT_ITEMS; j++, iCur++) {
       if (!data.projects[iCur]) {
@@ -101,23 +245,43 @@ const createProjectPages = (createPage, template, data) => {
       }
       const relatedP = data.projects[iCur]
       relatedP.projectTileIsWide = false // For related projects, please, do not go full width...
-      relatedProjects.push(relatedP)
+      const {
+        projectDescription: _rProjectDescription,
+        projectClient: _rProjectClient,
+        projectMyRole: _rProjectMyRole,
+        projectDuration: _rProjectDuration,
+        projectContentBody: _rProjectContentBody,
+        ...restP
+      } = relatedP
+      relatedProjects.push(restP)
     }
 
     let encryptedProjectStr
-    if (p.isProtected) {
-      console.log("Encrypting project", `/projects/${p.slug}`)
-      encryptedProjectStr = encrypt(p, p.password)
+    if (isProtected) {
+      console.log("Encrypting project", `/projects/${slug}`)
+      encryptedProjectStr = encrypt(p, password)
+      p = null // Once we have it encrypted, delete it
     }
-    p.password = undefined // Clear the password!
 
     createPage({
-      path: `projects/${p.slug}`,
+      path: `projects/${slug}`,
       component: template,
       context: {
-        isProtected: p.isProtected,
+        isProtected: isProtected,
         encryptedProjectStr,
         project: p,
+        pMeta: {
+          title,
+          projectTitleShort,
+          projectTileColor,
+          projectTileColorSmall,
+          projectTileIsInversedColor,
+          projectTileIsWide,
+          heroPicture,
+          projectCover,
+          projectVideo,
+          projectVideoSmall,
+        },
         relatedProjects,
       },
     })
