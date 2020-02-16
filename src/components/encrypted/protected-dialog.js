@@ -102,6 +102,11 @@ const InputField = styled.div`
     cursor: pointer;
     font-size: 16px;
     color: rgba(153, 153, 153, 1);
+    &:active,
+    &:focus {
+      outline: none;
+      border: none;
+    }
   }
 `
 
