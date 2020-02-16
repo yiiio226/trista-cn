@@ -39,7 +39,7 @@ const DialogForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  h1 {
+  .title {
     font-size: 30px;
     margin: 140px auto 40px;
     @media (max-width: 780px) {
@@ -139,7 +139,7 @@ export const ProtectedDialog = ({ onSubmit, hintData }) => {
       <PostCoverWrapper fluid={heroPic.localImage.childImageSharp.fluid} />
       <DialogFormWrapper>
         <DialogForm onSubmit={handleSubmit}>
-          <h1>{title}</h1>
+          <div className="title">{title}</div>
           <InputField shake={isPasswordCorrect === false}>
             <input
               type="password"
