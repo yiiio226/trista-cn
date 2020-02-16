@@ -44,6 +44,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             projectDescription
             projectClient
             projectMyRole
+            projectMyContribution
             projectDuration
             projectContentBody {
               ... on CMS_projectContentBody_textSection_BlockType {
@@ -251,6 +252,7 @@ const createProjectPages = (createPage, template, data) => {
         projectMyRole: _rProjectMyRole,
         projectDuration: _rProjectDuration,
         projectContentBody: _rProjectContentBody,
+        projectMyContribution: _rProjectMyContribution,
         ...restP
       } = relatedP
       relatedProjects.push(restP)

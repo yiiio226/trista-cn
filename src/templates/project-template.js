@@ -203,6 +203,16 @@ export default ({ pageContext }) => {
                     <p className="post-attr">客户：{p.projectClient}</p>
                     <p className="post-attr">角色：{p.projectMyRole}</p>
                     <p className="post-attr">时间：{p.projectDuration}</p>
+                    {p.projectMyContribution && (
+                      <>
+                        <h1>主要贡献</h1>
+                        <ReactMarkdown
+                          key={uuid()}
+                          source={p.projectMyContribution}
+                          escapeHtml={false}
+                        />
+                      </>
+                    )}
                   </div>
                 </PostBody>
               </PostHead>
