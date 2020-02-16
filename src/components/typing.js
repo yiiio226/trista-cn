@@ -7,7 +7,7 @@ import { sleep } from "../hooks/sleep"
 const TypingWrapper = styled.div`
   display: inline-block;
   font-size: 64px;
-  line-height: 72px;
+  line-height: 80px;
   font-family: ${props => props.theme.fontFamily};
 
   @media (max-width: 780px) {
