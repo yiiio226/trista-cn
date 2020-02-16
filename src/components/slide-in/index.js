@@ -15,7 +15,7 @@ export const SlideIn = ({ duration, children }) => {
 
   React.useEffect(() => {
     if (childrenRef.current) {
-      let newWidth = isCleaning ? 0 : childrenRef.current.offsetWidth
+      let newWidth = isCleaning ? 1 : childrenRef.current.offsetWidth
       updateChildrenWidth(newWidth)
     }
   }, [showingChildren, childrenRef, isCleaning])
