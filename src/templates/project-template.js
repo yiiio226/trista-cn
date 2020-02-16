@@ -45,6 +45,13 @@ const PostBody = styled.div`
       width: calc(100vw - 60px);
     }
   }
+  & > ol,
+  & > ul {
+    width: 640px;
+    @media (max-width: 780px) {
+      width: calc(100vw - 100px);
+    }
+  }
 
   * {
     margin-bottom: 0;
