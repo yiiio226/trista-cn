@@ -6,14 +6,12 @@ import uuid from "uuid/v4"
 import { ClickToCopyLink } from "../click-to-copy-link"
 
 const MenuNavWrapper = styled.nav`
-  width: 100%;
-
   .active {
     color: ${props => props.theme.colorTheme};
   }
 
   ul {
-    display: flex;
+    display: inline-flex;
     margin: 0;
     padding: 0;
     justify-content: center;
