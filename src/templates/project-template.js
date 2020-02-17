@@ -188,7 +188,7 @@ export default ({ pageContext }) => {
       footerLinks={footer.usefulLinks}
       footnote={footer.footnote}
     >
-      <Container>
+      <Container isFullWidth>
         <Header menuLinks={siteMainMenu} siteTitle={siteTitle} />
         <SEO title={pMeta.title} />
       </Container>

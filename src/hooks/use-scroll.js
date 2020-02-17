@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react"
+import { useLocation } from "@reach/router"
 
 export function useScroll() {
   const [lastScrollTop, setLastScrollTop] = useState(0)
+  const location = useLocation()
   const [bodyOffset, setBodyOffset] = useState(
     typeof window === "undefined" || !window.document
       ? 0
@@ -11,7 +13,7 @@ export function useScroll() {
   const [scrollX, setScrollX] = useState(bodyOffset.left)
   const [scrollDirection, setScrollDirection] = useState()
 
-  const listener = e => {
+  const listener = () => {
     setBodyOffset(
       typeof window === "undefined" || !window.document
         ? 0
@@ -29,6 +31,10 @@ export function useScroll() {
       window.removeEventListener("scroll", listener)
     }
   })
+
+  useEffect(() => {
+    listener()
+  }, [location.pathname])
 
   return {
     scrollY,

@@ -49,10 +49,21 @@ const HeaderCollapsed = styled.div`
 
 const HeaderCollapsedAuto = ({ menuLinks }) => {
   const { scrollDirection, scrollY } = useScroll()
+  const pathnameRef = React.useRef()
+
   const isCollapsed = React.useMemo(() => {
+    // console.log("location", location.pathname, pathnameRef.current, scrollY)
+    console.log("scrollY", scrollY)
+
+    // if (location.pathname !== pathnameRef.current) {
+    //   pathnameRef.current = location.pathname
+    //   return false
+    // }
     if (scrollDirection === "down") return scrollY > 400
     else return scrollY > 210
   }, [scrollY, scrollDirection])
+  // }, [scrollY, scrollDirection, location.pathname])
+  console.log("isCollapsed", isCollapsed)
 
   if (!isCollapsed) return null
 
