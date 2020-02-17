@@ -121,6 +121,7 @@ export const query = graphql`
             title
             slug
             ... on CMS_project_project_Entry {
+              isProtected
               projectTitleShort
               projectTileColor
               projectTileColorSmall

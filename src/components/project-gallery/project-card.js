@@ -3,6 +3,8 @@ import _get from "lodash/get"
 import styled from "styled-components"
 import { Link } from "gatsby"
 
+import IconLock from "../../images/icon_lock.inline.svg"
+
 const LinkWrapper = styled(Link)`
   display: flex;
   flex-direction: column;
@@ -54,6 +56,9 @@ const ProjectCoverImg = styled.div`
 `
 
 const LinkCopy = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-top: 70px;
   padding: 0 30px;
   color: ${props =>
@@ -114,6 +119,7 @@ export const ProjectCard = ({ ...props }) => {
         isInverseColor={project.projectTileIsInversedColor}
       >
         {project.projectTitleShort}
+        {project.isProtected && <IconLock style={{ marginLeft: 14 }} />}
       </LinkCopy>
       {projectVideo ? (
         <video
