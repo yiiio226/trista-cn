@@ -51,8 +51,7 @@ const HeaderCollapsedAuto = ({ menuLinks }) => {
   const isCollapsed = React.useMemo(() => {
     if (scrollDirection === "down") return scrollY > 400
     else return scrollY > 210
-  }, [scrollY])
-  console.log("scrollY, scrollDirection", scrollY, scrollDirection)
+  }, [scrollY, scrollDirection])
 
   if (!isCollapsed) return null
 
