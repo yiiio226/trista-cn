@@ -183,7 +183,8 @@ exports.createResolvers = async ({
       localImage: {
         type: "File",
         async resolve(parent) {
-          let url = parent.url
+          let { id, url } = parent
+          if (!id) throw new Error("id is required")
           if (url.startsWith("//")) url = `https:${url}`
 
           return createRemoteFileNode({
@@ -201,7 +202,8 @@ exports.createResolvers = async ({
       localVideo: {
         type: "File",
         async resolve(parent) {
-          let url = parent.url
+          let { id, url } = parent
+          if (!id) throw new Error("id is required")
           if (url.startsWith("//")) url = `https:${url}`
 
           return createRemoteFileNode({
