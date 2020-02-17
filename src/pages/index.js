@@ -60,7 +60,11 @@ const IndexPage = ({ data }) => {
   )
 
   return (
-    <Layout center={true} footerLinks={footer.usefulLinks}>
+    <Layout
+      center={true}
+      footerLinks={footer.usefulLinks}
+      footnote={footer.footnote}
+    >
       <HomeContentContainer isFullWidth>
         <Header menuLinks={siteMainMenu} siteTitle={siteTitle} />
         <SEO title={"主页"} />

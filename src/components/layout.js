@@ -24,7 +24,7 @@ const FooterContainer = styled(Container)`
   }
 `
 
-export const Layout = ({ footerLinks, children }) => {
+export const Layout = ({ footerLinks, footnote, children }) => {
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -32,9 +32,9 @@ export const Layout = ({ footerLinks, children }) => {
         <main>{children}</main>
         <Gap gapSize={100} />
         <FooterContainer isFullWidth>
-          <Footer links={footerLinks} />
+          <Footer links={footerLinks} footnote={footnote} />
         </FooterContainer>
-        <Gap gapSize={100} />
+        <Gap gapSize={60} />
       </ThemeProvider>
     </>
   )

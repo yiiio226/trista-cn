@@ -40,7 +40,11 @@ const AboutPage = ({ data }) => {
   const photos = _get(data, "cms.about.photos")
 
   return (
-    <Layout center={true} footerLinks={footer.usefulLinks}>
+    <Layout
+      center={true}
+      footerLinks={footer.usefulLinks}
+      footnote={footer.footnote}
+    >
       <Container isFullWidth>
         <Header menuLinks={siteMainMenu} siteTitle={siteTitle} />
         <SEO title="关于我" />

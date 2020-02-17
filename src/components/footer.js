@@ -56,34 +56,51 @@ const FooterWrapper = styled.div`
   }
 `
 
-export const Footer = ({ links }) => {
+const TailInfo = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 60px;
+  font-size: 14px;
+  color: rgba(153, 153, 153, 1);
+  line-height: 180%;
+  p {
+    margin: 0;
+    padding: 0;
+  }
+`
+
+export const Footer = ({ links, footnote }) => {
   return (
-    <FooterWrapper>
-      <Logo />
-      <ul className="links">
-        {links &&
-          links.map(l => {
-            switch (l.typeHandle) {
-              case "email":
-                return (
-                  <li key={uuid()}>
-                    <ExternalLink
-                      label={`Email: ${l.email}`}
-                      href={`mailto:${l.email}`}
-                    />
-                  </li>
-                )
-              case "links":
-                return (
-                  <li key={uuid()}>
-                    <ExternalLink label={l.linkText} href={l.linkHref} />
-                  </li>
-                )
-              default:
-                return null
-            }
-          })}
-      </ul>
-    </FooterWrapper>
+    <>
+      <FooterWrapper>
+        <Logo />
+        <ul className="links">
+          {links &&
+            links.map(l => {
+              switch (l.typeHandle) {
+                case "email":
+                  return (
+                    <li key={uuid()}>
+                      <ExternalLink
+                        label={`Email: ${l.email}`}
+                        href={`mailto:${l.email}`}
+                      />
+                    </li>
+                  )
+                case "links":
+                  return (
+                    <li key={uuid()}>
+                      <ExternalLink label={l.linkText} href={l.linkHref} />
+                    </li>
+                  )
+                default:
+                  return null
+              }
+            })}
+        </ul>
+      </FooterWrapper>
+      <TailInfo>{footnote}</TailInfo>
+    </>
   )
 }

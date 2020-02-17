@@ -183,7 +183,11 @@ export default ({ pageContext }) => {
   const footer = useFooterData()
 
   return (
-    <Layout center={true} footerLinks={footer.usefulLinks}>
+    <Layout
+      center={true}
+      footerLinks={footer.usefulLinks}
+      footnote={footer.footnote}
+    >
       <Container>
         <Header menuLinks={siteMainMenu} siteTitle={siteTitle} />
         <SEO title={pMeta.title} />
