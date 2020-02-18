@@ -33,6 +33,7 @@ const MenuNavWrapper = styled.nav`
         text-decoration: none;
         font-family: ${props => props.theme.fontFamily};
         font-weight: 600;
+        border: none;
 
         @media (max-width: 780px) {
           padding: 0 10px;

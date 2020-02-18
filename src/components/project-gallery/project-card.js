@@ -16,6 +16,7 @@ const LinkWrapper = styled(Link)`
   text-decoration: none;
   overflow-y: hidden;
   transition: transform 0.2s;
+  border: none;
   &:hover {
     transform: translateY(-25px);
     box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.12);

@@ -11,6 +11,7 @@ const LogoWrapper = styled(Link)`
   height: 88px;
   justify-content: center;
   align-items: center;
+  border: none;
 `
 
 export const Logo = ({ ...props }) => {

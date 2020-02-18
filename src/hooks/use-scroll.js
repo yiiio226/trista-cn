@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from "react"
+import { useState, useEffect, useRef } from "react"
 import { useLocation } from "@reach/router"
 
 export function useScroll() {
@@ -43,11 +43,11 @@ export function useScroll() {
     return () => {
       window.removeEventListener("scroll", listener)
     }
-  }, [scroll])
+  }, [scroll, listener])
 
   useEffect(() => {
     listener()
-  }, [location.pathname])
+  }, [location.pathname, listener])
 
   return scroll
 }
