@@ -34,7 +34,7 @@ export const Layout = ({ footerLinks, footnote, children }) => {
         <FooterContainer isFullWidth>
           <Footer links={footerLinks} footnote={footnote} />
         </FooterContainer>
-        <Gap gapSize={60} />
+        <Gap gapSize={60} shrinkOnMobile={false} />
       </ThemeProvider>
     </>
   )
