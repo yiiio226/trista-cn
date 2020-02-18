@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import uuid from "uuid/v4"
+import ReactMarkdown from "react-markdown/with-html"
 
 import { Logo } from "./header/logo"
 import { ExternalLink } from "."
@@ -101,7 +102,9 @@ export const Footer = ({ links, footnote }) => {
             })}
         </ul>
       </FooterWrapper>
-      <TailInfo>{footnote}</TailInfo>
+      <TailInfo>
+        <ReactMarkdown key={uuid()} source={footnote} escapeHtml={false} />
+      </TailInfo>
     </>
   )
 }
