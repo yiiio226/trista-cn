@@ -26,6 +26,20 @@ const PhotoImgWrapper = styled.div`
   @media (max-width: 780px) {
     max-width: calc(100vw - 30px * 2);
   }
+
+  /* Hover on image to zoom in */
+  overflow: hidden;
+  transition: transform 0.2s;
+  &:hover {
+    transform: scale(0.98);
+  }
+
+  .gatsby-image-wrapper {
+    transition: transform 0.2s;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
 `
 
 const PhotoLabel = styled.label`
