@@ -62,6 +62,7 @@ const TailInfo = styled.div`
   align-items: center;
   margin-top: 60px;
   font-size: 14px;
+  text-align: center;
   color: rgba(153, 153, 153, 1);
   line-height: 180%;
   p {
