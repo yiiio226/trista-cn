@@ -1,28 +1,41 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
 import { useLocation } from "@reach/router"
 
 export function useScroll() {
-  const [lastScrollTop, setLastScrollTop] = useState(0)
+  const lastScrollTopRef = useRef(0)
   const location = useLocation()
-  const [bodyOffset, setBodyOffset] = useState(
+  const bodyOffsetRef = useRef(
     typeof window === "undefined" || !window.document
       ? 0
       : document.body.getBoundingClientRect()
   )
-  const [scrollY, setScrollY] = useState(bodyOffset.top)
-  const [scrollX, setScrollX] = useState(bodyOffset.left)
-  const [scrollDirection, setScrollDirection] = useState()
+  // const [bodyOffset, setBodyOffset] = useState()
+  const [scroll, updateScroll] = useState({
+    scrollX: bodyOffsetRef.current.left,
+    scrollY: bodyOffsetRef.current.top,
+    scrollDirection: null,
+  })
 
   const listener = () => {
-    setBodyOffset(
+    bodyOffsetRef.current =
       typeof window === "undefined" || !window.document
         ? 0
         : document.body.getBoundingClientRect()
-    )
-    setScrollY(-bodyOffset.top)
-    setScrollX(bodyOffset.left)
-    setScrollDirection(lastScrollTop > -bodyOffset.top ? "down" : "up")
-    setLastScrollTop(-bodyOffset.top)
+
+    const newScroll = {}
+    const newDir =
+      lastScrollTopRef.current > -bodyOffsetRef.current.top ? "down" : "up"
+    if (newDir !== scroll.scrollDirection) newScroll.scrollDirection = newDir
+    if (-bodyOffsetRef.current.top !== scroll.scrollY) {
+      newScroll.scrollY = Math.max(-bodyOffsetRef.current.top, 0)
+    }
+    if (bodyOffsetRef.current.left !== scroll.scrollX) {
+      newScroll.scrollX = bodyOffsetRef.current.left
+    }
+    if (-bodyOffsetRef.current.top !== lastScrollTopRef.current) {
+      lastScrollTopRef.current = -bodyOffsetRef.current.top
+    }
+    updateScroll({ ...scroll, ...newScroll })
   }
 
   useEffect(() => {
@@ -30,15 +43,11 @@ export function useScroll() {
     return () => {
       window.removeEventListener("scroll", listener)
     }
-  })
+  }, [scroll])
 
   useEffect(() => {
     listener()
   }, [location.pathname])
 
-  return {
-    scrollY,
-    scrollX,
-    scrollDirection,
-  }
+  return scroll
 }

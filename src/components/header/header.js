@@ -49,13 +49,13 @@ const HeaderCollapsed = styled.div`
 
 const HeaderCollapsedAuto = ({ menuLinks }) => {
   const { scrollDirection, scrollY } = useScroll()
-
-  const isCollapsed = React.useMemo(() => {
-    if (scrollDirection === "down") return scrollY > 400
-    else return scrollY > 210
-  }, [scrollY, scrollDirection])
-
-  if (!isCollapsed) return null
+  if (
+    !scrollDirection ||
+    (scrollDirection === "down" && scrollY < 400) ||
+    (scrollDirection === "up" && scrollY < 210)
+  ) {
+    return null
+  }
 
   return (
     <FullWidthBg>
