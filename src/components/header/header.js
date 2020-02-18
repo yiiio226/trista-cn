@@ -29,6 +29,7 @@ const FullWidthBg = styled.div`
   width: 100%;
   background: rgba(255, 255, 255, 1);
   box-shadow: 0px 8px 20px -2px rgba(0, 0, 0, 0.06);
+  transform: translateY(-${props => (1 - (props.showPercent || 0)) * 100}px);
 `
 
 const HeaderCollapsed = styled.div`
@@ -42,23 +43,18 @@ const HeaderCollapsed = styled.div`
 
   max-width: 1240px;
   width: calc(100% - 200px);
+  height: 100px;
   @media (max-width: 780px) {
     width: calc(100% - 60px);
   }
 `
 
-const HeaderCollapsedAuto = ({ menuLinks }) => {
-  const { scrollDirection, scrollY } = useScroll()
-  if (
-    !scrollDirection ||
-    (scrollDirection === "down" && scrollY < 400) ||
-    (scrollDirection === "up" && scrollY < 210)
-  ) {
-    return null
-  }
+const HeaderCollapsedAuto = ({ menuLinks, threshold = 210 }) => {
+  const { scrollY } = useScroll()
+  const showPercent = Math.min(Math.max(0, (scrollY - threshold) / 100), 1)
 
   return (
-    <FullWidthBg>
+    <FullWidthBg showPercent={showPercent}>
       <HeaderCollapsed>
         <Logo />
         <Menu menuLinks={menuLinks} />
