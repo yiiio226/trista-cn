@@ -203,9 +203,11 @@ export default ({ pageContext }) => {
           return (
             <>
               <PostHead isFullWidth>
-                <PostCoverWrapper
-                  fluid={heroPic.localImage.childImageSharp.fluid}
-                />
+                {heroPic && (
+                  <PostCoverWrapper
+                    fluid={heroPic.localImage.childImageSharp.fluid}
+                  />
+                )}
                 <PostBody>
                   <div className="meta">
                     <h1>{p.title}</h1>

@@ -49,10 +49,12 @@ const AboutPage = ({ data }) => {
         <Header menuLinks={siteMainMenu} siteTitle={siteTitle} />
         <SEO title="关于我" />
         <Gap gapSize={180} />
-        <HeroPic
-          fluid={heroPic.localImage.childImageSharp.fluid}
-          alt="Trista hero picture"
-        />
+        {heroPic && (
+          <HeroPic
+            fluid={heroPic.localImage.childImageSharp.fluid}
+            alt="Trista hero picture"
+          />
+        )}
       </Container>
       <Gap gapSize={200} />
       <AboutBody>
