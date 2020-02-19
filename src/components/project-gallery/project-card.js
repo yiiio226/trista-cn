@@ -64,10 +64,14 @@ const LinkCopy = styled.div`
   padding: 0 30px;
   color: ${props =>
     props.isInverseColor ? props.theme.colorInverse : props.theme.color};
-  font-size: 24px;
   line-height: 180%;
   font-weight: 500;
   text-align: center;
+  font-size: 24px;
+  @media (max-width: 780px) {
+    margin-top: 48px;
+    font-size: 18px;
+  }
 `
 
 export const ProjectCard = ({ ...props }) => {

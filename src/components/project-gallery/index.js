@@ -22,6 +22,10 @@ const GalleryWrapper = styled.div`
       grid-column: 1/2 !important;
     }
   }
+
+  @media (max-width: 560px) {
+    grid-auto-rows: calc(100vw - 60px);
+  }
 `
 
 export const ProjectGallery = trackWindowScroll(
