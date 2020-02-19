@@ -20,8 +20,8 @@ const HeaderWrapper = styled.div`
     max-width: unset;
   }
 `
-
-const FullWidthBg = styled.div`
+const FullWidthBgMotion = motion.div
+const FullWidthBg = styled(FullWidthBgMotion)`
   display: flex;
   justify-content: center;
   position: fixed;
@@ -29,7 +29,8 @@ const FullWidthBg = styled.div`
   width: 100%;
   background: rgba(255, 255, 255, 1);
   box-shadow: 0px 8px 20px -2px rgba(0, 0, 0, 0.06);
-  transform: translateY(-${props => (1 - (props.showPercent || 0)) * 100}px);
+  /* transform: translateY(-${props =>
+    (1 - (props.showPercent || 0)) * 100}px); */
 `
 
 const HeaderCollapsed = styled.div`
@@ -51,10 +52,13 @@ const HeaderCollapsed = styled.div`
 
 const HeaderCollapsedAuto = ({ menuLinks, threshold = 210 }) => {
   const { scrollY } = useViewportScroll()
-  const showPercent = Math.min(Math.max(0, (scrollY - threshold) / 100), 1)
+  const translateY = useTransform(scrollY, y => {
+    const showPercent = Math.min(Math.max(0, (y - threshold) / 100), 1)
+    return -1 * (1 - (showPercent || 0)) * 100
+  })
 
   return (
-    <FullWidthBg showPercent={showPercent}>
+    <FullWidthBg style={{ translateY }}>
       <HeaderCollapsed>
         <Logo />
         <Menu menuLinks={menuLinks} />
