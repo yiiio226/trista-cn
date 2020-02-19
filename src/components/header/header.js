@@ -1,10 +1,10 @@
 import React from "react"
 import styled from "styled-components"
+import { motion, useViewportScroll, useTransform } from "framer-motion"
 
 import { Logo as _Logo } from "./logo"
 import { Menu } from "./menu"
 import { Gap } from "../gap"
-import { useScroll } from "../../hooks/use-scroll"
 
 const Logo = styled(_Logo)``
 
@@ -50,7 +50,7 @@ const HeaderCollapsed = styled.div`
 `
 
 const HeaderCollapsedAuto = ({ menuLinks, threshold = 210 }) => {
-  const { scrollY } = useScroll()
+  const { scrollY } = useViewportScroll()
   const showPercent = Math.min(Math.max(0, (scrollY - threshold) / 100), 1)
 
   return (

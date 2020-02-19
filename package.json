@@ -10,6 +10,7 @@
     "babel-plugin-styled-components": "^1.10.7",
     "crypto-js": "^4.0.0",
     "dotenv": "^8.2.0",
+    "framer-motion": "^1.8.4",
     "fslightbox-react": "^1.4.9",
     "gatsby": "^2.19.15",
     "gatsby-image": "^2.2.40",
