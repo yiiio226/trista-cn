@@ -70,6 +70,7 @@ const LinkCopy = styled.div`
   font-size: 24px;
   @media (max-width: 780px) {
     margin-top: 48px;
+    padding: 0 12px;
     font-size: 18px;
   }
 `
