@@ -32,7 +32,7 @@ const PhotoImgWrapper = styled.div`
   transition: transform 0.2s, box-shadow 0.2s;
   &:hover {
     transform: scale(0.98);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   }
 
   .gatsby-image-wrapper {
