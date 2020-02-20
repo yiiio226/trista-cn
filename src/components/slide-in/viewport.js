@@ -6,7 +6,7 @@ export const Viewport = styled.div`
   position: relative;
   width: 0;
   overflow: hidden;
-  padding-left: 1px;
+  padding-left: 0.1px;
   transition-property: width;
   border-right: 2px solid rgba(32, 104, 106, 0);
 
