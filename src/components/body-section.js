@@ -8,7 +8,7 @@ export const AboutBodySection = styled(Container)`
 
   padding: 120px calc((100vw - ${props => props.theme.maxBodyWidth}px) / 2);
   @media (max-width: 780px) {
-    padding: 60px 30px;
+    padding: 40px 30px;
   }
 `
 

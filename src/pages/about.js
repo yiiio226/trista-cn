@@ -48,7 +48,7 @@ const AboutPage = ({ data }) => {
       <Container isFullWidth>
         <Header menuLinks={siteMainMenu} siteTitle={siteTitle} />
         <SEO title="关于我" />
-        <Gap gapSize={180} />
+        <Gap gapSize={180} mobileGapSize={100} />
         {heroPic && (
           <HeroPic
             fluid={heroPic.localImage.childImageSharp.fluid}
@@ -56,7 +56,7 @@ const AboutPage = ({ data }) => {
           />
         )}
       </Container>
-      <Gap gapSize={200} />
+      <Gap gapSize={200} mobileGapSize={60} />
       <AboutBody>
         {descriptionInfo &&
           descriptionInfo.map((s, i) => (

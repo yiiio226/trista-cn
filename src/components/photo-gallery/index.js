@@ -11,7 +11,7 @@ const PhotoItemWrapper = styled.div`
   padding: 100px 0;
 
   @media (max-width: 780px) {
-    padding: 20px 0;
+    padding: 40px 0 20px;
     flex-direction: column;
   }
 `
