@@ -7,8 +7,8 @@ import SvgLogo from "../../images/logo-static.inline.svg"
 
 const LogoWrapper = styled(Link)`
   display: flex;
-  width: 144px;
-  height: 88px;
+  width: 129px;
+  height: 73px;
   justify-content: center;
   align-items: center;
   border: none;
