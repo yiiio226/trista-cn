@@ -50,7 +50,7 @@ const HeaderCollapsed = styled.div`
   }
 `
 
-const HeaderCollapsedAuto = ({ menuLinks, threshold = 210 }) => {
+const HeaderCollapsedAuto = ({ menuLinks, threshold = 200 }) => {
   const { scrollY } = useViewportScroll()
   const translateY = useTransform(scrollY, y => {
     const showPercent = Math.min(Math.max(0, (y - threshold) / 100), 1)
@@ -72,7 +72,7 @@ export const Header = ({ menuLinks }) => {
     <>
       <HeaderCollapsedAuto menuLinks={menuLinks} />
       <HeaderWrapper>
-        <Gap gapSize={60} />
+        <Gap gapSize={60} mobileGapSize={30} />
         <Logo />
         <Gap gapSize={20} />
         <Menu menuLinks={menuLinks} />

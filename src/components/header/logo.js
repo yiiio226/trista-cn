@@ -12,6 +12,10 @@ const LogoWrapper = styled(Link)`
   justify-content: center;
   align-items: center;
   border: none;
+  @media (max-width: 780px) {
+    width: 100px;
+    height: 60px;
+  }
 `
 
 export const Logo = ({ ...props }) => {

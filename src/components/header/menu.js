@@ -37,6 +37,8 @@ const MenuNavWrapper = styled.nav`
 
         @media (max-width: 780px) {
           padding: 0 10px;
+          font-size: 18px;
+          font-weight: 500;
         }
 
         &:hover {

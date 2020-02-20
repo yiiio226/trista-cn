@@ -39,6 +39,7 @@ const TristaCutoutCenter = styled.div`
   background-position: center 300px;
   @media (max-width: 780px) {
     background-position: center 240px;
+    background-size: 220px;
   }
 `
 
@@ -68,11 +69,11 @@ const IndexPage = ({ data }) => {
       <HomeContentContainer isFullWidth>
         <Header menuLinks={siteMainMenu} siteTitle={siteTitle} />
         <SEO title={"主页"} />
-        <Gap gapSize={235} shrinkOnMobile={false} />
+        <Gap gapSize={235} mobileGapSize={180} />
         <TristaCutoutCenter src={tristaCutout} />
         <Typing actions={_get(data, "cms.home.typingSentences")} />
       </HomeContentContainer>
-      <Gap gapSize={150} id="project-gallery" />
+      <Gap gapSize={150} mobileGapSize={80} id="project-gallery" />
       <ProjectsContainer isFullWidth>
         <ProjectGallery
           projects={_get(data, "cms.home.projects")}
