@@ -17,16 +17,14 @@ const LinkWrapper = styled(Link)`
   overflow-y: hidden;
   transition: transform 0.2s;
   border: none;
-  &:hover {
-    transform: translateY(-25px);
-    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.12);
+  @media (min-width: 781px) {
+    &:hover {
+      transform: translateY(-25px);
+      box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.12);
 
-    .link-copy {
-      opacity: 1;
-    }
-
-    video {
-      /* transform: translateY(24px); */
+      .link-copy {
+        opacity: 1;
+      }
     }
   }
 
