@@ -127,12 +127,13 @@ export const ProjectCard = ({ ...props }) => {
       </LinkCopy>
       {projectVideo ? (
         <video
-          preload="metadata"
+          preload="auto"
           autoPlay={true}
           loop={true}
           muted={true}
           playsInline={true}
           ref={videoRef}
+          poster={projectCover}
         >
           <source
             src={projectVideo.localVideo.publicURL}
