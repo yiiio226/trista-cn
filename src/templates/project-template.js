@@ -212,9 +212,7 @@ export default ({ pageContext }) => {
                   <div className="meta">
                     <h1>{p.title}</h1>
                     <p>{p.projectDescription}</p>
-                    {(p.title ||
-                      p.projectDescription ||
-                      p.projectClient ||
+                    {(p.projectClient ||
                       p.projectMyRole ||
                       p.projectDuration ||
                       p.projectMyContribution) && <PostHR />}
