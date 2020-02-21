@@ -8,6 +8,7 @@ const ProtectedDialogWrapper = styled.div`
   display: flex;
   margin: 100px auto 0;
   max-width: 1240px;
+  min-height: 400px;
   justify-content: center;
   @media (max-width: 1260px) {
     margin: 50px 30px 0;
@@ -40,8 +41,10 @@ const DialogForm = styled.form`
   flex-direction: column;
   align-items: center;
   .title {
-    font-size: 30px;
     margin: 140px auto 40px;
+    min-width: 250px;
+    font-size: 30px;
+    text-align: center;
     @media (max-width: 780px) {
       font-size: 20px;
       margin: 40px auto 20px;
@@ -88,8 +91,14 @@ const InputField = styled.div`
     height: 48px;
     width: 100%;
     padding: 0 0 0 20px;
-    border: 0;
+    border: 1px solid #ddd;
+    border-radius: 2px;
     box-sizing: border-box;
+    &:active,
+    &:focus {
+      outline: none;
+      border: 1px solid #ccc;
+    }
   }
   button {
     position: absolute;
@@ -115,7 +124,7 @@ export const ProtectedDialog = ({ onSubmit, hintData }) => {
   const [isPasswordCorrect, updateIsPasswordCorrect] = React.useState(null)
 
   const { heroPicture, title } = hintData
-  const heroPic = heroPicture[0] || {}
+  const heroPic = heroPicture[0]
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -133,10 +142,12 @@ export const ProtectedDialog = ({ onSubmit, hintData }) => {
       }, 600)
     }
   }, [isPasswordCorrect])
-
+  console.log(heroPic)
   return (
     <ProtectedDialogWrapper>
-      <PostCoverWrapper fluid={heroPic.localImage.childImageSharp.fluid} />
+      {heroPic && (
+        <PostCoverWrapper fluid={heroPic.localImage.childImageSharp.fluid} />
+      )}
       <DialogFormWrapper>
         <DialogForm onSubmit={handleSubmit}>
           <div className="title">{title}</div>
