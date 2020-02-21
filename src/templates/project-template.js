@@ -212,10 +212,21 @@ export default ({ pageContext }) => {
                   <div className="meta">
                     <h1>{p.title}</h1>
                     <p>{p.projectDescription}</p>
-                    <PostHR />
-                    <p className="post-attr">客户：{p.projectClient}</p>
-                    <p className="post-attr">角色：{p.projectMyRole}</p>
-                    <p className="post-attr">时间：{p.projectDuration}</p>
+                    {(p.title ||
+                      p.projectDescription ||
+                      p.projectClient ||
+                      p.projectMyRole ||
+                      p.projectDuration ||
+                      p.projectMyContribution) && <PostHR />}
+                    {p.projectClient && (
+                      <p className="post-attr">客户：{p.projectClient}</p>
+                    )}
+                    {p.projectMyRole && (
+                      <p className="post-attr">角色：{p.projectMyRole}</p>
+                    )}
+                    {p.projectDuration && (
+                      <p className="post-attr">时间：{p.projectDuration}</p>
+                    )}
                     {p.projectMyContribution && (
                       <>
                         <h1>主要贡献</h1>
@@ -229,42 +240,44 @@ export default ({ pageContext }) => {
                   </div>
                 </PostBody>
               </PostHead>
-              <Body isFullWidth>
-                <PostBody>
-                  {p.projectContentBody.map(block => {
-                    switch (block.typeHandle) {
-                      case "textSection":
-                        return (
-                          <ReactMarkdown
-                            key={uuid()}
-                            source={block.body}
-                            escapeHtml={false}
-                          />
-                        )
-                      case "image":
-                        return (
-                          <React.Fragment key={uuid()}>
-                            {block.image.map(node => {
-                              return (
-                                <Img
-                                  className="project-image"
-                                  key={uuid()}
-                                  fluid={_get(
-                                    node,
-                                    "localImage.childImageSharp.fluid"
-                                  )}
-                                  alt="Project screenshot"
-                                />
-                              )
-                            })}
-                          </React.Fragment>
-                        )
-                      default:
-                        return null
-                    }
-                  })}
-                </PostBody>
-              </Body>
+              {p.projectContentBody && p.projectContentBody.length > 0 && (
+                <Body isFullWidth>
+                  <PostBody>
+                    {p.projectContentBody.map(block => {
+                      switch (block.typeHandle) {
+                        case "textSection":
+                          return (
+                            <ReactMarkdown
+                              key={uuid()}
+                              source={block.body}
+                              escapeHtml={false}
+                            />
+                          )
+                        case "image":
+                          return (
+                            <React.Fragment key={uuid()}>
+                              {block.image.map(node => {
+                                return (
+                                  <Img
+                                    className="project-image"
+                                    key={uuid()}
+                                    fluid={_get(
+                                      node,
+                                      "localImage.childImageSharp.fluid"
+                                    )}
+                                    alt="Project screenshot"
+                                  />
+                                )
+                              })}
+                            </React.Fragment>
+                          )
+                        default:
+                          return null
+                      }
+                    })}
+                  </PostBody>
+                </Body>
+              )}
             </>
           )
         }}
