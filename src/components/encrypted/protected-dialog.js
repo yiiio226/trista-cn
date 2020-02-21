@@ -142,7 +142,7 @@ export const ProtectedDialog = ({ onSubmit, hintData }) => {
       }, 600)
     }
   }, [isPasswordCorrect])
-  console.log(heroPic)
+
   return (
     <ProtectedDialogWrapper>
       {heroPic && (
