@@ -1,5 +1,5 @@
 import React from "react"
-import { Viewport } from "./viewport"
+import { Viewport, TypingPlaceholder } from "./viewport"
 import { ChildrenAnimated } from "./children-animated"
 
 export const SlideIn = ({ duration, children }) => {
@@ -61,6 +61,7 @@ export const SlideIn = ({ duration, children }) => {
         ref={childrenRef}
       >
         {showingChildren}
+        <TypingPlaceholder />
       </ChildrenAnimated>
     </Viewport>
   )

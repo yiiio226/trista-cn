@@ -33,3 +33,9 @@ export const Viewport = styled.div`
     border-right-color: rgba(32, 104, 106, 1);
   }
 `
+
+export const TypingPlaceholder = styled.div`
+  display: block;
+  height: 100%;
+  width: ${props => props.width || 4}px;
+`
