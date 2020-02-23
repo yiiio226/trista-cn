@@ -7,7 +7,7 @@ import Lightbox from "fslightbox-react"
 import { FadeInUp } from "../fade-in-up"
 
 const PhotoItemWrapper = styled(FadeInUp).attrs(() => ({
-  threshold: -300,
+  threshold: -200,
 }))`
   display: flex;
   flex-direction: ${props => (props.index % 2 === 0 ? "row" : "row-reverse")};
