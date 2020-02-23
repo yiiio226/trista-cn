@@ -7,19 +7,26 @@ import IconLock from "../../images/icon_lock.inline.svg"
 import IconLockBlack from "../../images/icon_lock_black.inline.svg"
 
 const LinkWrapper = styled(Link)`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background-color: ${props => props.projectTileColor || props.theme.color};
   grid-column: ${props =>
     props.project.projectTileIsWide ? "1/3" : "initial"};
-  box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.06);
   text-decoration: none;
-  overflow-y: hidden;
-  transition: transform 0.2s;
   border: none;
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: ${props => props.projectTileColor || props.theme.color};
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.06);
+    overflow-y: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    .link-copy {
+      transition: opacity 0.2s;
+    }
+  }
   @media (min-width: 781px) {
-    &:hover {
+    &:hover > .content {
       transform: translateY(-25px);
       box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.12);
 
@@ -119,36 +126,38 @@ export const ProjectCard = ({ ...props }) => {
       projectTileColor={projectTileColor}
       {...props}
     >
-      <LinkCopy
-        className="link-copy"
-        isInverseColor={project.projectTileIsInversedColor}
-      >
-        {project.projectTitleShort}
-        {project.isProtected &&
-          (project.projectTileIsInversedColor ? (
-            <IconLock style={{ marginLeft: 14 }} />
-          ) : (
-            <IconLockBlack style={{ marginLeft: 14 }} />
-          ))}
-      </LinkCopy>
-      {projectVideo ? (
-        <video
-          preload="auto"
-          autoPlay={true}
-          loop={true}
-          muted={true}
-          playsInline={true}
-          ref={videoRef}
-          poster={projectCover}
+      <div className="content">
+        <LinkCopy
+          className="link-copy"
+          isInverseColor={project.projectTileIsInversedColor}
         >
-          <source
-            src={projectVideo.localVideo.publicURL}
-            type={projectVideo.mimeType}
-          />
-        </video>
-      ) : (
-        (projectCover && <ProjectCoverImg src={projectCover} />) || null
-      )}
+          {project.projectTitleShort}
+          {project.isProtected &&
+            (project.projectTileIsInversedColor ? (
+              <IconLock style={{ marginLeft: 14 }} />
+            ) : (
+              <IconLockBlack style={{ marginLeft: 14 }} />
+            ))}
+        </LinkCopy>
+        {projectVideo ? (
+          <video
+            preload="auto"
+            autoPlay={true}
+            loop={true}
+            muted={true}
+            playsInline={true}
+            ref={videoRef}
+            poster={projectCover}
+          >
+            <source
+              src={projectVideo.localVideo.publicURL}
+              type={projectVideo.mimeType}
+            />
+          </video>
+        ) : (
+          (projectCover && <ProjectCoverImg src={projectCover} />) || null
+        )}
+      </div>
     </LinkWrapper>
   )
 }
