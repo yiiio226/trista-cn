@@ -4,6 +4,7 @@ import styled from "styled-components"
 import { Link } from "gatsby"
 
 import IconLock from "../../images/icon_lock.inline.svg"
+import IconLockBlack from "../../images/icon_lock_black.inline.svg"
 
 const LinkWrapper = styled(Link)`
   display: flex;
@@ -123,7 +124,12 @@ export const ProjectCard = ({ ...props }) => {
         isInverseColor={project.projectTileIsInversedColor}
       >
         {project.projectTitleShort}
-        {project.isProtected && <IconLock style={{ marginLeft: 14 }} />}
+        {project.isProtected &&
+          (project.projectTileIsInversedColor ? (
+            <IconLock style={{ marginLeft: 14 }} />
+          ) : (
+            <IconLockBlack style={{ marginLeft: 14 }} />
+          ))}
       </LinkCopy>
       {projectVideo ? (
         <video
