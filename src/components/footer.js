@@ -4,9 +4,10 @@ import uuid from "uuid/v4"
 import ReactMarkdown from "react-markdown/with-html"
 
 import { Logo } from "./header/logo"
+import { FadeInUp } from "./fade-in-up"
 import { ExternalLink } from "."
 
-const FooterWrapper = styled.div`
+const FooterWrapper = styled(FadeInUp).attrs(() => ({ threshold: -200 }))`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -57,7 +58,7 @@ const FooterWrapper = styled.div`
   }
 `
 
-const TailInfo = styled.div`
+const TailInfo = styled(FadeInUp).attrs(() => ({ threshold: -30 }))`
   display: flex;
   justify-content: center;
   align-items: center;

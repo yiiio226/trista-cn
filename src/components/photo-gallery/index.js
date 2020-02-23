@@ -4,7 +4,11 @@ import styled from "styled-components"
 import Img from "gatsby-image"
 import Lightbox from "fslightbox-react"
 
-const PhotoItemWrapper = styled.div`
+import { FadeInUp } from "../fade-in-up"
+
+const PhotoItemWrapper = styled(FadeInUp).attrs(() => ({
+  threshold: -300,
+}))`
   display: flex;
   flex-direction: ${props => (props.index % 2 === 0 ? "row" : "row-reverse")};
   align-items: center;

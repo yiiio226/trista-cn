@@ -10,6 +10,7 @@ import {
   AboutBodySection,
   AboutBodyPhotos,
   Container,
+  FadeInUp,
   Gap,
   Header,
   Layout,
@@ -61,8 +62,12 @@ const AboutPage = ({ data }) => {
         {descriptionInfo &&
           descriptionInfo.map((s, i) => (
             <AboutBodySection isAlt={i % 2 === 0} key={i} isFullWidth>
-              <h2>{s.blurbTitle}</h2>
-              <ReactMarkdown source={s.blurbContent} escapeHtml={false} />
+              <h2>
+                <FadeInUp>{s.blurbTitle}</FadeInUp>
+              </h2>
+              <FadeInUp>
+                <ReactMarkdown source={s.blurbContent} escapeHtml={false} />
+              </FadeInUp>
             </AboutBodySection>
           ))}
         <AboutBodyPhotos isAlt isFullWidth>
