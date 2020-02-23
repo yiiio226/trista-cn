@@ -36,8 +36,8 @@ const MenuNavWrapper = styled.nav`
         border: none;
 
         @media (max-width: 780px) {
-          padding: 0 10px;
-          font-size: 18px;
+          padding: 0 ${props => (props.isFixed ? 12 : 15)}px;
+          font-size: ${props => (props.isFixed ? 14 : 18)}px;
           font-weight: 500;
         }
 
@@ -49,9 +49,9 @@ const MenuNavWrapper = styled.nav`
   }
 `
 
-export const Menu = ({ menuLinks }) => {
+export const Menu = ({ menuLinks, isFixed = false }) => {
   return (
-    <MenuNavWrapper>
+    <MenuNavWrapper isFixed={isFixed}>
       <ul>
         {menuLinks.map(link => {
           let linkEle = (

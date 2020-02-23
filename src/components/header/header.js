@@ -61,7 +61,7 @@ const HeaderCollapsedAuto = ({ menuLinks, threshold = 200 }) => {
     <FullWidthBg style={{ translateY }}>
       <HeaderCollapsed>
         <Logo />
-        <Menu menuLinks={menuLinks} />
+        <Menu menuLinks={menuLinks} isFixed={true} />
       </HeaderCollapsed>
     </FullWidthBg>
   )
@@ -75,7 +75,7 @@ export const Header = ({ menuLinks }) => {
         <Gap gapSize={60} mobileGapSize={30} />
         <Logo />
         <Gap gapSize={20} />
-        <Menu menuLinks={menuLinks} />
+        <Menu menuLinks={menuLinks} isFixed={false} />
       </HeaderWrapper>
     </>
   )
