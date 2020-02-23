@@ -5,5 +5,5 @@ export const ChildrenAnimated = styled.div`
   height: 130px;
   transform: translateX(${props => props.shiftWidth}px);
   transition-property: transform;
-  font-weight: 500;
+  font-weight: 400;
 `
