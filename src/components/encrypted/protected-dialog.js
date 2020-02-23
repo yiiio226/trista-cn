@@ -12,6 +12,7 @@ const ProtectedDialogWrapper = styled.div`
   justify-content: center;
   @media (max-width: 1260px) {
     margin: 50px 30px 0;
+    min-height: 200px;
   }
 `
 
