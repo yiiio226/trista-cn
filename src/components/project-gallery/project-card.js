@@ -131,7 +131,7 @@ export const ProjectCard = ({ ...props }) => {
         threshold={-100}
         initialOffset={200}
         duration={0.8}
-        initialOpacity={0.5}
+        initialOpacity={1}
       >
         <div className="content">
           <LinkCopy
