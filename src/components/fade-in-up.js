@@ -27,6 +27,7 @@ const scrollYToBool = (ref, y, threshold) => {
 export const FadeInUp = ({
   children,
   initialOffset = 50,
+  initialOpacity = 0,
   threshold = -100,
   duration = 0.3,
   delay = 0,
@@ -38,7 +39,7 @@ export const FadeInUp = ({
     scrollYToBool(ref, y, threshold) ? 0 : initialOffset
   )
   const opacity = useTransform(scrollY, y =>
-    scrollYToBool(ref, y, threshold) ? 1 : 0
+    scrollYToBool(ref, y, threshold) ? 1 : initialOpacity
   )
 
   return (
