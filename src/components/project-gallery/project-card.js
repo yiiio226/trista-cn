@@ -127,7 +127,7 @@ export const ProjectCard = ({ ...props }) => {
       projectTileColor={projectTileColor}
       {...props}
     >
-      <FadeInUp threshold={-200} duration={0.8}>
+      <FadeInUp threshold={-100} initialOffset={100} duration={0.8}>
         <div className="content">
           <LinkCopy
             className="link-copy"
