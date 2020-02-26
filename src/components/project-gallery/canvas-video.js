@@ -2,7 +2,7 @@ import React from "react"
 import styled from "styled-components"
 
 const CanvasVideoWrapper = styled.div`
-  display: flex;
+  /* display: flex; */
 `
 
 const Canvas = styled.canvas`
