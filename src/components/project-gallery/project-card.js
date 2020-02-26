@@ -6,6 +6,7 @@ import { Link } from "gatsby"
 import IconLock from "../../images/icon_lock.inline.svg"
 import IconLockBlack from "../../images/icon_lock_black.inline.svg"
 import { FadeInUp } from "../fade-in-up"
+import { CanvasVideo } from "./canvas-video"
 
 const LinkWrapper = styled(Link)`
   grid-column: ${props =>
@@ -63,6 +64,11 @@ const ProjectCoverImg = styled.div`
   background-image: url(${props => props.src});
 `
 
+const CanvasVideoEle = styled(CanvasVideo)`
+  width: 100%;
+  max-height: 80%;
+`
+
 const LinkCopy = styled.div`
   display: flex;
   align-items: center;
@@ -118,45 +124,7 @@ export const ProjectCard = ({ ...props }) => {
     videoRef.current.muted = true
   }
 
-  React.useEffect(() => {
-    if (!videoRef.current) return
-
-    const applyColor = cb => {
-      // draw first four pixel of video to a canvas
-      // then get pixel color from that canvas
-      var canvas = document.createElement("canvas")
-      canvas.width = 64
-      canvas.height = 64
-      canvas.style.width = "64px"
-      canvas.style.height = "64px"
-
-      var ctx = canvas.getContext("2d")
-      console.log("going to draw", videoRef.current)
-      ctx.drawImage(videoRef.current, 0, 0, 128, 128)
-      // ctx.drawImage(videoRef.current, 0, 0, 8, 8)
-      console.log("canvas img data", ctx.getImageData(0, 0, 64, 64))
-
-      var p = ctx.getImageData(0, 0, 64, 64).data
-      // var p = ctx.getImageData(0, 0, 8, 8).data
-      // don't take the first but fourth pixel [r g b]
-      // const newBgColor = "rgb(" + p[60] + "," + p[61] + "," + p[62] + ")"
-      const newBgColor = "rgb(" + p[0] + "," + p[1] + "," + p[2] + ")"
-      console.log(newBgColor)
-      updateProjectTileColor(newBgColor)
-      videoRef.current.parentNode.insertBefore(canvas, videoRef.current)
-      cb && cb()
-    }
-
-    const loadedDataListener = () => {
-      applyColor(() =>
-        videoRef.current.removeEventListener("loadeddata", loadedDataListener)
-      )
-      videoRef.current.play()
-    }
-    videoRef.current.addEventListener("loadeddata", loadedDataListener)
-  }, [videoRef])
-
-  // Have to disable ssr for this component for now
+  // Have to disable ssr for this component for checking mobile
   if (noWindow) return null
 
   return (
@@ -165,45 +133,37 @@ export const ProjectCard = ({ ...props }) => {
       projectTileColor={projectTileColor}
       {...props}
     >
-      <FadeInUp
+      {/* <FadeInUp
         threshold={-100}
         initialOffset={200}
         duration={0.8}
         initialOpacity={0.6}
-      >
-        <div className="content">
-          <LinkCopy
-            className="link-copy"
-            isInverseColor={project.projectTileIsInversedColor}
-          >
-            {project.projectTitleShort}
-            {project.isProtected &&
-              (project.projectTileIsInversedColor ? (
-                <IconLock style={{ marginLeft: 14 }} />
-              ) : (
-                <IconLockBlack style={{ marginLeft: 14 }} />
-              ))}
-          </LinkCopy>
-          {projectVideo ? (
-            <video
-              preload="auto"
-              autoPlay={true}
-              loop={true}
-              muted={true}
-              playsInline={true}
-              ref={videoRef}
-              poster={projectCover}
-            >
-              <source
-                src={projectVideo.localVideo.publicURL}
-                type={projectVideo.mimeType}
-              />
-            </video>
-          ) : (
-            (projectCover && <ProjectCoverImg src={projectCover} />) || null
-          )}
-        </div>
-      </FadeInUp>
+      > */}
+      <div className="content">
+        <LinkCopy
+          className="link-copy"
+          isInverseColor={project.projectTileIsInversedColor}
+        >
+          {project.projectTitleShort}
+          {project.isProtected &&
+            (project.projectTileIsInversedColor ? (
+              <IconLock style={{ marginLeft: 14 }} />
+            ) : (
+              <IconLockBlack style={{ marginLeft: 14 }} />
+            ))}
+        </LinkCopy>
+        {projectVideo ? (
+          <CanvasVideoEle
+            poster={projectCover}
+            src={projectVideo.localVideo.publicURL}
+            type={projectVideo.mimeType}
+            onColor={updateProjectTileColor}
+          />
+        ) : (
+          (projectCover && <ProjectCoverImg src={projectCover} />) || null
+        )}
+      </div>
+      {/* </FadeInUp> */}
     </LinkWrapper>
   )
 }
