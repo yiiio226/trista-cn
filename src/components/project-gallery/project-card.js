@@ -118,6 +118,44 @@ export const ProjectCard = ({ ...props }) => {
     videoRef.current.muted = true
   }
 
+  React.useEffect(() => {
+    if (!videoRef.current) return
+
+    const applyColor = cb => {
+      // draw first four pixel of video to a canvas
+      // then get pixel color from that canvas
+      var canvas = document.createElement("canvas")
+      canvas.width = 64
+      canvas.height = 64
+      canvas.style.width = "64px"
+      canvas.style.height = "64px"
+
+      var ctx = canvas.getContext("2d")
+      console.log("going to draw", videoRef.current)
+      ctx.drawImage(videoRef.current, 0, 0, 128, 128)
+      // ctx.drawImage(videoRef.current, 0, 0, 8, 8)
+      console.log("canvas img data", ctx.getImageData(0, 0, 64, 64))
+
+      var p = ctx.getImageData(0, 0, 64, 64).data
+      // var p = ctx.getImageData(0, 0, 8, 8).data
+      // don't take the first but fourth pixel [r g b]
+      // const newBgColor = "rgb(" + p[60] + "," + p[61] + "," + p[62] + ")"
+      const newBgColor = "rgb(" + p[0] + "," + p[1] + "," + p[2] + ")"
+      console.log(newBgColor)
+      updateProjectTileColor(newBgColor)
+      videoRef.current.parentNode.insertBefore(canvas, videoRef.current)
+      cb && cb()
+    }
+
+    const loadedDataListener = () => {
+      applyColor(() =>
+        videoRef.current.removeEventListener("loadeddata", loadedDataListener)
+      )
+      videoRef.current.play()
+    }
+    videoRef.current.addEventListener("loadeddata", loadedDataListener)
+  }, [videoRef])
+
   // Have to disable ssr for this component for now
   if (noWindow) return null
 
