@@ -1,11 +1,14 @@
 import React from "react"
 import styled from "styled-components"
 
-const CanvasVideoWrapper = styled.div``
+const CanvasVideoWrapper = styled.div`
+  display: flex;
+`
 
 const Canvas = styled.canvas`
   display: block;
   margin: auto auto 0;
+  max-width: 100%;
   max-height: 100%;
 `
 

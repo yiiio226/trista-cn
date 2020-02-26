@@ -47,12 +47,12 @@ const LinkWrapper = styled(Link)`
     }
   }
 
-  video {
+  /* video {
     max-width: 100%;
     max-height: 80%;
     margin-top: auto;
     transition: transform 0.2s;
-  }
+  } */
 `
 
 const ProjectCoverImg = styled.div`
@@ -66,7 +66,8 @@ const ProjectCoverImg = styled.div`
 
 const CanvasVideoEle = styled(CanvasVideo)`
   width: 100%;
-  max-height: 80%;
+  height: 80%;
+  /* max-height: 80%; */
 `
 
 const LinkCopy = styled.div`
