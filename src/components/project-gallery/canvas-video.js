@@ -39,6 +39,8 @@ export const CanvasVideo = ({ poster, src, type, onColor, ...props }) => {
     vid.style.position = "absolute"
     vid.style.opacity = 0
     vid.style.zIndex = -1
+    vid.style.width = "20px"
+    vid.style.height = "20px"
     // now, add sources:
     var srcEle = document.createElement("source")
     srcEle.type = type
