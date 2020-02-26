@@ -132,6 +132,7 @@ export const query = graphql`
               projectTileColorSmall
               projectTileIsInversedColor
               projectTileIsWide
+              projectCoverFrame
               heroPicture {
                 url
                 ... on CMS_images_Asset {

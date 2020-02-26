@@ -6,6 +6,8 @@ import { Link } from "gatsby"
 import IconLock from "../../images/icon_lock.inline.svg"
 import IconLockBlack from "../../images/icon_lock_black.inline.svg"
 import { FadeInUp } from "../fade-in-up"
+import { getFrame } from "./device-frames"
+import { ProjectVideo } from "./project-video"
 
 const LinkWrapper = styled(Link)`
   grid-column: ${props =>
@@ -16,6 +18,7 @@ const LinkWrapper = styled(Link)`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     width: 100%;
     height: 100%;
     background-color: ${props => props.projectTileColor || props.theme.color};
@@ -45,13 +48,6 @@ const LinkWrapper = styled(Link)`
       opacity: 1;
     }
   }
-
-  video {
-    max-width: 100%;
-    max-height: 80%;
-    margin-top: auto;
-    transition: transform 0.2s;
-  }
 `
 
 const ProjectCoverImg = styled.div`
@@ -67,7 +63,7 @@ const LinkCopy = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 70px;
+  /* margin-top: 70px; */
   padding: 0 30px;
   color: ${props =>
     props.isInverseColor ? props.theme.colorInverse : props.theme.color};
@@ -75,24 +71,62 @@ const LinkCopy = styled.div`
   font-weight: 500;
   text-align: center;
   font-size: 24px;
+  flex: 1;
   @media (max-width: 780px) {
-    margin-top: 48px;
+    /* margin-top: 48px; */
     padding: 0 12px;
     font-size: 18px;
   }
 `
 
-export const ProjectCard = ({ ...props }) => {
-  const project = props.project
+const CardMediaWrapper = styled.div`
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  /* max-width: 100%;
+  max-height: 80%; */
+  /* width: 200px; */
+  /* height: 400px; */
+  flex: 3;
+  width: ${props => props.width}px;
+  margin-top: auto;
+
+  video {
+    max-width: 100%;
+    max-height: 100%;
+    /* transition: transform 0.2s; */
+  }
+`
+
+const CoverFrame = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 200px;
+  min-height: 400px;
+  background: url(${props => props.src});
+  background-size: cover;
+  background-position: center top;
+`
+
+const Screen = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  box-sizing: border-box;
+  padding: 12.5% 9.5% 0;
+`
+
+const CardMedia = ({ project, updateProjectTileColor }) => {
   const noWindow = typeof window === `undefined`
-  const videoRef = React.useRef()
   const [projectVideo, updateProjectVideo] = React.useState(
     _get(project, "projectVideo[0]")
   )
-  const [projectTileColor, updateProjectTileColor] = React.useState(
-    project.projectTileColor
-  )
-
   const projectCover =
     _get(project, "projectCover[0].localImage.publicURL") ||
     _get(project, "heroPicture[0].localImage.publicURL")
@@ -110,13 +144,42 @@ export const ProjectCard = ({ ...props }) => {
         }
       }
     }
-  }, [project, projectVideo, noWindow])
+  }, [project, projectVideo, noWindow, updateProjectTileColor])
 
-  /** Trying to fix muted not being set on ios video tag */
-  if (videoRef.current && !videoRef.current.defaultMuted) {
-    videoRef.current.defaultMuted = true
-    videoRef.current.muted = true
-  }
+  const projectCoverFrame = React.useMemo(
+    () =>
+      project.projectCoverFrame && project.projectCoverFrame !== "no"
+        ? getFrame(project.projectCoverFrame)
+        : null,
+    [project]
+  )
+
+  console.log("projectCoverFrame", projectCoverFrame)
+
+  return (
+    <CardMediaWrapper width={250}>
+      <Screen>
+        {projectVideo ? (
+          <ProjectVideo
+            cover={projectCover}
+            src={projectVideo.localVideo.publicURL}
+            type={projectVideo.mimeType}
+          />
+        ) : (
+          (projectCover && <ProjectCoverImg src={projectCover} />) || null
+        )}
+      </Screen>
+      {projectCoverFrame && <CoverFrame src={projectCoverFrame.url} />}
+    </CardMediaWrapper>
+  )
+}
+
+export const ProjectCard = ({ ...props }) => {
+  const project = props.project
+  const noWindow = typeof window === `undefined`
+  const [projectTileColor, updateProjectTileColor] = React.useState(
+    project.projectTileColor
+  )
 
   // Have to disable ssr for this component for now
   if (noWindow) return null
@@ -146,24 +209,10 @@ export const ProjectCard = ({ ...props }) => {
                 <IconLockBlack style={{ marginLeft: 14 }} />
               ))}
           </LinkCopy>
-          {projectVideo ? (
-            <video
-              preload="auto"
-              autoPlay={true}
-              loop={true}
-              muted={true}
-              playsInline={true}
-              ref={videoRef}
-              poster={projectCover}
-            >
-              <source
-                src={projectVideo.localVideo.publicURL}
-                type={projectVideo.mimeType}
-              />
-            </video>
-          ) : (
-            (projectCover && <ProjectCoverImg src={projectCover} />) || null
-          )}
+          <CardMedia
+            project={project}
+            updateProjectTileColor={updateProjectTileColor}
+          />
         </div>
       </FadeInUp>
     </LinkWrapper>
