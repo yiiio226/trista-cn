@@ -14,7 +14,7 @@ const LinkWrapper = styled(Link)`
   text-decoration: none;
   border: none;
   .content {
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
     justify-content: center;
     position: relative;
@@ -52,6 +52,13 @@ const LinkWrapper = styled(Link)`
     }
   }
 
+  &::before {
+    ${props => (props.project.projectTileIsWide ? "" : 'content: "&nbsp;"')}
+    padding-bottom: 100%;
+    display: inline-block;
+    vertical-align: top;
+  }
+
   video {
     width: 100%;
     height: 100%;
@@ -62,13 +69,18 @@ const LinkWrapper = styled(Link)`
   }
 `
 
-const ProjectCoverImg = styled.div`
-  width: 100%;
-  height: 100%;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center bottom;
-  background-image: url(${props => props.src});
+// const ProjectCoverImg = styled.div`
+//   width: 100%;
+//   height: 100%;
+//   background-size: contain;
+//   background-repeat: no-repeat;
+//   background-position: center bottom;
+//   background-image: url(${props => props.src});
+// `
+
+const ProjectCoverImg = styled.img`
+  max-width: 100%;
+  max-height: 100%;
 `
 
 // const CanvasVideoEle = styled(CanvasVideo)`
@@ -182,7 +194,13 @@ export const ProjectCard = ({ ...props }) => {
             />
           </video>
         ) : (
-          (projectCover && <ProjectCoverImg src={projectCover} />) || null
+          (projectCover && (
+            <ProjectCoverImg
+              src={projectCover}
+              alt={project.projectTitleShort}
+            />
+          )) ||
+          null
         )}
       </div>
       {/* </FadeInUp> */}
