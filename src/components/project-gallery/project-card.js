@@ -17,6 +17,7 @@ const LinkWrapper = styled(Link)`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    position: relative;
     width: 100%;
     height: 100%;
     background-color: ${props => props.projectTileColor || props.theme.color};
@@ -39,6 +40,10 @@ const LinkWrapper = styled(Link)`
   }
 
   .link-copy {
+    position: absolute;
+    box-sizing: border-box;
+    width: 100%;
+    top: 0;
     opacity: 0;
     transition: opacity 0.2s;
 
@@ -47,12 +52,14 @@ const LinkWrapper = styled(Link)`
     }
   }
 
-  /* video {
-    max-width: 100%;
-    max-height: 80%;
-    margin-top: auto;
-    transition: transform 0.2s;
-  } */
+  video {
+    width: 100%;
+    height: 100%;
+    /* max-width: 100%; */
+    /* max-height: 80%; */
+    /* margin-top: auto; */
+    /* transition: transform 0.2s; */
+  }
 `
 
 const ProjectCoverImg = styled.div`
@@ -64,11 +71,11 @@ const ProjectCoverImg = styled.div`
   background-image: url(${props => props.src});
 `
 
-const CanvasVideoEle = styled(CanvasVideo)`
-  width: 100%;
-  height: 80%;
-  /* max-height: 80%; */
-`
+// const CanvasVideoEle = styled(CanvasVideo)`
+//   width: 100%;
+//   height: 80%;
+//   /* max-height: 80%; */
+// `
 
 const LinkCopy = styled.div`
   display: flex;
@@ -153,13 +160,27 @@ export const ProjectCard = ({ ...props }) => {
               <IconLockBlack style={{ marginLeft: 14 }} />
             ))}
         </LinkCopy>
-        {projectVideo ? (
-          <CanvasVideoEle
+        {projectVideo && projectVideo.localVideo ? (
+          // <CanvasVideoEle
+          //   poster={projectCover}
+          //   src={projectVideo.localVideo.publicURL}
+          //   type={projectVideo.mimeType}
+          //   onColor={updateProjectTileColor}
+          // />
+          <video
+            preload="auto"
+            autoPlay={true}
+            loop={true}
+            muted={true}
+            playsInline={true}
+            ref={videoRef}
             poster={projectCover}
-            src={projectVideo.localVideo.publicURL}
-            type={projectVideo.mimeType}
-            onColor={updateProjectTileColor}
-          />
+          >
+            <source
+              src={projectVideo.localVideo.publicURL}
+              type={projectVideo.mimeType}
+            />
+          </video>
         ) : (
           (projectCover && <ProjectCoverImg src={projectCover} />) || null
         )}

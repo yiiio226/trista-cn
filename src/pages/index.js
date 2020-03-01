@@ -94,6 +94,7 @@ export const query = graphql`
           backgroundImage {
             url
             ... on CMS_images_Asset {
+              id
               localImage {
                 publicURL
               }
@@ -135,6 +136,7 @@ export const query = graphql`
               heroPicture {
                 url
                 ... on CMS_images_Asset {
+                  id
                   localImage {
                     publicURL
                   }
@@ -147,6 +149,7 @@ export const query = graphql`
               projectCover {
                 url
                 ... on CMS_images_Asset {
+                  id
                   localImage {
                     publicURL
                   }
@@ -159,6 +162,7 @@ export const query = graphql`
               projectVideo {
                 url
                 ... on CMS_videos_Asset {
+                  id
                   localVideo {
                     publicURL
                   }
@@ -169,6 +173,7 @@ export const query = graphql`
               projectVideoSmall {
                 url
                 ... on CMS_videos_Asset {
+                  id
                   localVideo {
                     publicURL
                   }
