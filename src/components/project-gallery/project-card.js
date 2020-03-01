@@ -6,7 +6,6 @@ import { Link } from "gatsby"
 import IconLock from "../../images/icon_lock.inline.svg"
 import IconLockBlack from "../../images/icon_lock_black.inline.svg"
 import { FadeInUp } from "../fade-in-up"
-import { CanvasVideo } from "./canvas-video"
 
 const LinkWrapper = styled(Link)`
   grid-column: ${props =>
@@ -14,7 +13,7 @@ const LinkWrapper = styled(Link)`
   text-decoration: none;
   border: none;
   .content {
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     position: relative;
@@ -52,42 +51,16 @@ const LinkWrapper = styled(Link)`
     }
   }
 
-  &::before {
-    ${props => (props.project.projectTileIsWide ? "" : 'content: "&nbsp;"')}
-    padding-bottom: 100%;
-    display: inline-block;
-    vertical-align: top;
-  }
-
   video {
     width: 100%;
     height: 100%;
-    /* max-width: 100%; */
-    /* max-height: 80%; */
-    /* margin-top: auto; */
-    /* transition: transform 0.2s; */
   }
 `
-
-// const ProjectCoverImg = styled.div`
-//   width: 100%;
-//   height: 100%;
-//   background-size: contain;
-//   background-repeat: no-repeat;
-//   background-position: center bottom;
-//   background-image: url(${props => props.src});
-// `
 
 const ProjectCoverImg = styled.img`
   max-width: 100%;
   max-height: 100%;
 `
-
-// const CanvasVideoEle = styled(CanvasVideo)`
-//   width: 100%;
-//   height: 80%;
-//   /* max-height: 80%; */
-// `
 
 const LinkCopy = styled.div`
   display: flex;
@@ -153,57 +126,51 @@ export const ProjectCard = ({ ...props }) => {
       projectTileColor={projectTileColor}
       {...props}
     >
-      {/* <FadeInUp
+      <FadeInUp
         threshold={-100}
         initialOffset={200}
         duration={0.8}
         initialOpacity={0.6}
-      > */}
-      <div className="content">
-        <LinkCopy
-          className="link-copy"
-          isInverseColor={project.projectTileIsInversedColor}
-        >
-          {project.projectTitleShort}
-          {project.isProtected &&
-            (project.projectTileIsInversedColor ? (
-              <IconLock style={{ marginLeft: 14 }} />
-            ) : (
-              <IconLockBlack style={{ marginLeft: 14 }} />
-            ))}
-        </LinkCopy>
-        {projectVideo && projectVideo.localVideo ? (
-          // <CanvasVideoEle
-          //   poster={projectCover}
-          //   src={projectVideo.localVideo.publicURL}
-          //   type={projectVideo.mimeType}
-          //   onColor={updateProjectTileColor}
-          // />
-          <video
-            preload="auto"
-            autoPlay={true}
-            loop={true}
-            muted={true}
-            playsInline={true}
-            ref={videoRef}
-            poster={projectCover}
+      >
+        <div className="content">
+          <LinkCopy
+            className="link-copy"
+            isInverseColor={project.projectTileIsInversedColor}
           >
-            <source
-              src={projectVideo.localVideo.publicURL}
-              type={projectVideo.mimeType}
-            />
-          </video>
-        ) : (
-          (projectCover && (
-            <ProjectCoverImg
-              src={projectCover}
-              alt={project.projectTitleShort}
-            />
-          )) ||
-          null
-        )}
-      </div>
-      {/* </FadeInUp> */}
+            {project.projectTitleShort}
+            {project.isProtected &&
+              (project.projectTileIsInversedColor ? (
+                <IconLock style={{ marginLeft: 14 }} />
+              ) : (
+                <IconLockBlack style={{ marginLeft: 14 }} />
+              ))}
+          </LinkCopy>
+          {projectVideo && projectVideo.localVideo ? (
+            <video
+              preload="auto"
+              autoPlay={true}
+              loop={true}
+              muted={true}
+              playsInline={true}
+              ref={videoRef}
+              poster={projectCover}
+            >
+              <source
+                src={projectVideo.localVideo.publicURL}
+                type={projectVideo.mimeType}
+              />
+            </video>
+          ) : (
+            (projectCover && (
+              <ProjectCoverImg
+                src={projectCover}
+                alt={project.projectTitleShort}
+              />
+            )) ||
+            null
+          )}
+        </div>
+      </FadeInUp>
     </LinkWrapper>
   )
 }
