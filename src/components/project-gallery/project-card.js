@@ -88,17 +88,17 @@ export const ProjectCard = ({ ...props }) => {
   const [projectVideo, updateProjectVideo] = React.useState(
     _get(project, "projectVideo[0]")
   )
+  const [projectCover, updateProjectCover] = React.useState(
+    _get(project, "projectCover[0].localImage.publicURL") ||
+      _get(project, "heroPicture[0].localImage.publicURL")
+  )
   const [projectTileColor, updateProjectTileColor] = React.useState(
     project.projectTileColor
   )
 
-  const projectCover =
-    _get(project, "projectCover[0].localImage.publicURL") ||
-    _get(project, "heroPicture[0].localImage.publicURL")
-
   React.useEffect(() => {
     if (projectVideo && typeof window !== `undefined`) {
-      if (window.innerWidth < 780) {
+      if (window.innerWidth <= 780) {
         // Mobile view
         const smallVideo = _get(project, "projectVideoSmall[0]")
         if (smallVideo) {
@@ -107,6 +107,15 @@ export const ProjectCard = ({ ...props }) => {
             updateProjectTileColor(project.projectTileColorSmall)
           }
         }
+      }
+    }
+    const smallCover = _get(
+      project,
+      "projectCoverSmall[0].localImage.publicURL"
+    )
+    if (smallCover) {
+      if (window.innerWidth <= 780) {
+        updateProjectCover(smallCover)
       }
     }
   }, [project, projectVideo, noWindow])

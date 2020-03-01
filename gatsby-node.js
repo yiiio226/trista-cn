@@ -129,6 +129,30 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
               height
               size
             }
+            projectCoverSmall {
+              url
+              ... on CMS_images_Asset {
+                id
+                localImage {
+                  publicURL
+                  childImageSharp {
+                    fluid(maxWidth: 1200, quality: 90) {
+                      base64
+                      aspectRatio
+                      src
+                      srcSet
+                      srcWebp
+                      srcSetWebp
+                      sizes
+                    }
+                  }
+                }
+              }
+              mimeType
+              width
+              height
+              size
+            }
             projectVideo {
               url
               ... on CMS_videos_Asset {
@@ -231,6 +255,7 @@ const createProjectPages = (createPage, template, data) => {
       password,
       heroPicture,
       projectCover,
+      projectCoverSmall,
       projectVideo,
       projectVideoSmall,
 
@@ -283,6 +308,7 @@ const createProjectPages = (createPage, template, data) => {
           projectTileIsWide,
           heroPicture,
           projectCover,
+          projectCoverSmall,
           projectVideo,
           projectVideoSmall,
         },

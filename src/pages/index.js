@@ -159,6 +159,19 @@ export const query = graphql`
                 height
                 size
               }
+              projectCoverSmall {
+                url
+                ... on CMS_images_Asset {
+                  id
+                  localImage {
+                    publicURL
+                  }
+                }
+                mimeType
+                width
+                height
+                size
+              }
               projectVideo {
                 url
                 ... on CMS_videos_Asset {
