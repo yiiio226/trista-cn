@@ -29,7 +29,7 @@ export const FadeInUp = ({
   initialOffset = 100,
   initialOpacity = 0,
   threshold = -100,
-  duration = 1,
+  duration = 0.8,
   delay = 0,
   ...props
 }) => {
