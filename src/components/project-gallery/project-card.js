@@ -139,7 +139,7 @@ export const ProjectCard = props => {
       <FadeInUp
         threshold={-100}
         initialOffset={200}
-        duration={0.8}
+        duration={1}
         initialOpacity={0.6}
       >
         <div className="content">

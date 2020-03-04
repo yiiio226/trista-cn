@@ -26,10 +26,10 @@ const scrollYToBool = (ref, y, threshold) => {
 
 export const FadeInUp = ({
   children,
-  initialOffset = 50,
+  initialOffset = 100,
   initialOpacity = 0,
   threshold = -100,
-  duration = 0.3,
+  duration = 1,
   delay = 0,
   ...props
 }) => {

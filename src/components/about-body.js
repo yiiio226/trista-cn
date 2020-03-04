@@ -1,6 +1,5 @@
 import styled from "styled-components"
 
-// TODO: Move article related css to separate component
 export const AboutBody = styled.div`
   h2 {
     font-size: 32px;
