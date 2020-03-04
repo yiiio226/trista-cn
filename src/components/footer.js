@@ -7,7 +7,10 @@ import { Logo } from "./header/logo"
 import { FadeInUp } from "./fade-in-up"
 import { ExternalLink } from "."
 
-const FooterWrapper = styled(FadeInUp).attrs(() => ({ threshold: -200 }))`
+const FooterWrapper = styled(FadeInUp).attrs(() => ({
+  threshold: -200,
+  duration: 0.3,
+}))`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -58,7 +61,10 @@ const FooterWrapper = styled(FadeInUp).attrs(() => ({ threshold: -200 }))`
   }
 `
 
-const TailInfo = styled(FadeInUp).attrs(() => ({ threshold: -30 }))`
+const TailInfo = styled(FadeInUp).attrs(() => ({
+  threshold: -30,
+  duration: 0.3,
+}))`
   display: flex;
   justify-content: center;
   align-items: center;
