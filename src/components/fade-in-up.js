@@ -9,6 +9,7 @@ const FadeInUpWrapper = styled(FadeInUpMotion)`
   transition-duration: ${props => props.duration}s;
   transition-delay: ${props => props.delay}s;
   transition-property: transform opacity;
+  transition-timing-function: ease-in-out;
 `
 
 const scrollYToBool = (ref, y, threshold) => {
