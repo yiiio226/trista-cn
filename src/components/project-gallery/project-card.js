@@ -7,11 +7,13 @@ import IconLock from "../../images/icon_lock.inline.svg"
 import IconLockBlack from "../../images/icon_lock_black.inline.svg"
 import { FadeInUp } from "../fade-in-up"
 
-const LinkWrapper = styled(Link)`
+const LinkWrapper = styled(
+  ({ forceSquared, projectTileIsWide, project, ...rest }) => <Link {...rest} />
+)`
   grid-column: ${props =>
     props.forceSquared
       ? "initial"
-      : props.project.projectTileIsWide
+      : props.projectTileIsWide
       ? "1/3"
       : "initial"};
   text-decoration: none;
@@ -23,7 +25,6 @@ const LinkWrapper = styled(Link)`
     position: relative;
     width: 100%;
     height: 100%;
-    background-color: ${props => props.projectTileColor || props.theme.color};
     box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.06);
     overflow-y: hidden;
     transition: transform 0.2s, box-shadow 0.2s;
@@ -86,9 +87,11 @@ const LinkCopy = styled.div`
 `
 
 export const ProjectCard = props => {
-  const { project, forceSquared } = props
+  const { project } = props
+  let { forceSquared } = props
   const noWindow = typeof window === `undefined`
   const videoRef = React.useRef()
+
   const { videoSquare, videoWide, imageSquare, imageWide } = React.useMemo(
     () =>
       (project.projectCardAssets || []).reduce((memo, v) => {
@@ -101,62 +104,22 @@ export const ProjectCard = props => {
       }, {}),
     [project]
   )
-  console.log(
-    "Debug test: title, videoSquare, videoWide, imageSquare, imageWide",
-    project.title,
-    videoSquare,
-    videoWide,
-    imageSquare,
-    imageWide
+  const projectTileIsWide = !!(
+    _get(videoWide, "standard[0]") || _get(imageWide, "standard[0]")
   )
-  const [projectVideo, updateProjectVideo] = React.useState(
-    forceSquared
-      ? _get(videoSquare, "standard[0]")
-      : _get(videoWide, "standard[0]") || _get(videoSquare, "standard[0]")
+  const lowRes = window && window.innerWidth <= 780
+  if (lowRes && !forceSquared) forceSquared = true
+
+  const projectVideo = forceSquared ? videoSquare : videoWide || videoSquare
+  const projectCover = React.useMemo(
+    () =>
+      _get(projectVideo, "cover[0].localImage.publicURL") ||
+      (forceSquared
+        ? _get(imageSquare, "standard[0].localImage.publicURL")
+        : _get(imageWide, "standard[0].localImage.publicURL") ||
+          _get(imageSquare, "standard[0].localImage.publicURL")),
+    [projectVideo, imageWide, imageSquare]
   )
-  const [projectCover, updateProjectCover] = React.useState(
-    forceSquared
-      ? _get(videoSquare, "cover[0].localImage.publicURL") ||
-          _get(imageSquare, "standard[0].localImage.publicURL")
-      : _get(videoWide, "cover[0].localImage.publicURL") ||
-          _get(videoSquare, "cover[0].localImage.publicURL") ||
-          _get(imageWide, "standard[0].localImage.publicURL") ||
-          _get(imageSquare, "standard[0].localImage.publicURL")
-  )
-  const [projectTileColor, updateProjectTileColor] = React.useState(
-    project.projectTileColor
-  )
-
-  React.useEffect(() => {
-    if (typeof window === `undefined`) return
-    // console.log(project, project.title, project.projectTileIsWide, forceSquared)
-
-    if (
-      window.innerWidth <= 780 ||
-      (project.projectTileIsWide && forceSquared)
-    ) {
-      // Replace videos
-      const smallVideo = _get(project, "projectVideoSmall[0]")
-      if (smallVideo) {
-        // Mobile view
-        updateProjectVideo(smallVideo)
-      }
-
-      // Replace cover photos
-      const smallCover = _get(
-        project,
-        "projectCoverSmall[0].localImage.publicURL"
-      )
-      if (smallCover) {
-        updateProjectCover(smallCover)
-      }
-
-      // Replace tile color
-      if (project.projectTileColorSmall) {
-        updateProjectTileColor(project.projectTileColorSmall)
-      }
-    }
-  }, [project, projectVideo, noWindow])
 
   /** Trying to fix muted not being set on ios video tag */
   if (videoRef.current && !videoRef.current.defaultMuted) {
@@ -170,7 +133,7 @@ export const ProjectCard = props => {
   return (
     <LinkWrapper
       to={`/projects/${project.slug}`}
-      projectTileColor={projectTileColor}
+      projectTileIsWide={projectTileIsWide}
       {...props}
     >
       <FadeInUp
@@ -192,7 +155,7 @@ export const ProjectCard = props => {
                 <IconLockBlack style={{ marginLeft: 14 }} />
               ))}
           </LinkCopy>
-          {projectVideo && projectVideo.localVideo ? (
+          {projectVideo ? (
             <video
               preload="auto"
               autoPlay={true}
@@ -203,8 +166,11 @@ export const ProjectCard = props => {
               poster={projectCover}
             >
               <source
-                src={projectVideo.localVideo.publicURL}
-                type={projectVideo.mimeType}
+                src={_get(
+                  projectVideo,
+                  `${lowRes ? "small" : "standard"}[0].localVideo.publicURL`
+                )}
+                type={_get(projectVideo, "small[0].mimeType")}
               />
             </video>
           ) : (

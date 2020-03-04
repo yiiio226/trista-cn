@@ -37,10 +37,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             isProtected
             password
             projectTitleShort
-            projectTileColor
-            projectTileColorSmall
             projectTileIsInversedColor
-            projectTileIsWide
             projectDescription
             projectClient
             projectMyRole
@@ -271,17 +268,10 @@ const createProjectPages = (createPage, template, data) => {
       isProtected,
       password,
       heroPicture,
-      projectCover,
-      projectCoverSmall,
-      projectVideo,
-      projectVideoSmall,
 
       title,
       projectTitleShort,
-      projectTileColor,
-      projectTileColorSmall,
       projectTileIsInversedColor,
-      projectTileIsWide,
     } = p
 
     for (let j = 0, iCur = i + 1; j < NEXT_ITEMS; j++, iCur++) {
@@ -289,7 +279,6 @@ const createProjectPages = (createPage, template, data) => {
         iCur = 0
       }
       const relatedP = data.projects[iCur]
-      // relatedP.projectTileIsWide = false // For related projects, please, do not go full width...
       const {
         projectDescription: _rProjectDescription,
         projectClient: _rProjectClient,
@@ -319,15 +308,8 @@ const createProjectPages = (createPage, template, data) => {
         pMeta: {
           title,
           projectTitleShort,
-          projectTileColor,
-          projectTileColorSmall,
           projectTileIsInversedColor,
-          projectTileIsWide,
           heroPicture,
-          projectCover,
-          projectCoverSmall,
-          projectVideo,
-          projectVideoSmall,
         },
         relatedProjects,
       },

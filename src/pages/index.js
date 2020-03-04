@@ -129,10 +129,7 @@ export const query = graphql`
             ... on CMS_project_project_Entry {
               isProtected
               projectTitleShort
-              projectTileColor
-              projectTileColorSmall
               projectTileIsInversedColor
-              projectTileIsWide
               heroPicture {
                 url
                 ... on CMS_images_Asset {
