@@ -9,7 +9,11 @@ import { FadeInUp } from "../fade-in-up"
 
 const LinkWrapper = styled(Link)`
   grid-column: ${props =>
-    props.project.projectTileIsWide ? "1/3" : "initial"};
+    props.forceSquared
+      ? "initial"
+      : props.project.projectTileIsWide
+      ? "1/3"
+      : "initial"};
   text-decoration: none;
   border: none;
   .content {
@@ -81,41 +85,75 @@ const LinkCopy = styled.div`
   }
 `
 
-export const ProjectCard = ({ ...props }) => {
-  const project = props.project
+export const ProjectCard = props => {
+  const { project, forceSquared } = props
   const noWindow = typeof window === `undefined`
   const videoRef = React.useRef()
+  const { videoSquare, videoWide, imageSquare, imageWide } = React.useMemo(
+    () =>
+      (project.projectCardAssets || []).reduce((memo, v) => {
+        const vt = v.__typename || ""
+        if (vt.includes("videoSquare")) memo.videoSquare = v
+        else if (vt.includes("videoWide")) memo.videoWide = v
+        else if (vt.includes("imageSquare")) memo.imageSquare = v
+        else if (vt.includes("imageWide")) memo.imageWide = v
+        return memo
+      }, {}),
+    [project]
+  )
+  console.log(
+    "Debug test: title, videoSquare, videoWide, imageSquare, imageWide",
+    project.title,
+    videoSquare,
+    videoWide,
+    imageSquare,
+    imageWide
+  )
   const [projectVideo, updateProjectVideo] = React.useState(
-    _get(project, "projectVideo[0]")
+    forceSquared
+      ? _get(videoSquare, "standard[0]")
+      : _get(videoWide, "standard[0]") || _get(videoSquare, "standard[0]")
   )
   const [projectCover, updateProjectCover] = React.useState(
-    _get(project, "projectCover[0].localImage.publicURL") ||
-      _get(project, "heroPicture[0].localImage.publicURL")
+    forceSquared
+      ? _get(videoSquare, "cover[0].localImage.publicURL") ||
+          _get(imageSquare, "standard[0].localImage.publicURL")
+      : _get(videoWide, "cover[0].localImage.publicURL") ||
+          _get(videoSquare, "cover[0].localImage.publicURL") ||
+          _get(imageWide, "standard[0].localImage.publicURL") ||
+          _get(imageSquare, "standard[0].localImage.publicURL")
   )
   const [projectTileColor, updateProjectTileColor] = React.useState(
     project.projectTileColor
   )
 
   React.useEffect(() => {
-    if (projectVideo && typeof window !== `undefined`) {
-      if (window.innerWidth <= 780) {
+    if (typeof window === `undefined`) return
+    // console.log(project, project.title, project.projectTileIsWide, forceSquared)
+
+    if (
+      window.innerWidth <= 780 ||
+      (project.projectTileIsWide && forceSquared)
+    ) {
+      // Replace videos
+      const smallVideo = _get(project, "projectVideoSmall[0]")
+      if (smallVideo) {
         // Mobile view
-        const smallVideo = _get(project, "projectVideoSmall[0]")
-        if (smallVideo) {
-          updateProjectVideo(smallVideo)
-          if (project.projectTileColorSmall) {
-            updateProjectTileColor(project.projectTileColorSmall)
-          }
-        }
+        updateProjectVideo(smallVideo)
       }
-    }
-    const smallCover = _get(
-      project,
-      "projectCoverSmall[0].localImage.publicURL"
-    )
-    if (smallCover) {
-      if (window.innerWidth <= 780) {
+
+      // Replace cover photos
+      const smallCover = _get(
+        project,
+        "projectCoverSmall[0].localImage.publicURL"
+      )
+      if (smallCover) {
         updateProjectCover(smallCover)
+      }
+
+      // Replace tile color
+      if (project.projectTileColorSmall) {
+        updateProjectTileColor(project.projectTileColorSmall)
       }
     }
   }, [project, projectVideo, noWindow])

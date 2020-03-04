@@ -286,6 +286,7 @@ export default ({ pageContext }) => {
           projects={relatedProjects}
           className="project-gallery"
           loadByDefault={true}
+          forceSquared={true}
         />
       </RelatedProjectsWrapper>
     </Layout>

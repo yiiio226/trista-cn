@@ -105,75 +105,92 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
               height
               size
             }
-            projectCover {
-              url
-              ... on CMS_images_Asset {
+            projectCardAssets {
+              __typename
+              ... on CMS_projectCardAssets_videoSquare_BlockType {
                 id
-                localImage {
-                  publicURL
-                  childImageSharp {
-                    fluid(maxWidth: 1200, quality: 90) {
-                      base64
-                      aspectRatio
-                      src
-                      srcSet
-                      srcWebp
-                      srcSetWebp
-                      sizes
+                standard {
+                  url
+                  ... on CMS_videos_Asset {
+                    id
+                    localVideo {
+                      publicURL
+                    }
+                  }
+                }
+                small {
+                  url
+                  ... on CMS_videos_Asset {
+                    id
+                    localVideo {
+                      publicURL
+                    }
+                  }
+                }
+                cover {
+                  url
+                  ... on CMS_images_Asset {
+                    id
+                    localImage {
+                      publicURL
                     }
                   }
                 }
               }
-              mimeType
-              width
-              height
-              size
-            }
-            projectCoverSmall {
-              url
-              ... on CMS_images_Asset {
+              ... on CMS_projectCardAssets_videoWide_BlockType {
                 id
-                localImage {
-                  publicURL
-                  childImageSharp {
-                    fluid(maxWidth: 1200, quality: 90) {
-                      base64
-                      aspectRatio
-                      src
-                      srcSet
-                      srcWebp
-                      srcSetWebp
-                      sizes
+                standard {
+                  url
+                  ... on CMS_videos_Asset {
+                    id
+                    localVideo {
+                      publicURL
+                    }
+                  }
+                }
+                small {
+                  url
+                  ... on CMS_videos_Asset {
+                    id
+                    localVideo {
+                      publicURL
+                    }
+                  }
+                }
+                cover {
+                  url
+                  ... on CMS_images_Asset {
+                    id
+                    localImage {
+                      publicURL
                     }
                   }
                 }
               }
-              mimeType
-              width
-              height
-              size
-            }
-            projectVideo {
-              url
-              ... on CMS_videos_Asset {
+              ... on CMS_projectCardAssets_imageSquare_BlockType {
                 id
-                localVideo {
-                  publicURL
+                standard {
+                  url
+                  ... on CMS_images_Asset {
+                    id
+                    localImage {
+                      publicURL
+                    }
+                  }
                 }
               }
-              mimeType
-              size
-            }
-            projectVideoSmall {
-              url
-              ... on CMS_videos_Asset {
+              ... on CMS_projectCardAssets_imageWide_BlockType {
                 id
-                localVideo {
-                  publicURL
+                standard {
+                  url
+                  ... on CMS_images_Asset {
+                    id
+                    localImage {
+                      publicURL
+                    }
+                  }
                 }
               }
-              mimeType
-              size
             }
           }
         }
@@ -272,7 +289,7 @@ const createProjectPages = (createPage, template, data) => {
         iCur = 0
       }
       const relatedP = data.projects[iCur]
-      relatedP.projectTileIsWide = false // For related projects, please, do not go full width...
+      // relatedP.projectTileIsWide = false // For related projects, please, do not go full width...
       const {
         projectDescription: _rProjectDescription,
         projectClient: _rProjectClient,

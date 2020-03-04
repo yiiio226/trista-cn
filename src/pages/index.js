@@ -146,53 +146,92 @@ export const query = graphql`
                 height
                 size
               }
-              projectCover {
-                url
-                ... on CMS_images_Asset {
+              projectCardAssets {
+                __typename
+                ... on CMS_projectCardAssets_videoSquare_BlockType {
                   id
-                  localImage {
-                    publicURL
+                  standard {
+                    url
+                    ... on CMS_videos_Asset {
+                      id
+                      localVideo {
+                        publicURL
+                      }
+                    }
+                  }
+                  small {
+                    url
+                    ... on CMS_videos_Asset {
+                      id
+                      localVideo {
+                        publicURL
+                      }
+                    }
+                  }
+                  cover {
+                    url
+                    ... on CMS_images_Asset {
+                      id
+                      localImage {
+                        publicURL
+                      }
+                    }
                   }
                 }
-                mimeType
-                width
-                height
-                size
-              }
-              projectCoverSmall {
-                url
-                ... on CMS_images_Asset {
+                ... on CMS_projectCardAssets_videoWide_BlockType {
                   id
-                  localImage {
-                    publicURL
+                  standard {
+                    url
+                    ... on CMS_videos_Asset {
+                      id
+                      localVideo {
+                        publicURL
+                      }
+                    }
+                  }
+                  small {
+                    url
+                    ... on CMS_videos_Asset {
+                      id
+                      localVideo {
+                        publicURL
+                      }
+                    }
+                  }
+                  cover {
+                    url
+                    ... on CMS_images_Asset {
+                      id
+                      localImage {
+                        publicURL
+                      }
+                    }
                   }
                 }
-                mimeType
-                width
-                height
-                size
-              }
-              projectVideo {
-                url
-                ... on CMS_videos_Asset {
+                ... on CMS_projectCardAssets_imageSquare_BlockType {
                   id
-                  localVideo {
-                    publicURL
+                  standard {
+                    url
+                    ... on CMS_images_Asset {
+                      id
+                      localImage {
+                        publicURL
+                      }
+                    }
                   }
                 }
-                mimeType
-                size
-              }
-              projectVideoSmall {
-                url
-                ... on CMS_videos_Asset {
+                ... on CMS_projectCardAssets_imageWide_BlockType {
                   id
-                  localVideo {
-                    publicURL
+                  standard {
+                    url
+                    ... on CMS_images_Asset {
+                      id
+                      localImage {
+                        publicURL
+                      }
+                    }
                   }
                 }
-                mimeType
-                size
               }
             }
           }
