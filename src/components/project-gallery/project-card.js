@@ -107,7 +107,7 @@ export const ProjectCard = props => {
   const projectTileIsWide = !!(
     _get(videoWide, "standard[0]") || _get(imageWide, "standard[0]")
   )
-  const lowRes = window && window.innerWidth <= 780
+  const lowRes = !noWindow && window.innerWidth <= 780
   if (lowRes && !forceSquared) forceSquared = true
 
   const projectVideo = forceSquared ? videoSquare : videoWide || videoSquare
