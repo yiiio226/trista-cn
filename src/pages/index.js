@@ -69,7 +69,7 @@ const IndexPage = ({ data }) => {
       <HomeContentContainer isFullWidth>
         <Header menuLinks={siteMainMenu} siteTitle={siteTitle} />
         <SEO title={"主页"} />
-        <Gap gapSize={200} mobileGapSize={142} />
+        <Gap gapSize={215} mobileGapSize={155} />
         <TristaCutoutCenter src={tristaCutout} />
         <Typing actions={_get(data, "cms.home.typingSentences")} />
       </HomeContentContainer>
