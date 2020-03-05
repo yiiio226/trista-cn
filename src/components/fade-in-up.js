@@ -43,6 +43,11 @@ export const FadeInUp = ({
     scrollYToBool(ref, y, threshold) ? 1 : initialOpacity
   )
 
+  // TODO: Temporarily disabled FadeInUp
+  if (children) {
+    return <FadeInUpWrapper {...props}>{children}</FadeInUpWrapper>
+  }
+
   return (
     <FadeInUpWrapper
       ref={ref}
