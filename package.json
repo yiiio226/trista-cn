@@ -14,6 +14,7 @@
     "fslightbox-react": "^1.4.9",
     "gatsby": "^2.19.15",
     "gatsby-image": "^2.2.40",
+    "gatsby-plugin-google-analytics": "^2.1.36",
     "gatsby-plugin-manifest": "^2.2.41",
     "gatsby-plugin-react-helmet": "^3.1.22",
     "gatsby-plugin-react-svg": "^3.0.0",
