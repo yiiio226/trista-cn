@@ -29,6 +29,7 @@ const FullWidthBg = styled(FullWidthBgMotion)`
   width: 100%;
   background: rgba(255, 255, 255, 1);
   box-shadow: 0px 8px 20px -2px rgba(0, 0, 0, 0.06);
+  transition: transform 0.1s;
   /* transform: translateY(-${props =>
     (1 - (props.showPercent || 0)) * 100}px); */
 `
