@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-      - dummy
   repository_dispatch:
 
 jobs:
@@ -19,11 +18,12 @@ jobs:
         env: # Or as an environment variable
           API_AUTH: ${{ secrets.API_AUTH }}
       # Use rsync to upload website to another server
-      - name: Upload website
-        shell: bash
-        run: |
-          mkdir -p ~/.ssh && chmod 700 ~/.ssh
-          echo "${{ secrets.PRIVATE_SSH_KEY }}" | base64 -d > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          rm -rf ./public/.git # Remove unused folder
-          rsync -e "ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa" -havr --delete ./public/ root@47.56.199.173:/root/works/docker_static_nginx/sample_web_app
+      # ! Disable uploading websites
+      # - name: Upload website
+      #   shell: bash
+      #   run: |
+      #     mkdir -p ~/.ssh && chmod 700 ~/.ssh
+      #     echo "${{ secrets.PRIVATE_SSH_KEY }}" | base64 -d > ~/.ssh/id_rsa
+      #     chmod 600 ~/.ssh/id_rsa
+      #     rm -rf ./public/.git # Remove unused folder
+      #     rsync -e "ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa" -havr --delete ./public/ root@47.56.199.173:/root/works/docker_static_nginx/sample_web_app
