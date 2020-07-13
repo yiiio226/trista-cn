@@ -1,7 +1,7 @@
 require("dotenv").config()
 
 module.exports = {
-  assetPrefix: 'https://cdn.jsdelivr.net/gh/yiiio226/trista-cn@gh-pages',
+  // assetPrefix: 'https://cdn.jsdelivr.net/gh/yiiio226/trista-cn@gh-pages',
   siteMetadata: {},
   plugins: [
     `gatsby-plugin-react-helmet`,
