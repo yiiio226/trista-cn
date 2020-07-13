@@ -17,6 +17,12 @@ jobs:
           deploy-branch: gh-pages
         env: # Or as an environment variable
           API_AUTH: ${{ secrets.API_AUTH }}
+      - uses: go-choppy/ossutil-github-action@master
+        with:
+          ossArgs: 'cp -r -u ./public/ oss://trista-www'
+          accessKey: ${{ secrets.ALIYUN_ACCESS_KEY }}
+          accessSecret: ${{ secrets.ALIYUN_ACCESS_SECRET }}
+          endpoint: oss-cn-hongkong.aliyuncs.com
       # Use rsync to upload website to another server
       # ! Disable uploading websites
       # - name: Upload website
