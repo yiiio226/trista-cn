@@ -2,9 +2,12 @@ require("dotenv").config()
 
 module.exports = {
   // assetPrefix: 'https://cdn.jsdelivr.net/gh/yiiio226/trista-cn@gh-pages',
-  siteMetadata: {},
+  siteMetadata: {
+    siteUrl: `https://www.trista.design`,
+  },
   plugins: [
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-sitemap`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
