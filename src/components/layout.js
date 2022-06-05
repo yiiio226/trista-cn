@@ -16,23 +16,25 @@ import { Footer, Gap } from "."
 import { Container } from "./container"
 
 const FooterContainer = styled(Container)`
+  max-width: 1240px;
+  padding: 0 100px;
   @media (max-width: 780px) {
     padding: 0 30px;
     max-width: unset;
   }
 `
 
-export const Layout = ({ sideDistance, footerLinks, children }) => {
+export const Layout = ({ footerLinks, footnote, children }) => {
   return (
     <>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <main>{children}</main>
         <Gap gapSize={100} />
-        <FooterContainer sideDistance={100}>
-          <Footer links={footerLinks} />
+        <FooterContainer isFullWidth>
+          <Footer links={footerLinks} footnote={footnote} />
         </FooterContainer>
-        <Gap gapSize={100} />
+        <Gap gapSize={60} />
       </ThemeProvider>
     </>
   )

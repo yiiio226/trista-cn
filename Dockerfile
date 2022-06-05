@@ -10,6 +10,9 @@ ENV NODE_ENV=production
 COPY package.json ./
 RUN yarn --frozen-lockfile --non-interactive
 
+ARG API_AUTH
+ENV API_AUTH $API_AUTH
+
 # If project files change
 COPY . .
 RUN yarn build

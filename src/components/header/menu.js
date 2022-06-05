@@ -1,16 +1,17 @@
 import React from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
+import uuid from "uuid/v4"
+
+import { ClickToCopyLink } from "../click-to-copy-link"
 
 const MenuNavWrapper = styled.nav`
-  width: 100%;
-
   .active {
     color: ${props => props.theme.colorTheme};
   }
 
   ul {
-    display: flex;
+    display: inline-flex;
     margin: 0;
     padding: 0;
     justify-content: center;
@@ -23,13 +24,22 @@ const MenuNavWrapper = styled.nav`
 
       a {
         display: inline-block;
-        min-width: 100px;
+        /* min-width: 100px; */
+        word-break: keep-all;
         line-height: 48px;
+        padding: 0 20px;
         font-size: ${props => props.theme.fontSize}px;
         color: ${props => props.theme.color};
         text-decoration: none;
         font-family: ${props => props.theme.fontFamily};
         font-weight: 600;
+        border: none;
+
+        @media (max-width: 780px) {
+          padding: 0 ${props => (props.isFixed ? 12 : 15)}px;
+          font-size: ${props => (props.isFixed ? 14 : 18)}px;
+          font-weight: 500;
+        }
 
         &:hover {
           color: ${props => props.theme.colorTheme};
@@ -39,17 +49,25 @@ const MenuNavWrapper = styled.nav`
   }
 `
 
-export const Menu = ({ menuLinks }) => {
+export const Menu = ({ menuLinks, isFixed = false }) => {
   return (
-    <MenuNavWrapper>
+    <MenuNavWrapper isFixed={isFixed}>
       <ul>
-        {menuLinks.map(link => (
-          <li key={link.name}>
-            <Link to={link.link} activeClassName="active">
-              {link.name}
+        {menuLinks.map(link => {
+          let linkEle = (
+            <Link to={link.linkLink} activeClassName="active">
+              {link.linkTitle}
             </Link>
-          </li>
-        ))}
+          )
+
+          if (link.typeHandle === "clickToCopyLink") {
+            linkEle = (
+              <ClickToCopyLink link={link} successText="Email 复制成功" />
+            )
+          }
+
+          return <li key={uuid()}>{linkEle}</li>
+        })}
       </ul>
     </MenuNavWrapper>
   )

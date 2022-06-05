@@ -1,10 +1,16 @@
 import React from "react"
 import styled from "styled-components"
-import { Logo } from "./header/logo"
+import uuid from "uuid/v4"
+import ReactMarkdown from "react-markdown/with-html"
 
+import { Logo } from "./header/logo"
+import { FadeInUp } from "./fade-in-up"
 import { ExternalLink } from "."
 
-const FooterWrapper = styled.div`
+const FooterWrapper = styled(FadeInUp).attrs(() => ({
+  threshold: -200,
+  duration: 0.3,
+}))`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -16,6 +22,7 @@ const FooterWrapper = styled.div`
 
   @media (max-width: 780px) {
     flex-direction: column;
+    padding: 60px 15px;
   }
 
   ul {
@@ -28,6 +35,11 @@ const FooterWrapper = styled.div`
     @media (max-width: 780px) {
       flex-direction: column;
       text-align: center;
+      margin-top: 60px;
+
+      li {
+        margin: 10px 0;
+      }
     }
 
     a {
@@ -49,32 +61,57 @@ const FooterWrapper = styled.div`
   }
 `
 
-export const Footer = ({ links }) => {
+const TailInfo = styled(FadeInUp).attrs(() => ({
+  threshold: -30,
+  duration: 0.3,
+}))`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 60px;
+  font-size: 14px;
+  text-align: center;
+  color: rgba(153, 153, 153, 1);
+  line-height: 180%;
+  p {
+    margin: 0;
+    padding: 0;
+  }
+`
+
+export const Footer = ({ links, footnote }) => {
   return (
-    <FooterWrapper>
-      <Logo />
-      <ul className="links">
-        {links &&
-          links.map(l => {
-            switch (l.typeHandle) {
-              case "email":
-                return (
-                  <li key={l.email}>
-                    <ExternalLink
-                      label={`Email: ${l.email}`}
-                      href={`mailto:${l.email}`}
-                    />
-                  </li>
-                )
-              case "links":
-                return (
-                  <li key={l.linkText}>
-                    <ExternalLink label={l.linkText} href={l.linkHref} />
-                  </li>
-                )
-            }
-          })}
-      </ul>
-    </FooterWrapper>
+    <>
+      <FooterWrapper>
+        <Logo />
+        <ul className="links">
+          {links &&
+            links.map(l => {
+              switch (l.typeHandle) {
+                case "email":
+                  return (
+                    <li key={uuid()}>
+                      <ExternalLink
+                        label={`Email: ${l.email}`}
+                        href={`mailto:${l.email}`}
+                      />
+                    </li>
+                  )
+                case "links":
+                  return (
+                    <li key={uuid()}>
+                      <ExternalLink label={l.linkText} href={l.linkHref} />
+                    </li>
+                  )
+                default:
+                  return null
+              }
+            })}
+        </ul>
+      </FooterWrapper>
+      <TailInfo>
+        <ReactMarkdown key={uuid()} source={footnote} escapeHtml={false} />
+      </TailInfo>
+    </>
   )
 }

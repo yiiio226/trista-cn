@@ -7,33 +7,40 @@ import SvgLogo from "../../images/logo-static.inline.svg"
 
 const LogoWrapper = styled(Link)`
   display: flex;
-  width: 144px;
-  height: 88px;
+  width: 129px;
+  height: 73px;
   justify-content: center;
   align-items: center;
+  border: none;
+  @media (max-width: 780px) {
+    width: 100px;
+    height: 60px;
+  }
 `
 
 export const Logo = ({ ...props }) => {
   const [isHovering, hoverRef] = useHover(0, 200)
   const [isPlaying, updateIsPlaying] = React.useState(false)
-  const [isInitialPlaying, updateIsInitialPlaying] = React.useState(false)
+  const timerRef = React.useRef()
 
   React.useEffect(() => {
-    if (!isPlaying && isHovering) {
+    if (isHovering) {
+      if (timerRef.current) {
+        return
+      }
+
       updateIsPlaying(true)
-      setTimeout(() => updateIsPlaying(false), 2000)
+      timerRef.current = setTimeout(() => {
+        updateIsPlaying(false)
+        clearTimeout(timerRef.current)
+        timerRef.current = null
+      }, 1500)
     }
-  }, [isHovering, isPlaying])
-
-  React.useEffect(() => {
-    // updateIsInitialPlaying(true) // Disabled initial playing
-    setTimeout(() => updateIsInitialPlaying(false), 2000)
-  }, [])
+  }, [isHovering])
 
   return (
     <LogoWrapper {...props} to="/" ref={hoverRef}>
-      {isPlaying || isInitialPlaying ? <SvgLogoAnimated /> : <SvgLogo />}
-      {/* <SvgLogoAnimated /> */}
+      {isPlaying ? <SvgLogoAnimated /> : <SvgLogo />}
     </LogoWrapper>
   )
 }

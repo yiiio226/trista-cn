@@ -1,17 +1,13 @@
+require("dotenv").config()
+
 module.exports = {
+  // assetPrefix: 'https://cdn.jsdelivr.net/gh/yiiio226/trista-cn@gh-pages',
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@trista`,
-    menuLinks: [
-      { name: "主页", link: "/" },
-      { name: "关于我", link: "/about" },
-      // { name: "我的工作", link: "/portfolio" },
-      // { name: "联系我", link: "/contact" },
-    ],
+    siteUrl: `https://www.trista.design`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-sitemap`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -22,8 +18,15 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `projects`,
-        path: `${__dirname}/src/projects`,
+        name: `assets-images`,
+        path: `${__dirname}/src/assets/images`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `assets-videos`,
+        path: `${__dirname}/src/assets/videos`,
       },
     },
     {
@@ -35,13 +38,21 @@ module.exports = {
         // HTTP headers
         headers: {
           // Learn about environment variables: https://gatsby.dev/env-vars
-          Authorization: `Bearer GnIyCjNWZKR1MeN_6dadFIMmbypU1q-e`,
+          Authorization: `Bearer ${process.env.API_AUTH}`,
         },
         // Additional options to pass to node-fetch
         fetchOptions: {},
         refetchInterval: 10,
       },
     },
+    // {
+    //   resolve: `gatsby-plugin-remote-images`,
+    //   options: {
+    //     nodeType: "CMS_images_Asset",
+    //     imagePath: "url",
+    //     name: "localImage",
+    //   },
+    // },
     {
       resolve: "gatsby-plugin-react-svg",
       options: {
@@ -50,23 +61,42 @@ module.exports = {
         },
       },
     },
+    `gatsby-plugin-styled-components`,
     `gatsby-transformer-remark`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `Trista`,
+        short_name: `Trista`,
         start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
-        display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        background_color: `#267776`,
+        theme_color: `#ffffff`,
+        display: `standalone`,
+        icon: `src/images/favicon.png`,
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        // The property ID; the tracking code won't be generated without it
+        trackingId: "UA-159952522-1",
+        // Defines where to place the tracking script - `true` in the head and `false` in the body
+        head: false,
+        // Setting this parameter is optional
+        // anonymize: true,
+        // Setting this parameter is also optional
+        respectDNT: true,
+        // Avoids sending pageview hits from custom paths
+        exclude: [],
+        // Delays sending pageview hits on route update (in milliseconds)
+        pageTransitionDelay: 0,
+        // Any additional optional fields
+        // sampleRate: 5,
+        // siteSpeedSampleRate: 10,
+        cookieDomain: "auto",
+      },
+    },
   ],
 }

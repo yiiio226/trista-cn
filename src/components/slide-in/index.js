@@ -1,5 +1,5 @@
 import React from "react"
-import { Viewport } from "./viewport"
+import { Viewport, TypingPlaceholder } from "./viewport"
 import { ChildrenAnimated } from "./children-animated"
 
 export const SlideIn = ({ duration, children }) => {
@@ -15,7 +15,7 @@ export const SlideIn = ({ duration, children }) => {
 
   React.useEffect(() => {
     if (childrenRef.current) {
-      let newWidth = isCleaning ? 0 : childrenRef.current.offsetWidth
+      let newWidth = isCleaning ? 1 : childrenRef.current.offsetWidth
       updateChildrenWidth(newWidth)
     }
   }, [showingChildren, childrenRef, isCleaning])
@@ -61,6 +61,7 @@ export const SlideIn = ({ duration, children }) => {
         ref={childrenRef}
       >
         {showingChildren}
+        <TypingPlaceholder />
       </ChildrenAnimated>
     </Viewport>
   )

@@ -2,8 +2,6 @@ import React from "react"
 import _get from "lodash/get"
 import { graphql } from "gatsby"
 import styled from "styled-components"
-import { useWindowWidth } from "@react-hook/window-size"
-// import { Animated } from "react-animated-css"
 
 import {
   Container,
@@ -14,11 +12,8 @@ import {
   SEO,
   Typing,
 } from "../components"
-import { useSiteMetadata } from "../hooks"
-import { theme } from "../constants/theme"
-// import svgHandPointDown from "../images/icons/hand-point-down.svg"
-import "../styles/animate.min.css"
-import tristaCutout from "../images/trista-cutout.png"
+import { useFooterData, useSiteMetadata } from "../hooks/graphql"
+import tristaCutoutPng from "../images/trista-cutout.png"
 
 const HomeContentContainer = styled(Container)`
   display: flex;
@@ -29,6 +24,7 @@ const HomeContentContainer = styled(Container)`
   width: 100%;
   height: 100vh;
   min-height: 600px;
+  max-height: 900px;
 `
 
 const TristaCutoutCenter = styled.div`
@@ -37,62 +33,53 @@ const TristaCutoutCenter = styled.div`
   height: 100%;
   width: 100%;
   opacity: 0.14;
-  background-image: url(${tristaCutout});
+  background-image: url(${props => props.src});
   background-repeat: no-repeat;
   background-size: 306px;
   background-position: center 300px;
+  @media (max-width: 780px) {
+    background-position: center 240px;
+    background-size: 220px;
+  }
 `
 
-// const ButtonAnimated = styled(Animated)`
-//   position: absolute;
-//   bottom: 0;
-//   left: calc(50% - 30px);
-// `
-
-// const ContinueButtonLink = styled(Link)`
-//   display: block;
-//   width: 60px;
-//   height: 90px;
-//   background-image: url(${svgHandPointDown});
-//   background-repeat: no-repeat;
-//   opacity: 0.2;
-// `
+const ProjectsContainer = styled(Container)`
+  max-width: 1240px;
+  padding: 0 100px;
+  @media (max-width: 780px) {
+    padding: 0 30px;
+  }
+`
 
 const IndexPage = ({ data }) => {
-  const { menuLinks, title } = useSiteMetadata()
-  const windowWidth = useWindowWidth()
-  console.log("windowWidth", windowWidth)
-  const sideDistance =
-    windowWidth <= theme.mobileWidth ? theme.gapSize * 3 : 100
-
-  // console.log("home page data", data)
-
-  // Disable static content generation, only render lively, mainly due to useWindowWidth()
-  // TODO: Replace useWindowWidth()
-  if (typeof window === `undefined`) {
-    return <></>
-  }
+  const { siteMainMenu, siteTitle } = useSiteMetadata()
+  const footer = useFooterData()
+  const tristaCutout = _get(
+    data,
+    "cms.home.backgroundImage[0].localImage.publicURL",
+    tristaCutoutPng
+  )
 
   return (
     <Layout
       center={true}
-      sideDistance={sideDistance}
-      footerLinks={_get(data, "cms.footer.usefulLinks")}
+      footerLinks={footer.usefulLinks}
+      footnote={footer.footnote}
     >
-      <HomeContentContainer>
-        <Header menuLinks={menuLinks} siteTitle={title} />
-        <SEO title="Trista" />
-        <Gap gapSize={235} />
-        <TristaCutoutCenter />
+      <HomeContentContainer isFullWidth>
+        <Header menuLinks={siteMainMenu} siteTitle={siteTitle} />
+        <SEO title={"主页"} />
+        <Gap gapSize={215} mobileGapSize={155} />
+        <TristaCutoutCenter src={tristaCutout} />
         <Typing actions={_get(data, "cms.home.typingSentences")} />
       </HomeContentContainer>
-      <Container sideDistance={sideDistance}>
-        <Gap gapSize={150} id="project-gallery" />
+      <Gap gapSize={150} mobileGapSize={80} id="project-gallery" />
+      <ProjectsContainer isFullWidth>
         <ProjectGallery
           projects={_get(data, "cms.home.projects")}
           loadByDefault={true}
         />
-      </Container>
+      </ProjectsContainer>
     </Layout>
   )
 }
@@ -106,6 +93,12 @@ export const query = graphql`
         ... on CMS_homePage_homePage_Entry {
           backgroundImage {
             url
+            ... on CMS_images_Asset {
+              id
+              localImage {
+                publicURL
+              }
+            }
             mimeType
             width
             height
@@ -134,38 +127,109 @@ export const query = graphql`
             title
             slug
             ... on CMS_project_project_Entry {
+              isProtected
               projectTitleShort
-              projectTileColor
               projectTileIsInversedColor
-              projectTileIsWide
               heroPicture {
                 url
+                ... on CMS_images_Asset {
+                  id
+                  localImage {
+                    publicURL
+                  }
+                }
                 mimeType
                 width
                 height
                 size
               }
-              projectVideo {
-                url
-                mimeType
-                size
+              projectCardAssets {
+                __typename
+                ... on CMS_projectCardAssets_videoSquare_BlockType {
+                  id
+                  standard {
+                    url
+                    ... on CMS_videos_Asset {
+                      id
+                      localVideo {
+                        publicURL
+                      }
+                    }
+                  }
+                  small {
+                    url
+                    ... on CMS_videos_Asset {
+                      id
+                      localVideo {
+                        publicURL
+                      }
+                    }
+                  }
+                  cover {
+                    url
+                    ... on CMS_images_Asset {
+                      id
+                      localImage {
+                        publicURL
+                      }
+                    }
+                  }
+                }
+                ... on CMS_projectCardAssets_videoWide_BlockType {
+                  id
+                  standard {
+                    url
+                    ... on CMS_videos_Asset {
+                      id
+                      localVideo {
+                        publicURL
+                      }
+                    }
+                  }
+                  small {
+                    url
+                    ... on CMS_videos_Asset {
+                      id
+                      localVideo {
+                        publicURL
+                      }
+                    }
+                  }
+                  cover {
+                    url
+                    ... on CMS_images_Asset {
+                      id
+                      localImage {
+                        publicURL
+                      }
+                    }
+                  }
+                }
+                ... on CMS_projectCardAssets_imageSquare_BlockType {
+                  id
+                  standard {
+                    url
+                    ... on CMS_images_Asset {
+                      id
+                      localImage {
+                        publicURL
+                      }
+                    }
+                  }
+                }
+                ... on CMS_projectCardAssets_imageWide_BlockType {
+                  id
+                  standard {
+                    url
+                    ... on CMS_images_Asset {
+                      id
+                      localImage {
+                        publicURL
+                      }
+                    }
+                  }
+                }
               }
-            }
-          }
-        }
-      }
-      footer: entry(section: "footer") {
-        title
-        ... on CMS_footer_footer_Entry {
-          usefulLinks {
-            ... on CMS_usefulLinks_email_BlockType {
-              email
-              typeHandle
-            }
-            ... on CMS_usefulLinks_links_BlockType {
-              linkText
-              linkHref
-              typeHandle
             }
           }
         }

@@ -7,7 +7,21 @@
 // You can delete this file if you're not using it
 const path = require(`path`)
 const _get = require("lodash/get")
+const { createRemoteFileNode } = require(`gatsby-source-filesystem`)
+const { encrypt } = require("./src/components/encrypted/utils/encrypt")
 
+/**
+ * Replace `GatsbyImageSharpFluid_withWebp` with:
+ * ```js
+ * base64
+ * aspectRatio
+ * src
+ * srcSet
+ * srcWebp
+ * srcSetWebp
+ * sizes
+ * ```
+ */
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions
   const projectTemplate = path.resolve(`src/templates/project-template.js`)
@@ -19,13 +33,15 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           title
           slug
           ... on CMS_project_project_Entry {
+            id
+            isProtected
+            password
             projectTitleShort
-            projectTileColor
             projectTileIsInversedColor
-            projectTileIsWide
             projectDescription
             projectClient
             projectMyRole
+            projectMyContribution
             projectDuration
             projectContentBody {
               ... on CMS_projectContentBody_textSection_BlockType {
@@ -35,7 +51,26 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
               ... on CMS_projectContentBody_image_BlockType {
                 typeHandle
                 image {
+                  id
                   url
+                  ... on CMS_images_Asset {
+                    id
+                    localImage {
+                      id
+                      publicURL
+                      childImageSharp {
+                        fluid(maxWidth: 1120, quality: 95) {
+                          base64
+                          aspectRatio
+                          src
+                          srcSet
+                          srcWebp
+                          srcSetWebp
+                          sizes
+                        }
+                      }
+                    }
+                  }
                   mimeType
                   width
                   height
@@ -45,31 +80,113 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             }
             heroPicture {
               url
+              ... on CMS_images_Asset {
+                id
+                localImage {
+                  publicURL
+                  childImageSharp {
+                    fluid(maxWidth: 1200, quality: 90) {
+                      base64
+                      aspectRatio
+                      src
+                      srcSet
+                      srcWebp
+                      srcSetWebp
+                      sizes
+                    }
+                  }
+                }
+              }
               mimeType
               width
               height
               size
             }
-            projectVideo {
-              url
-              mimeType
-              size
-            }
-          }
-        }
-
-        footer: entry(section: "footer") {
-          title
-          ... on CMS_footer_footer_Entry {
-            usefulLinks {
-              ... on CMS_usefulLinks_email_BlockType {
-                email
-                typeHandle
+            projectCardAssets {
+              __typename
+              ... on CMS_projectCardAssets_videoSquare_BlockType {
+                id
+                standard {
+                  url
+                  ... on CMS_videos_Asset {
+                    id
+                    localVideo {
+                      publicURL
+                    }
+                  }
+                }
+                small {
+                  url
+                  ... on CMS_videos_Asset {
+                    id
+                    localVideo {
+                      publicURL
+                    }
+                  }
+                }
+                cover {
+                  url
+                  ... on CMS_images_Asset {
+                    id
+                    localImage {
+                      publicURL
+                    }
+                  }
+                }
               }
-              ... on CMS_usefulLinks_links_BlockType {
-                linkText
-                linkHref
-                typeHandle
+              ... on CMS_projectCardAssets_videoWide_BlockType {
+                id
+                standard {
+                  url
+                  ... on CMS_videos_Asset {
+                    id
+                    localVideo {
+                      publicURL
+                    }
+                  }
+                }
+                small {
+                  url
+                  ... on CMS_videos_Asset {
+                    id
+                    localVideo {
+                      publicURL
+                    }
+                  }
+                }
+                cover {
+                  url
+                  ... on CMS_images_Asset {
+                    id
+                    localImage {
+                      publicURL
+                    }
+                  }
+                }
+              }
+              ... on CMS_projectCardAssets_imageSquare_BlockType {
+                id
+                standard {
+                  url
+                  ... on CMS_images_Asset {
+                    id
+                    localImage {
+                      publicURL
+                    }
+                  }
+                }
+              }
+              ... on CMS_projectCardAssets_imageWide_BlockType {
+                id
+                standard {
+                  url
+                  ... on CMS_images_Asset {
+                    id
+                    localImage {
+                      publicURL
+                    }
+                  }
+                }
               }
             }
           }
@@ -84,10 +201,60 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     return
   }
 
-  // console.log("result:\n", JSON.stringify(result, {}, 2))
   createProjectPages(createPage, projectTemplate, {
     projects: _get(result, "data.cms.projects", []),
-    footer: _get(result, "data.cms.footer", {}),
+  })
+}
+
+exports.createResolvers = async ({
+  actions,
+  cache,
+  createNodeId,
+  createResolvers,
+  store,
+  reporter,
+}) => {
+  const { createNode } = actions
+
+  await createResolvers({
+    CMS_images_Asset: {
+      localImage: {
+        type: "File",
+        async resolve(parent) {
+          let { id, url } = parent
+          if (!id) throw new Error("id is required")
+          if (url.startsWith("//")) url = `https:${url}`
+
+          return createRemoteFileNode({
+            url: encodeURI(url),
+            store,
+            cache,
+            createNode,
+            createNodeId,
+            reporter,
+          })
+        },
+      },
+    },
+    CMS_videos_Asset: {
+      localVideo: {
+        type: "File",
+        async resolve(parent) {
+          let { id, url } = parent
+          if (!id) throw new Error("id is required")
+          if (url.startsWith("//")) url = `https:${url}`
+
+          return createRemoteFileNode({
+            url: encodeURI(url),
+            store,
+            cache,
+            createNode,
+            createNodeId,
+            reporter,
+          })
+        },
+      },
+    },
   })
 }
 
@@ -96,23 +263,55 @@ const createProjectPages = (createPage, template, data) => {
 
   data.projects.forEach((p, i) => {
     const relatedProjects = []
+    const {
+      slug,
+      isProtected,
+      password,
+      heroPicture,
+
+      title,
+      projectTitleShort,
+      projectTileIsInversedColor,
+    } = p
 
     for (let j = 0, iCur = i + 1; j < NEXT_ITEMS; j++, iCur++) {
       if (!data.projects[iCur]) {
         iCur = 0
       }
       const relatedP = data.projects[iCur]
-      relatedP.projectTileIsWide = false // Please, do not go full width...
-      relatedProjects.push(relatedP)
+      const {
+        projectDescription: _rProjectDescription,
+        projectClient: _rProjectClient,
+        projectMyRole: _rProjectMyRole,
+        projectDuration: _rProjectDuration,
+        projectContentBody: _rProjectContentBody,
+        projectMyContribution: _rProjectMyContribution,
+        ...restP
+      } = relatedP
+      relatedProjects.push(restP)
+    }
+
+    let encryptedProjectStr
+    if (isProtected) {
+      console.log("Encrypting project", `/projects/${slug}`)
+      encryptedProjectStr = encrypt(p, password)
+      p = null // Once we have it encrypted, delete it
     }
 
     createPage({
-      path: `projects/${p.slug}`,
+      path: `projects/${slug}`,
       component: template,
       context: {
+        isProtected: isProtected,
+        encryptedProjectStr,
         project: p,
+        pMeta: {
+          title,
+          projectTitleShort,
+          projectTileIsInversedColor,
+          heroPicture,
+        },
         relatedProjects,
-        footer: data.footer,
       },
     })
   })

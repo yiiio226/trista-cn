@@ -17,3 +17,8 @@ export const Container = styled.div`
         ? props.sideDistance + "px"
         : "calc((100vw - " + props.theme.mobileWidth + "px)/2)"};
 `
+
+Container.defaultProps = {
+  isFullWidth: false,
+  sideDistance: 100,
+}

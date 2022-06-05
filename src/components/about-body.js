@@ -1,6 +1,5 @@
 import styled from "styled-components"
 
-// TODO: Move article related css to separate component
 export const AboutBody = styled.div`
   h2 {
     font-size: 32px;
@@ -12,9 +11,9 @@ export const AboutBody = styled.div`
 
   p {
     font-size: 14px;
-    line-height: 19px;
+    line-height: 180%;
     font-weight: 400;
     color: rgba(51, 51, 51, 1);
-    margin: 0;
+    margin: 20px 0 0;
   }
 `
