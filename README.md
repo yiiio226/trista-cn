@@ -55,13 +55,13 @@ Files
 
 ### CMS Content Organization
 
-Manage content in the CMS: https://dev.cms.trista.design/admin
+Manage content in the CMS: https://dev.cms.trista.design/admin.
 
 - Singles
-  - About Me: about page content
-  - Footer: global footer content
-  - Home Page: home page content
-  - Site Metadata: SEO info & site menus
+  - About Me: about page content.
+  - Footer: global footer content.
+  - Home Page: home page content.
+  - Site Metadata: SEO info & site menus.
 - All entries 
-  - Project: project pages across the website
-  - Photo: photos displayed on about page
+  - Project: project pages across the website.
+  - Photo: photos displayed on about page.
