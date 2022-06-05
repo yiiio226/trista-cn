@@ -30,3 +30,7 @@ Visit the live version: https://trista.design
   - Google Domain & DNS for trista.design.
   - Aliyun Domain & DNS for trista.cn.
   - Aliyun OSS for www.trista.design hosting.
+
+### Backup and Restore
+
+Please refer to [this official document](https://docs.docker.com/storage/volumes/#backup-restore-or-migrate-data-volumes) for more info :)
