@@ -51,3 +51,14 @@ Files
 - volume-craftcms-logs.tar: Trivial logs.
 - volume-craftcms-data.tar: Images and cached static data for CMS.
 - volume-redis-data.tar: Trivial cache data.
+
+### CMS Content Organization
+
+- Singles
+  - About Me: about page content
+  - Footer: global footer content
+  - Home Page: home page content
+  - Site Metadata: SEO info & site menus
+- All entries 
+  - Project: project pages across the website
+  - Photo: photos displayed on about page
