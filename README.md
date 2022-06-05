@@ -8,6 +8,7 @@ Visit the live website: https://trista.design
 
 - The website is hosted as static files on Aliyun OSS www.trista.design.
 - The website content is on self-hosted CraftCMS [dev.cms.trista.design/admin](https://dev.cms.trista.design/admin).
+  - Domain starts with `dev.` because it's the only legit free way to host this CMS publicly.
 - Build process: a Github Action to pull data from CraftCMS, build static web pages then push to Aliyun OSS.
   - Github Action holds an **access token** to upload files to Aliyun OSS (as environment var, won't expire).
   - Build Shortcut for iOS holds another **access token** to trigger Github Action build (expires when Github updates policy), token is sent in POST request header as `Authorization: Basic <access_token>`.
@@ -53,6 +54,8 @@ Files
 - volume-redis-data.tar: Trivial cache data.
 
 ### CMS Content Organization
+
+Manage content in the CMS: https://dev.cms.trista.design/admin
 
 - Singles
   - About Me: about page content
