@@ -15,7 +15,7 @@ Visit the live version: https://trista.design
 - [trista.cn](http://trista.cn) is registered at Aliyun, using self-hosted 301 service.
 - Aliyun OSS doesn't support top-level domain as bucket domain, using www.trista.design.
   - Aliyun OSS bucket is Hongkong, to support domains without ICP license (both domains have no ICP license).
-  - Using 传输加速 for optimal loading speed in China
+  - Using 传输加速 for optimal loading speed in China.
 - Google DNS has a bug of navigating `trista.design/projects/ada` to `www.trista.designprojects/ada`, messing domain and path together. Appending `?` to 301 target domain to mitigate this issue (301 - `https://www.trista.design?`).
 
 ### Key Components
