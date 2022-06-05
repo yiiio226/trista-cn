@@ -43,7 +43,7 @@ Files
 Files
 
 - volume-postgresql-data.sql.zip: SQL script export for the database
-- volume-postgresql-data.tar: Binary export for the database volume
+- volume-postgresql-data.tar: Binary export for the database data volume
 - volume-craftcms-logs.tar: trivial logs
 - volume-craftcms-data.tar: Images and cached static data for CMS
 - volume-redis-data.tar: trivial cache data
