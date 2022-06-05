@@ -1,6 +1,6 @@
 # Trista's Website
 
-Visit the live version: https://trista.design
+Visit the live website: https://trista.design
 
 ### Website High Level Architecture
 
