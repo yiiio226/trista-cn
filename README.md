@@ -9,10 +9,10 @@ Visit the live version: https://trista.design
 - The website is hosted as static files on Aliyun OSS www.trista.design.
 - The website content is on self-hosted CraftCMS [dev.cms.trista.design/admin](https://dev.cms.trista.design/admin).
 - Build process: a Github Action to pull data from CraftCMS, build static web pages then push to Aliyun OSS.
-  - Github Action holds an **access token** to upload files to Aliyun OSS (won't expire)
-  - Build Shortcut for iOS holds another **access token** to trigger Github Action build (expires when Github updates policy)
+  - Github Action holds an **access token** to upload files to Aliyun OSS (won't expire).
+  - Build Shortcut for iOS holds another **access token** to trigger Github Action build (expires when Github updates policy), token is sent in POST request header as `Authorization: Basic <access_token>`.
   - Push commits to this repo also triggers the build process.
-- [trista.cn](http://trista.cn) is registered at Aliyun, using self-hosted 301 service.
+- [trista.cn](http://trista.cn) is registered on Aliyun, using self-hosted 301 service.
 - Aliyun OSS doesn't support top-level domain as bucket domain, using www.trista.design.
   - Aliyun OSS bucket is Hongkong, to support domains without ICP license (both domains have no ICP license).
   - Using 传输加速 for optimal loading speed in China.
@@ -21,10 +21,10 @@ Visit the live version: https://trista.design
 ### Key Components
 
 - Self hosted
-  - 301 service for [trista.cn](http://trista.cn) to https://www.trista.design.
-  - Craft CMS for content administration at [dev.cms.trista.design/admin](https://dev.cms.trista.design/admin).
-    - Postgres DB
-    - Redis
+  - 301 service for [trista.cn](http://trista.cn) to https://www.trista.design. **config**: [rankun203/trista-redirect-to-dribbble/docker-compose.yml](https://github.com/rankun203/trista-redirect-to-dribbble/blob/master/docker-compose.yml)
+  - Craft CMS for content administration at [dev.cms.trista.design/admin](https://dev.cms.trista.design/admin). **config**: [yiiio226/trista-cn/docker-compose.yml#web](https://github.com/yiiio226/trista-cn/blob/master/docker-compose.yml#L14).
+    - Postgres DB (same docker-compose.yml)
+    - Redis (same docker-compose.yml)
   - Build trista.cn Shortcut on iOS, trigger build.
 - 3rd party
   - Google Domain & DNS for trista.design.
