@@ -31,6 +31,10 @@ Visit the live version: https://trista.design
   - Aliyun Domain & DNS for trista.cn.
   - Aliyun OSS for www.trista.design hosting.
 
+### Backup and Restore
+
+Please refer to [this official document](https://docs.docker.com/storage/volumes/#backup-restore-or-migrate-data-volumes) for how-to steps :)
+
 #### 301 service
 
 Files
@@ -47,9 +51,3 @@ Files
 - volume-craftcms-logs.tar: trivial logs
 - volume-craftcms-data.tar: Images and cached static data for CMS
 - volume-redis-data.tar: trivial cache data
-
-### Backup and Restore
-
-Please refer to [this official document](https://docs.docker.com/storage/volumes/#backup-restore-or-migrate-data-volumes) for more info :)
-
-Data for each component refer to above _Key Components_ section.
