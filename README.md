@@ -39,15 +39,15 @@ Please refer to [this official document](https://docs.docker.com/storage/volumes
 
 Files
 
-- repo: https://github.com/rankun203/trista-redirect-to-dribbble
-- docker-compose.override.yml: for secrets / host / gateway specific configs
+- repo: https://github.com/rankun203/trista-redirect-to-dribbble.
+- docker-compose.override.yml: for secrets / host / gateway specific configs.
 
 #### Craft CMS
 
 Files
 
-- volume-postgresql-data.tar: Binary export for the database data volume
-- volume-postgresql-data.sql.zip: Alternative SQL script backup for the database
-- volume-craftcms-logs.tar: Trivial logs
-- volume-craftcms-data.tar: Images and cached static data for CMS
-- volume-redis-data.tar: Trivial cache data
+- volume-postgresql-data.tar: Binary export for the database data volume.
+- volume-postgresql-data.sql.zip: Alternative SQL script backup for the database.
+- volume-craftcms-logs.tar: Trivial logs.
+- volume-craftcms-data.tar: Images and cached static data for CMS.
+- volume-redis-data.tar: Trivial cache data.
