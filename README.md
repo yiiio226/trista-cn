@@ -30,7 +30,7 @@ Visit the live website: https://trista.design
 - 3rd party
   - Google Domain & DNS for trista.design.
   - Aliyun Domain & DNS for trista.cn.
-  - Aliyun OSS for www.trista.design hosting.
+  - Aliyun OSS for www.trista.design hosting
 
 ### Backup and Restore
 
